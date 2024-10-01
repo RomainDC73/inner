@@ -3,20 +3,21 @@ import { Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
 export default function Dashboard() {
-    const { auth, greetings = [] } = usePage().props;
+    // Récupère l'utilisateur et le message de salutation aléatoire passé depuis le contrôleur
+    const { auth, greetings } = usePage().props;
     const user = auth.user;
 
-    const getRandomGreetingPhrase = () => {
-        return greetings.length > 0
-            ? greetings[Math.floor(Math.random() * greetings.length)]
-            : "Bienvenue !"; // Message par défaut si greetings est vide
+    const getRandomGreeting = () => {
+        const greetingKeys = Object.keys(greetings); // Récupère les clés du fichier de traduction
+        const randomKey = greetingKeys[Math.floor(Math.random() * greetingKeys.length)]; // Choisit une clé aléatoire
+        return greetings[randomKey]; // Retourne la salutation correspondante
     };
 
     const [randomGreeting, setRandomGreeting] = useState('');
 
     useEffect(() => {
-        setRandomGreeting(getRandomGreetingPhrase());
-    }, []);
+        setRandomGreeting(getRandomGreeting());
+    }, [greetings]);
 
     return (
         <AuthenticatedLayout
@@ -33,6 +34,7 @@ export default function Dashboard() {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <p className="font-bold">Hello {user.name} !</p>
+                            {/* Affiche le message de salutation aléatoire */}
                             <p>{randomGreeting}</p>
                         </div>
                     </div>

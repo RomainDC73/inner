@@ -1,11 +1,8 @@
 <?php
 
 return [
-    'phrases' => [
-        "Comment vas-tu aujourd'hui ?",
-        "J'espère que tu passes une bonne journée !",
-        "Tout se passe bien pour toi ?",
-        "Comment te sens-tu ?",
-        "Quoi de neuf ?",
-    ],
+    'greetings_01' => 'Comment ça va aujourd\'hui ?',
+    'greetings_02' => 'J\'espère que tu vas bien.',
+    'greetings_03' => 'Comment se passe cette journée ?',
+    'greetings_04' => 'Comment te sens-tu?',
 ];
