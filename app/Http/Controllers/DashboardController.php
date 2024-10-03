@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Log as LogFacade;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -16,10 +17,11 @@ class DashboardController extends Controller
 
     public function index()
     {
-        // app()->setLocale('fr');
-        LogFacade::info('Locale actuelle : ' . app()->getLocale());
+        $posts = Post::where('user_id', Auth::id())->with('mood')->get();
+
         return Inertia::render('Dashboard', [
             'greetings' => __('greetings'),
+            'posts' => $posts,
         ]);
     }
 
