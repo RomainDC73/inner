@@ -7,6 +7,7 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -33,9 +34,13 @@ class PostController extends Controller
         // Récupère le post avec son humeur et les détails associés
         $post = Post::with('mood')->findOrFail($id);
 
+        // Charger les traductions pour moods
+        $moodTranslations = Lang::get('moods');
+
         // Retourne la vue avec Inertia, en passant les données du post
         return Inertia::render('PostShow', [
-            'post' => $post
+            'post' => $post,
+            'moodTranslations' => $moodTranslations,
         ]);
     }
 

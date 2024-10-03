@@ -4,7 +4,7 @@ import { Head, usePage } from '@inertiajs/react';
 
 export default function PostShow() {
     // Récupère les données du post passées par Inertia depuis le contrôleur
-    const { post } = usePage().props;
+    const { post, moodTranslations } = usePage().props;
 
     return (
         <AuthenticatedLayout
@@ -20,7 +20,7 @@ export default function PostShow() {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <h3 className="text-lg font-bold">Humeur: {post.mood.translated_name}</h3>
+                            <h3 className="text-lg font-bold">Humeur: {moodTranslations[post.mood.name] || post.mood.name}</h3>
                             <p>{post.description}</p>
 
                             {/* Affichage des médias si présents */}
