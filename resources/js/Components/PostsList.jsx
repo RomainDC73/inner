@@ -13,7 +13,7 @@ const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour '
                             <h3>{post.mood.translated_name}</h3> {/* Affiche le nom de l'humeur */}
                             <p>{post.description}</p> {/* Affiche la description */}
                            {/* Lien vers la page de détail du post */}
-                           <Link href={`/posts/${post.id}`} className="text-blue-500 underline">
+                           <Link href={`/post/${post.id}`} className="text-blue-500 underline">
                                 Voir plus
                             </Link>
                         </li>
