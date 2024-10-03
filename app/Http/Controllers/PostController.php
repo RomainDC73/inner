@@ -28,6 +28,17 @@ class PostController extends Controller
         return response()->json($posts);
     }
 
+    public function show($id)
+    {
+        // Récupère le post avec son humeur et les détails associés
+        $post = Post::with('mood')->findOrFail($id);
+
+        // Retourne la vue avec Inertia, en passant les données du post
+        return Inertia::render('PostShow', [
+            'post' => $post
+        ]);
+    }
+
 
     public function create(Request $request)
     {
