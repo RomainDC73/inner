@@ -2,22 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Mood;
+use App\Models\Post;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function showPostsPage()
     {
-    // Récupérer tous les posts de l'utilisateur connecté
-        $posts = Post::with(['mood'])->where('user_id', Auth::id())->get();
+        // Récupérer les posts de l'utilisateur connecté avec la relation mood
+        $posts = Post::where('user_id', Auth::id())->with('mood')->get();
 
-        return response()->json($posts); // Retourner les posts sous forme de JSON
+        // Rendre la vue Inertia avec les posts
+        return Inertia::render('Posts', [
+            'posts' => $posts
+        ]);
     }
-    
+
+    public function index()
+    {
+        $posts = Post::where('user_id', Auth::id())->with('mood')->get();
+        return response()->json($posts);
+    }
+
+
     public function create(Request $request)
     {
         // Validation des données

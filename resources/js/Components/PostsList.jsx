@@ -1,37 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { usePage } from '@inertiajs/react';
 
 const PostsList = () => {
-    const [posts, setPosts] = useState([]); // Stock posts
-    const [isLoading, setIsLoading] = useState(true); // Handle loading state
-    const [error, setError] = useState(null); // Handle error state
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await axios.get('/api/posts', {
-                    headers: {
-                        Authorization: `Bearer ${window.Laravel.csrfToken}`,
-                    },
-                });
-                setPosts(response.data);
-            } catch (error) {
-                setError(error);
-                console.error(error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchPosts(); // Call the function to fetch posts
-    }, []);
-    if (isLoading) {
-        return <p>Chargement des humeurs...</p>;
-    }
-
-    if (error) {
-        return <p>{error}</p>;
-    }
+    // On récupère les posts depuis les props passées par Inertia
+    const { posts } = usePage().props;
 
     return (
         <div>
