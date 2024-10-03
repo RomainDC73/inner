@@ -1,4 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import PostsList from '@/Components/PostsList';
 import { Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
