@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Mood;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,7 +30,7 @@ class PostFactory extends Factory
             'audio_path' => $this->faker->Url(),
             'created_at' => $created_at,
             'updated_at' => $created_at,
-            'user_id' => 1,
+            'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
 }
