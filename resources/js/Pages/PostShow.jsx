@@ -30,7 +30,12 @@ export default function PostShow() {
                             <p className="text-sm text-gray-500">{formattedDate}</p>
                             <p>{post.description}</p>
                             {/* Affichage des médias si présents */}
-                            {post.media_path && <img src={`/storage/${post.media_path}`} alt="Media" />}
+                            {post.media_path && (
+                                <img
+                                src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
+                                alt="Media"
+                                />
+                            )}
                             {post.audio_path && <audio controls src={`/storage/${post.audio_path}`}></audio>}
                         </div>
                     </div>
