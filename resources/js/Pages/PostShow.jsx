@@ -6,6 +6,12 @@ export default function PostShow() {
     // Récupère les données du post passées par Inertia depuis le contrôleur
     const { post, moodTranslations } = usePage().props;
 
+    const formattedDate = new Date(post.created_at).toLocaleDateString('fr-FR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
     return (
         <AuthenticatedLayout
             header={
@@ -21,8 +27,8 @@ export default function PostShow() {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <h3 className="text-lg font-bold">Humeur: {moodTranslations[post.mood.name] || post.mood.name}</h3>
+                            <p className="text-sm text-gray-500">{formattedDate}</p>
                             <p>{post.description}</p>
-
                             {/* Affichage des médias si présents */}
                             {post.media_path && <img src={`/storage/${post.media_path}`} alt="Media" />}
                             {post.audio_path && <audio controls src={`/storage/${post.audio_path}`}></audio>}
