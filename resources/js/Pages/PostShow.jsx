@@ -36,7 +36,8 @@ export default function PostShow() {
                                 alt="Media"
                                 />
                             )}
-                            {post.audio_path && <audio controls src={`/storage/${post.audio_path}`}></audio>}
+                            {/* {post.audio_path && <audio controls src={`/storage/${post.audio_path}`}></audio>} */}
+                            {post.audio_path && <audio controls src={`/storage/audio_tests/audio_test_01.mp3`}></audio>}
                         </div>
                     </div>
                 </div>
