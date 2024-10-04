@@ -14,15 +14,17 @@ export default function PostShow() {
         minute: 'numeric',
     });
 
+    const postTitle = 'Votre humeur du ' + formattedDate + ' en détail.';
+
     return (
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Votre humeur du {formattedDate} en détail.
+                    {postTitle}
                 </h2>
             }
         >
-            <Head title={`Post ${post.id}`} />
+            <Head title={postTitle} />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
