@@ -44,7 +44,6 @@ class PostController extends Controller
         ]);
     }
 
-
     public function create(Request $request)
     {
         // Validation des données

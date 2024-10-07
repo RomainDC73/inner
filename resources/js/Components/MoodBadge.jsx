@@ -1,7 +1,18 @@
-import react from "react";
+import React from 'react';
 
-const moodColors = {
-    good: '#D0D6B5',
-    meh: '#EDC9FF',
-    bad: '#D9D9D9',
-};
+const MoodBadge = ({ mood }) => {
+    const moodColors = {
+        good: 'bg-innergreen',
+        meh: 'bg-innerpurple',
+        bad: 'bg-innerred',
+    };
+
+    const moodColorClass = moodColors[mood] || 'bg-gray-300';
+
+    return (
+        <div className={`w-6 h-6 rounded-full ${moodColorClass}`}>
+        </div>
+    );
+}
+
+export default MoodBadge;

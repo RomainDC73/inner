@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
+import MoodBadge from '@/Components/MoodBadge';
 
 export default function PostShow() {
     // Récupère les données du post passées par Inertia depuis le contrôleur
@@ -13,12 +14,6 @@ export default function PostShow() {
         hour: 'numeric',
         minute: 'numeric',
     });
-
-    const moodColors = {
-        good: 'bg-green-500', // vert pour les bons moods
-        meh: 'bg-yellow-500', // jaune pour les moods moyens
-        bad: 'bg-red-500',    // rouge pour les mauvais moods
-    };
 
     const postTitle = 'Votre humeur du ' + formattedDate + '';
 
@@ -38,6 +33,7 @@ export default function PostShow() {
                         <div className="p-6 text-gray-900 space-y-3"> {/* Ajoute un espacement vertical */}
                             {/* Humeur */}
                             <h3 className="text-lg font-bold">Humeur : {moodTranslations[post.mood.name] || post.mood.name}</h3>
+                            <MoodBadge mood={post.mood.name} />
 
                             {/* Date */}
                             <p className="text-sm text-gray-500">Posté le {formattedDate}</p>
