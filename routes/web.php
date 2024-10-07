@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts', [PostController::class, 'create']);
     Route::get('/posts', [PostController::class, 'index']);
     Route::get('posts', [PostController::class, 'showPostsPage']);
+    Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
 });
 
 

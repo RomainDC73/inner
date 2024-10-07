@@ -23,25 +23,17 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Dashboard
-                </h2>
+                <><h2 className="text-xl font-semibold leading-tight text-gray-800">
+                    Hello {user.name} !
+                </h2><p>{randomGreeting}</p></>
             }
         >
             <Head title="Dashboard" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            <p className="font-bold">Hello {user.name} !</p>
-                            {/* Affiche le message de salutation aléatoire */}
-                            <p>{randomGreeting}</p>
-                        </div>
-                    </div>
-
                     {/* Ajout du composant PostsList pour afficher les posts de l'utilisateur */}
-                    <div className="mt-8 overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <div className="mt-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6">
                             <PostsList posts={posts} /> {/* Passe les posts récupérés */}
                         </div>
