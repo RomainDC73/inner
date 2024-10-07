@@ -29,9 +29,9 @@ export default function PostShow() {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 space-y-6"> {/* Ajoute un espacement vertical */}
+                        <div className="p-6 text-gray-900 space-y-3"> {/* Ajoute un espacement vertical */}
                             {/* Humeur */}
-                            <h3 className="text-lg font-bold">Mood : {moodTranslations[post.mood.name] || post.mood.name}</h3>
+                            <h3 className="text-lg font-bold">Humeur : {moodTranslations[post.mood.name] || post.mood.name}</h3>
 
                             {/* Date */}
                             <p className="text-sm text-gray-500">Posté le {formattedDate}</p>
