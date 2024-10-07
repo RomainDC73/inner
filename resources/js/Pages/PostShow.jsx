@@ -14,7 +14,13 @@ export default function PostShow() {
         minute: 'numeric',
     });
 
-    const postTitle = 'Votre humeur du ' + formattedDate + ' en détail.';
+    const moodColors = {
+        good: 'bg-green-500', // vert pour les bons moods
+        meh: 'bg-yellow-500', // jaune pour les moods moyens
+        bad: 'bg-red-500',    // rouge pour les mauvais moods
+    };
+
+    const postTitle = 'Votre humeur du ' + formattedDate + '';
 
     return (
         <AuthenticatedLayout
@@ -64,6 +70,7 @@ export default function PostShow() {
                     </div>
                 </div>
             </div>
+
         </AuthenticatedLayout>
     );
 }
