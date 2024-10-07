@@ -37,7 +37,12 @@ export default function PostShow() {
                             <p className="text-sm text-gray-500">Posté le {formattedDate}</p>
 
                             {/* Description */}
-                            <p>{post.description}</p>
+                            <p>{post.description.split('\n').map((paragraph, index) => (
+                                <span key={index}>
+                                    {paragraph}
+                                     <br />
+                                 </span>
+                                ))}</p>
 
                             {/* Image */}
                             {post.media_path && (
