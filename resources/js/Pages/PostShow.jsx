@@ -2,6 +2,7 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
 import MoodBadge from '@/Components/MoodBadge';
+import CustomPlayer from '@/Components/Player';
 
 export default function PostShow() {
     // Récupère les données du post passées par Inertia depuis le contrôleur
@@ -61,10 +62,12 @@ export default function PostShow() {
                             {/* Audio */}
                             {post.audio_path && (
                                 <audio className="mt-4" controls>
+
                                     <source src={`/storage/audio_tests/audio_test_01.mp3`} type="audio/mpeg" />
                                     Your browser does not support the audio element.
                                 </audio>
                             )}
+                            <CustomPlayer />
                         </div>
                     </div>
                 </div>
