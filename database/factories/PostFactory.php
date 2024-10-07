@@ -30,7 +30,8 @@ class PostFactory extends Factory
             'audio_path' => $this->faker->Url(),
             'created_at' => $created_at,
             'updated_at' => $created_at,
-            'user_id' => User::inRandomOrder()->first()->id,
+            // 'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => 12,
         ];
     }
 }
