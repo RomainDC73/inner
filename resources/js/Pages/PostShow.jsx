@@ -39,7 +39,7 @@ export default function PostShow() {
 
 
                             {/* Date */}
-                            <p className="text-sm text-gray-500">Posté le {formattedDate}</p>
+                            <p className="text-sm text-gray-500">Publié le {formattedDate}</p>
 
                             {/* Description */}
                             <p>{post.description.split('\n').map((paragraph, index) => (
