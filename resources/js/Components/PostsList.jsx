@@ -23,16 +23,16 @@ const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour '
 
     return (
         <div>
-            <h1>Mes Posts</h1>
+            <h1 className='mb-4'>Mes Posts</h1>
             <ul>
                 {posts.length > 0 ? (
                     posts.map(post => (
-                        <li key={post.id}>
-                            <div className="flex items-center space-x-2">
+                        <li className="mb-4" key={post.id}>
+                            <div className="flex items-center mb-2 space-x-2">
                                 <MoodBadge mood={post.mood.name} />
                                 <p className="text-sm text-gray-500">{formattedDate(post.created_at)}</p>
                             </div>
-                            <p>{getExcerpt(post.description)}</p> {/* Affiche la description */}
+                            <p className="mb-2">{getExcerpt(post.description)}</p> {/* Affiche la description */}
                            {/* Lien vers la page de détail du post */}
                            <Link href={`/post/${post.id}`} className="text-blue-500 underline">
                                 Voir plus
