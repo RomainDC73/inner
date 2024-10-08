@@ -15,8 +15,8 @@ class PostController extends Controller
     public function showPostsPage()
     {
         // Récupérer les posts de l'utilisateur connecté avec la relation mood
-        $posts = Post::where('user_id', Auth::id())->with('mood')->get();
-
+        $posts = Post::where('user_id', Auth::id())->with('mood')->orderBy('created_at', 'desc')->get();
+        
         // Rendre la vue Inertia avec les posts
         return Inertia::render('Posts', [
             'posts' => $posts
@@ -25,7 +25,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::where('user_id', Auth::id())->with('mood')->get();
+        $posts = Post::where('user_id', Auth::id())->with('mood')->orderBy('created_at', 'desc')->get();
         return response()->json($posts);
     }
 
