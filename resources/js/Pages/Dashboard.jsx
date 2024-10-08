@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import PostsList from '@/Components/PostsList'; // Import du composant PostsList
+import PostsList from '@/Components/PostsList';
+import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
@@ -36,7 +37,10 @@ export default function Dashboard() {
                     <div className="mt-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6">
                             <PostsList posts={posts} /> {/* Passe les posts récupérés */}
+                            <PrimaryButton href="/posts">Voir tous</PrimaryButton>
                         </div>
+
+
                     </div>
                 </div>
             </div>
