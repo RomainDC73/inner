@@ -19,9 +19,13 @@ export default {
                 innerlightblue: '#75B9BE',
                 innerlightbluefade: 'rgba(117, 185, 190, 0.3)',
                 innerdarkblue: '#37515F',
+                innerdarkbluefade: 'rgba(55, 81, 95, 0.3)',
                 innergreen: '#D0D5B5',
+                innergreenfade: 'rgba(208, 214, 181, 0.3)',
                 innerred: '#F9B5AC',
+                innerredfade: 'rgba(249, 181, 172, 0.3)',
                 innerpurple: '#EDC9FF',
+                innerpurplefade: 'rgba(217, 195, 227, 0.3)',
             }
         },
     },
