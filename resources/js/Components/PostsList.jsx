@@ -14,6 +14,13 @@ const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour '
             minute: 'numeric',
         });
     };
+
+    const getExcerpt = (description, length = 100) => {
+        return description.length > length
+            ? description.substring(0, length) + '...'
+            : description;
+    };
+
     return (
         <div>
             <h1>Mes Posts</h1>
@@ -21,9 +28,11 @@ const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour '
                 {posts.length > 0 ? (
                     posts.map(post => (
                         <li key={post.id}>
-                            <MoodBadge mood={post.mood.name} />
-                            <p className="text-sm text-gray-500">{formattedDate(post.created_at)}</p>
-                            <p>{post.description}</p> {/* Affiche la description */}
+                            <div className="flex items-center space-x-2">
+                                <MoodBadge mood={post.mood.name} />
+                                <p className="text-sm text-gray-500">{formattedDate(post.created_at)}</p>
+                            </div>
+                            <p>{getExcerpt(post.description)}</p> {/* Affiche la description */}
                            {/* Lien vers la page de détail du post */}
                            <Link href={`/post/${post.id}`} className="text-blue-500 underline">
                                 Voir plus
