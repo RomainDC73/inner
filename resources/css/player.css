@@ -2,28 +2,36 @@
     background-color: #75B9BE;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .custom-audio-player .rhap_progress-indicator {
+.custom-audio-player .rhap_progress-indicator {
     background-color: white;
-  }
+}
 
-    .custom-audio-player .rhap_progress-filled {
-        background-color: white;
-    }
+.custom-audio-player .rhap_progress-filled {
+    background-color: #37515F;
+}
 
-    .custom-audio-player .rhap_volume-indicator {
-        background-color: white;
-    }
+.custom-audio-player .rhap_volume-indicator {
+    background-color: white;
+}
 
-  .custom-audio-player .rhap_controls-section {
+.custom-audio-player .rhap_controls-section {
     color: white;
-  }
+}
 
-  .custom-audio-player .rhap_bar-color{
-    color:#F0F;
-  }
-
-  .custom-audio-player .rhap_time {
+.custom-audio-player .rhap_time {
     color: white;
-  }
+}
+
+.custom-audio-player .rhap_button-clear {
+    color: #37515F;
+}
+
+.custom-audio-player .rhap_button-clear:hover {
+    color: white;
+}
+
+.custom-audio-player .rhap_volume-bar {
+    background-color: #37515F;
+}

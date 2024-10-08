@@ -61,13 +61,11 @@ export default function PostShow() {
 
                             {/* Audio */}
                             {post.audio_path && (
-                                <audio className="mt-4" controls>
-
-                                    <source src={`/storage/audio_tests/audio_test_01.mp3`} type="audio/mpeg" />
-                                    Your browser does not support the audio element.
-                                </audio>
+                                <CustomPlayer
+                                src="/storage/audio_tests/audio_test_01.mp3"
+                            />
                             )}
-                            <CustomPlayer />
+
                         </div>
                     </div>
                 </div>

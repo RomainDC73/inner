@@ -6,7 +6,7 @@ const CustomPlayer = ({ src }) => {
     return (
       <div className="custom-audio-player">
         <AudioPlayer
-          src={`/storage/audio_tests/audio_test_01.mp3`}
+          src={src}
           onPlay={() => console.log('Audio is playing')}
           customAdditionalControls={[]} // Tu peux ajouter des options pour le personnaliser davantage
           showJumpControls={false}     // Retirer les boutons de saut de piste
