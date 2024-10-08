@@ -17,6 +17,7 @@ export default {
             },
             colors: {
                 innerlightblue: '#75B9BE',
+                innerlightbluefade: 'rgba(117, 185, 190, 0.3)',
                 innerdarkblue: '#37515F',
                 innergreen: '#D0D5B5',
                 innerred: '#F9B5AC',
