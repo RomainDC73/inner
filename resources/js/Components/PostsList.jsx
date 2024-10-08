@@ -29,7 +29,7 @@ const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour '
                     posts.map(post => (
                         <li key={post.id} className="mb-4">
                             <Link href={`/post/${post.id}`}>
-                                <div className="bg-gradient-to-br from-white from-30% to-innerlightbluefade rounded-lg p-4 shadow-md">
+                                <div className="bg-gradient-to-br from-white from-30% to-innerredfade rounded-lg p-4 shadow-md">
                                     <div className="flex items-center mb-2 space-x-2">
                                         <MoodBadge mood={post.mood.name} />
                                         <p className="text-sm text-gray-500">{formattedDate(post.created_at)}</p>
