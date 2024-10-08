@@ -17,7 +17,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $posts = Post::where('user_id', Auth::id())->with('mood')->orderBy('created_at', 'desc')->get();
+        $posts = Post::where('user_id', Auth::id())->with('mood')->orderBy('created_at', 'desc', )->get();
 
         return Inertia::render('Dashboard', [
             'greetings' => __('greetings'),
