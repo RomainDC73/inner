@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from '@inertiajs/react';
 import { usePage } from '@inertiajs/react';
 
+
+
 const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour 'posts'
     return (
         <div>
