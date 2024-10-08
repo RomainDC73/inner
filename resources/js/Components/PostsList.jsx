@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import MoodBadge from '@/Components/MoodBadge';
 import { Link } from '@inertiajs/react';
 
 const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour 'posts'
@@ -20,7 +21,7 @@ const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour '
                 {posts.length > 0 ? (
                     posts.map(post => (
                         <li key={post.id}>
-                            <h3>{post.mood.translated_name}</h3> {/* Affiche le nom de l'humeur */}
+                            <MoodBadge mood={post.mood.name} />
                             <p className="text-sm text-gray-500">{formattedDate(post.created_at)}</p>
                             <p>{post.description}</p> {/* Affiche la description */}
                            {/* Lien vers la page de détail du post */}
