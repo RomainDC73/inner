@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PostsList from '@/Components/PostsList';
 import PrimaryButton from '@/Components/PrimaryButton';
+import CreateButton from '@/Components/CreateButton';
 import { Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
@@ -34,7 +35,7 @@ export default function Dashboard() {
         >
             <Head title="Dashboard" />
             <div className="flex justify-center py-6">
-                <PrimaryButton className='py-4' href="/">Publier</PrimaryButton>
+                <CreateButton href="/">Publier</CreateButton>
             </div>
             <div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
