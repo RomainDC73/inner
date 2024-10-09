@@ -18,7 +18,7 @@ const PostCard = ({ post }) => {
     });
 
     // Extrait de description
-    const getExcerpt = (text, length = 100) => {
+    const getExcerpt = (text, length = 40) => {
         return text.length > length ? text.substring(0, length) + '...' : text;
     };
 

@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PostsList from '@/Components/PostsList';
 import PrimaryButton from '@/Components/PrimaryButton';
+import CreateButton from '@/Components/CreateButton';
 import { Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
@@ -24,14 +25,19 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout
             header={
-                <><h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Hello {user.name} !
-                </h2><p>{randomGreeting}</p></>
+                <>
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                        Hello {user.name} !
+                    </h2>
+                    <p>{randomGreeting}</p>
+                </>
             }
         >
             <Head title="Dashboard" />
-
-            <div className="py-12">
+            <div className="flex justify-center py-6">
+                <CreateButton href="/">Publier</CreateButton>
+            </div>
+            <div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {/* Ajout du composant PostsList pour afficher les posts de l'utilisateur */}
                     <div className="mt-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
@@ -39,8 +45,6 @@ export default function Dashboard() {
                             <PostsList posts={posts} /> {/* Passe les posts récupérés */}
                             <PrimaryButton href="/posts">Voir tous</PrimaryButton>
                         </div>
-
-
                     </div>
                 </div>
             </div>
