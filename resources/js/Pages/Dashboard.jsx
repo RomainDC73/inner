@@ -24,13 +24,18 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout
             header={
-                <><h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Hello {user.name} !
-                </h2><p>{randomGreeting}</p></>
+                <>
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                        Hello {user.name} !
+                    </h2>
+                    <p>{randomGreeting}</p>
+                </>
             }
         >
             <Head title="Dashboard" />
-
+            <div className="flex justify-center py-6">
+                <PrimaryButton className='py-4' href="/">Publier</PrimaryButton>
+            </div>
             <div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {/* Ajout du composant PostsList pour afficher les posts de l'utilisateur */}
@@ -39,8 +44,6 @@ export default function Dashboard() {
                             <PostsList posts={posts} /> {/* Passe les posts récupérés */}
                             <PrimaryButton href="/posts">Voir tous</PrimaryButton>
                         </div>
-
-
                     </div>
                 </div>
             </div>
