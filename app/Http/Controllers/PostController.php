@@ -48,10 +48,12 @@ class PostController extends Controller
     {
         // Récupérer tous les moods pour les afficher dans la vue
         $moods = Mood::all();
+        $moodTranslations = Lang::get('moods');
 
         // Rendre la vue Inertia avec les moods disponibles
         return Inertia::render('Create/ChooseMood', [
-            'moods' => $moods
+            'moods' => $moods,
+            'moodTranslations' => $moodTranslations,
         ]);
     }
 
