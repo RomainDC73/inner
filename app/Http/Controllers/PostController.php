@@ -44,6 +44,17 @@ class PostController extends Controller
         ]);
     }
 
+    public function chooseMood()
+    {
+        // Récupérer tous les moods pour les afficher dans la vue
+        $moods = Mood::all();
+
+        // Rendre la vue Inertia avec les moods disponibles
+        return Inertia::render('Create/ChooseMood', [
+            'moods' => $moods
+        ]);
+    }
+
     public function create(Request $request)
     {
         // Validation des données
@@ -82,16 +93,7 @@ class PostController extends Controller
         return response()->json($post, 201); // Renvoie le post créé avec un code 201
     }
 
-    public function chooseMood()
-    {
-        // Récupérer tous les moods pour les afficher dans la vue
-        $moods = Mood::all();
 
-        // Rendre la vue Inertia avec les moods disponibles
-        return Inertia::render('Create/ChooseMood', [
-            'moods' => $moods
-        ]);
-    }
 }
 
 

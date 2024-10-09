@@ -1,4 +1,5 @@
-import { Link, useForm } from '@inertiajs/inertia-react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Link, useForm } from '@inertiajs/react';
 
 export default function ChooseMood({ moods }) {
     const { data, setData, post } = useForm({
@@ -16,6 +17,7 @@ const submitMood = (e) => {
 };
 
 return (
+    <AuthenticatedLayout>
     <div>
             <h1>Choose your mood</h1>
             <form onSubmit={submitMood}>
@@ -36,6 +38,7 @@ return (
                 <button type="submit" disabled={!data.mood_id}>Next</button>
             </form>
         </div>
+        </AuthenticatedLayout>
 );
 }
 
