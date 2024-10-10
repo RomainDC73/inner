@@ -1,4 +1,5 @@
-import { useForm } from '@inertiajs/react';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head, useForm } from '@inertiajs/react';
 
 export default function ChooseAction({ mood_id }) {
     const { data, setData, post } = useForm({
@@ -12,8 +13,15 @@ export default function ChooseAction({ mood_id }) {
     };
 
     return (
+        <AuthenticatedLayout
+            header={
+                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800">
+                    Et si tu en disais un peu plus ?
+                </h1>
+            }
+        >
+        <Head title="Écrire ou parler ?" />
         <div>
-            <h1>What would you like to do?</h1>
             <form onSubmit={submitAction}>
                 <div>
                     <button type="button" onClick={() => setData('action', 'write')}>
@@ -26,5 +34,6 @@ export default function ChooseAction({ mood_id }) {
                 <button type="submit" disabled={!data.action}>Next</button>
             </form>
         </div>
+        </AuthenticatedLayout>
     );
 }
