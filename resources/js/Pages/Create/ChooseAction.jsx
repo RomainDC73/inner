@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
+import ChooseCard from '@/Components/ChooseCard';
 
 export default function ChooseAction({ mood_id }) {
     const { data, setData, post } = useForm({
@@ -22,17 +23,16 @@ export default function ChooseAction({ mood_id }) {
         >
         <Head title="Écrire ou parler ?" />
         <div>
-            <form onSubmit={submitAction}>
-                <div>
-                    <button type="button" onClick={() => setData('action', 'write')}>
-                        Write a Post
-                    </button>
-                    <button type="button" onClick={() => setData('action', 'audio')}>
-                        Record a Voice Message
-                    </button>
-                </div>
-                <button type="submit" disabled={!data.action}>Next</button>
-            </form>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ChooseCard
+                title="Écrire un message"
+                link="/create/write"
+            />
+            <ChooseCard
+                title="Enregistrer un audio"
+                link="/create/record"
+            />
+        </div>
         </div>
         </AuthenticatedLayout>
     );
