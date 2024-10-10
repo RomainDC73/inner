@@ -57,6 +57,17 @@ class PostController extends Controller
         ]);
     }
 
+    public function chooseAction(Request $request)
+    {
+        // Récupérer l'humeur sélectionnée depuis la requête
+        $moodId = $request->input('mood_id');
+
+        // Rendre la vue pour choisir entre écrire ou enregistrer un vocal
+        return Inertia::render('Create/ChooseAction', [
+            'moodId' => $moodId,
+        ]);
+    }
+
     public function create(Request $request)
     {
         // Validation des données

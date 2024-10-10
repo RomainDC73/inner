@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/create/choose-mood', [PostController::class, 'chooseMood']);
+Route::post('/create/choose-action', [PostController::class, 'chooseAction']);
 
 
 require __DIR__.'/auth.php';
