@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'good' => 'Bon',
+    'good' => 'Bien',
     'meh' => 'Bof',
-    'bad' => 'Mauvais',
+    'bad' => 'Pas bien',
 ];

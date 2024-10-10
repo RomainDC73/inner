@@ -7,48 +7,40 @@ export default function ChooseMood({ moods, moodTranslations }) {
         mood_id: '',
     });
 
-    // Fonction pour gérer la sélection du mood
     const handleMoodSelect = (id) => {
-        setData('mood_id', id); // Met à jour le form data avec le mood sélectionné
+        setData('mood_id', id);
     };
 
-    // Soumission du formulaire
     const submitMood = (e) => {
         e.preventDefault();
-        post('/create/choose-action'); // Redirige vers la page suivante
+        post('/create/choose-action');
     };
 
     return (
         <AuthenticatedLayout
             header={
-                <>
-                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800">
-                        Avant tout, comment te sens-tu ?
-                    </h1>
-                </>
+                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800">
+                    Avant tout, comment te sens-tu ?
+                </h1>
             }
         >
             <Head title="Choisis ton mood" />
-
-            <div>
+            <div className="flex flex-col items-center">
                 <form onSubmit={submitMood}>
-                    <div className="moods grid grid-cols-3 gap-4">
-                        {moods.map((mood) => (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4"> {/* Affichage en grille avec 3 colonnes sur grand écran */}
+                        {moods.map(mood => (
                             <div key={mood.id} onClick={() => handleMoodSelect(mood.id)}>
-                                {/* Utilisation du composant MoodCard pour chaque humeur */}
-                                <MoodCard mood={mood} translations={moodTranslations} />
+                                <MoodCard mood={mood} moodTranslations={moodTranslations} />
                             </div>
                         ))}
                     </div>
-
                     <div className="mt-6 text-center">
-                        {/* Bouton désactivé si aucun mood n'est sélectionné */}
                         <button
                             type="submit"
-                            className={`px-4 py-2 bg-blue-500 text-white rounded-lg ${!data.mood_id ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
                             disabled={!data.mood_id}
                         >
-                            Suivant
+                            Next
                         </button>
                     </div>
                 </form>
