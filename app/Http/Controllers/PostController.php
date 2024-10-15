@@ -80,6 +80,44 @@ class PostController extends Controller
         ]);
     }
 
+    public function showWriteForm()
+    {
+        $mood_id = session('mood_id'); // Récupérer le mood sélectionné
+        return Inertia::render('Create/Write', ['mood_id' => $mood_id]);
+    }
+
+    public function showTalkForm()
+    {
+        $mood_id = session('mood_id'); // Récupérer le mood sélectionné
+        return Inertia::render('Create/Talk', ['mood_id' => $mood_id]);
+    }
+
+    public function addMedia()
+{
+    // Récupérer les données stockées en session
+    $mood_id = session('mood_id');
+    $action = session('action');
+
+    return Inertia::render('Create/AddMedia', compact('mood_id', 'action'));
+}
+
+public function saveMedia(Request $request)
+{
+    $request->validate([
+        'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('media')) {
+        // Stocker le fichier en session pour un enregistrement ultérieur
+        session(['media_path' => $request->file('media')->store('media', 'public')]);
+    }
+
+    return redirect('/create/confirm');
+}
+
+
+
+
     public function create(Request $request)
     {
         // Validation des données

@@ -36,4 +36,15 @@ Route::post('/create/save-mood', [PostController::class, 'saveMood']);
 // Route pour choisir entre écrire ou parler
 Route::get('/create/choose-action', [PostController::class, 'chooseAction']);
 
+// Routes pour écrire et parler
+Route::get('/create/write', [PostController::class, 'showWriteForm']);
+Route::get('/create/talk', [PostController::class, 'showTalkForm']);
+
+// Route pour ajouter une image
+Route::get('/create/add-media', [PostController::class, 'addMedia']);
+Route::post('/create/save-media', [PostController::class, 'saveMedia']);
+
+// Route pour sauvegarder le post final
+Route::post('/create/save', [PostController::class, 'store']);
+
 require __DIR__.'/auth.php';

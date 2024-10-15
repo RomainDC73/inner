@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 
-const ChooseCard = ({ title, link }) => {
+export default function ChooseCard({ title, link }) {
     return (
         <div className="max-w-xs w-full mx-auto mb-4"> {/* Limite la largeur du badge et ajoute un espacement entre chaque badge */}
             <Link href={link}>
@@ -12,4 +12,3 @@ const ChooseCard = ({ title, link }) => {
     );
 }
 
-export default ChooseCard;
