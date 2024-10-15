@@ -16,14 +16,14 @@ export default function ChooseAction({ mood_id }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800">
+                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     Et si tu en disais un peu plus ?
                 </h1>
             }
         >
         <Head title="Écrire ou parler ?" />
-        <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex flex-col items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ChooseCard
                 title="Écrire un message"
                 link="/create/write"
