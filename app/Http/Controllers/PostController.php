@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -64,6 +65,9 @@ class PostController extends Controller
         ]);
         // Stocker l'humeur sélectionnée dans la session
         session(['mood_id' => $request->input('mood_id')]);
+
+        // Vérification de la session (affiche un message dans le log)
+        Log::info('Mood stored in session: ' . session('mood_id'));
 
         // Redirection vers la page pour choisir l'action
         return redirect('/create/choose-action');
