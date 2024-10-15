@@ -33,5 +33,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/create/choose-mood', [PostController::class, 'chooseMood']);
 Route::post('/create/save-mood', [PostController::class, 'saveMood']);
 
+// Route pour choisir entre écrire ou parler
+Route::get('/create/choose-action', [PostController::class, 'chooseAction']);
 
 require __DIR__.'/auth.php';

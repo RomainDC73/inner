@@ -9,7 +9,7 @@ export default function ChooseMood({ moods, moodTranslations }) {
 
     const handleMoodSelect = (id) => {
         setData('mood_id', id);
-        post('/create/choose-action');
+        post('/create/save-mood');
     };
 
     return (
