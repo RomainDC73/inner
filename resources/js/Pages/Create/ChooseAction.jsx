@@ -32,7 +32,7 @@ export default function ChooseAction({ mood_id }) {
                 title="Enregistrer un audio"
                 link="/create/record"
             />
-        </div>
+            </div>
         </div>
         </AuthenticatedLayout>
     );

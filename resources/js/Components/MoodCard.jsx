@@ -12,7 +12,7 @@ const MoodCard = ({ mood, moodTranslations }) => {
     const moodName = moodTranslations[mood.name] || mood.name; // Si pas de traduction, afficher le nom par défaut.
 
     return (
-        <div className="max-w-xs w-full mx-auto mb-4"> {/* Limite la largeur du badge et ajoute un espacement entre chaque badge */}
+        <div className="max-w-xs w-full mx-auto"> {/* Limite la largeur du badge et ajoute un espacement entre chaque badge */}
             <Link href={`/mood/${mood.id}`}>
                 <div className={`${moodColors[mood.name] || 'bg-gradient-to-br from-white to-gray-200'} rounded-lg p-6 shadow-md flex flex-col items-center justify-center space-y-2`}>
                     {/* Centre le contenu verticalement avec flex-col */}
