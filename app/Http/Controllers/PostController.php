@@ -86,6 +86,24 @@ class PostController extends Controller
         return Inertia::render('Create/Write', ['mood_id' => $mood_id]);
     }
 
+    public function addDescription(Request $request)
+    {
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+            'description' => 'required|string|max:1000', // Limite de texte
+        ]);
+        // Stocker la description dans la session
+        session(['description' => $request->input('description')]);
+        // Crée un nouveau post ou met à jour celui existant
+        $post = new Post();
+        $post->user_id = Auth::id();
+        $post->mood_id = $request->input('mood_id');
+        $post->description = $request->input('description');
+        $post->save();
+
+        return redirect()->route('next.step'); // Rediriger vers l'étape suivante (ajout de média par ex.)
+    }
+
     public function showTalkForm()
     {
         $mood_id = session('mood_id'); // Récupérer le mood sélectionné
@@ -93,30 +111,27 @@ class PostController extends Controller
     }
 
     public function addMedia()
-{
-    // Récupérer les données stockées en session
-    $mood_id = session('mood_id');
-    $action = session('action');
+    {
+        // Récupérer les données stockées en session
+        $mood_id = session('mood_id');
+        $action = session('action');
 
-    return Inertia::render('Create/AddMedia', compact('mood_id', 'action'));
-}
-
-public function saveMedia(Request $request)
-{
-    $request->validate([
-        'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
-
-    if ($request->hasFile('media')) {
-        // Stocker le fichier en session pour un enregistrement ultérieur
-        session(['media_path' => $request->file('media')->store('media', 'public')]);
+        return Inertia::render('Create/AddMedia', compact('mood_id', 'action'));
     }
 
-    return redirect('/create/confirm');
-}
+    public function saveMedia(Request $request)
+    {
+        $request->validate([
+            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
+        if ($request->hasFile('media')) {
+            // Stocker le fichier en session pour un enregistrement ultérieur
+            session(['media_path' => $request->file('media')->store('media', 'public')]);
+        }
 
-
+        return redirect('/create/confirm');
+    }
 
     public function create(Request $request)
     {
@@ -130,11 +145,11 @@ public function saveMedia(Request $request)
 
         // Chiffrer et stocker le fichier image
         $mediaPath = $request->hasFile('media') ?
-        encrypt(Storage::put('media', $request->file('media'))) : null;
+            encrypt(Storage::put('media', $request->file('media'))) : null;
 
         // Chiffrer et stocker le fichier audio
         $audioPath = $request->hasFile('audio') ?
-        encrypt(Storage::put('audio', $request->file('audio'))) : null;
+            encrypt(Storage::put('audio', $request->file('audio'))) : null;
 
         // Création du post
         $post = new Post();
@@ -155,8 +170,4 @@ public function saveMedia(Request $request)
 
         return response()->json($post, 201); // Renvoie le post créé avec un code 201
     }
-
-
 }
-
-
