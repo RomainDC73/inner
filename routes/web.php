@@ -38,6 +38,7 @@ Route::get('/create/choose-action', [PostController::class, 'chooseAction']);
 
 // Routes pour écrire et parler
 Route::get('/create/write', [PostController::class, 'showWriteForm']);
+Route::post('/create/write', [PostController::class, 'addDescription']);
 Route::get('/create/talk', [PostController::class, 'showTalkForm']);
 
 // Route pour ajouter une image

@@ -21,7 +21,7 @@ export default forwardRef(function LongTextInput(
             {...props}
             rows={rows}
             className={
-                "rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 " +
+                "rounded-md border-gray-300 shadow-sm focus:border-innerdarkblue-500 focus:ring-innerdarkblue-500" +
                 className
             }
             ref={localRef}

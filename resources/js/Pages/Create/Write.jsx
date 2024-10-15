@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import LongTextInput from '@/Components/LongTextInput';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function Write({ mood_id }) {
     const { data, setData, post } = useForm({
@@ -10,7 +11,7 @@ export default function Write({ mood_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/posts/add-description'); // Soumettre le texte au serveur
+        post('/create/write'); // Soumettre le texte au serveur
     };
 
     return (
@@ -27,13 +28,13 @@ export default function Write({ mood_id }) {
                     value={data.description}
                     onChange={(e) => setData('description', e.target.value)} // Met à jour le texte
                 />
-                <button
+                <PrimaryButton
                     type="submit"
                     className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg"
                     disabled={!data.description} // Désactiver le bouton si le champ est vide
                 >
                     Enregistrer
-                </button>
+                </PrimaryButton>
             </form>
         </AuthenticatedLayout>
     );

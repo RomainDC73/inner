@@ -93,15 +93,11 @@ class PostController extends Controller
             'description' => 'required|string|max:1000', // Limite de texte
         ]);
         // Stocker la description dans la session
+        session(['mood_id' => $request->input('mood_id')]);
         session(['description' => $request->input('description')]);
-        // Crée un nouveau post ou met à jour celui existant
-        $post = new Post();
-        $post->user_id = Auth::id();
-        $post->mood_id = $request->input('mood_id');
-        $post->description = $request->input('description');
-        $post->save();
 
-        return redirect()->route('next.step'); // Rediriger vers l'étape suivante (ajout de média par ex.)
+        // Rediriger vers l'étape suivante (ajout de média par ex.)
+        return redirect('create/add-media');
     }
 
     public function showTalkForm()
@@ -114,9 +110,12 @@ class PostController extends Controller
     {
         // Récupérer les données stockées en session
         $mood_id = session('mood_id');
-        $action = session('action');
+        $description = session('description');
 
-        return Inertia::render('Create/AddMedia', compact('mood_id', 'action'));
+        return Inertia::render('Create/AddMedia', [
+            'mood_id' => $mood_id,
+            'description' => $description,
+        ]);
     }
 
     public function saveMedia(Request $request)
@@ -133,41 +132,41 @@ class PostController extends Controller
         return redirect('/create/confirm');
     }
 
-    public function create(Request $request)
-    {
-        // Validation des données
-        $request->validate([
-            'mood_id' => 'required|exists:moods,id',
-            'description' => 'required|string|max:500',
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'audio' => 'nullable|file|mimes:mp3,wav|max:2048',
-        ]);
+    // public function create(Request $request)
+    // {
+    //     // Validation des données
+    //     $request->validate([
+    //         'mood_id' => 'required|exists:moods,id',
+    //         'description' => 'required|string|max:500',
+    //         'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //         'audio' => 'nullable|file|mimes:mp3,wav|max:2048',
+    //     ]);
 
-        // Chiffrer et stocker le fichier image
-        $mediaPath = $request->hasFile('media') ?
-            encrypt(Storage::put('media', $request->file('media'))) : null;
+    //     // Chiffrer et stocker le fichier image
+    //     $mediaPath = $request->hasFile('media') ?
+    //         encrypt(Storage::put('media', $request->file('media'))) : null;
 
-        // Chiffrer et stocker le fichier audio
-        $audioPath = $request->hasFile('audio') ?
-            encrypt(Storage::put('audio', $request->file('audio'))) : null;
+    //     // Chiffrer et stocker le fichier audio
+    //     $audioPath = $request->hasFile('audio') ?
+    //         encrypt(Storage::put('audio', $request->file('audio'))) : null;
 
-        // Création du post
-        $post = new Post();
-        $post->user_id = Auth::id();
-        $post->mood_id = $request->input('mood_id');
-        $post->description = $request->input('description');
+    //     // Création du post
+    //     $post = new Post();
+    //     $post->user_id = Auth::id();
+    //     $post->mood_id = $request->input('mood_id');
+    //     $post->description = $request->input('description');
 
-        // Gestion des fichiers media
-        if ($request->hasFile('media')) {
-            $post->media_path = $request->file('media')->store('media', 'public');
-        }
+    //     // Gestion des fichiers media
+    //     if ($request->hasFile('media')) {
+    //         $post->media_path = $request->file('media')->store('media', 'public');
+    //     }
 
-        if ($request->hasFile('audio')) {
-            $post->audio_path = $request->file('audio')->store('audio', 'public');
-        }
+    //     if ($request->hasFile('audio')) {
+    //         $post->audio_path = $request->file('audio')->store('audio', 'public');
+    //     }
 
-        $post->save();
+    //     $post->save();
 
-        return response()->json($post, 201); // Renvoie le post créé avec un code 201
-    }
+    //     return response()->json($post, 201); // Renvoie le post créé avec un code 201
+    // }
 }
