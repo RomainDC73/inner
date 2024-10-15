@@ -17,7 +17,7 @@ const MoodCard = ({ mood, moodTranslations }) => {
                 <div className={`${moodColors[mood.name] || 'bg-gradient-to-br from-white to-gray-200'} rounded-lg p-6 shadow-md flex flex-col items-center justify-center space-y-2`}>
                     {/* Centre le contenu verticalement avec flex-col */}
                     <MoodBadge mood={mood.name} />
-                    <p className="text-sm text-gray-500">{moodName}</p>
+                    <p className="text-sm text-gray-700">{moodName}</p>
                 </div>
             </Link>
         </div>
