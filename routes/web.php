@@ -24,14 +24,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/posts', [PostController::class, 'create']);
     Route::get('/posts', [PostController::class, 'index']);
     Route::get('posts', [PostController::class, 'showPostsPage']);
     Route::get('/post/{id}', [PostController::class, 'show'])->name('posts.show');
 });
 
+// Route pour choisir le mood
 Route::get('/create/choose-mood', [PostController::class, 'chooseMood']);
-Route::post('/create/choose-action', [PostController::class, 'chooseAction']);
+Route::post('/create/save-mood', [PostController::class, 'saveMood']);
 
 
 require __DIR__.'/auth.php';

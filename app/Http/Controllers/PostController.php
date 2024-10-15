@@ -57,6 +57,18 @@ class PostController extends Controller
         ]);
     }
 
+    public function saveMood(Request $request)
+    {
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+        ]);
+        // Stocker l'humeur sélectionnée dans la session
+        session(['mood_id' => $request->input('mood_id')]);
+
+        // Redirection vers la page pour choisir l'action
+        return redirect('/create/choose-action');
+    }
+
     public function chooseAction(Request $request)
     {
         // Récupérer l'humeur sélectionnée depuis la requête
