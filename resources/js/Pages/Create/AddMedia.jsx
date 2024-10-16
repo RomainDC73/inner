@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import ChooseMedia from '@/Components/ChooseMedia';
+import ImagePreview from '@/Components/ImagePreview';
 import { useRef, useState } from 'react';
 
 export default function AddMedia({ mood_id }) {
@@ -82,18 +83,10 @@ export default function AddMedia({ mood_id }) {
 
                 {/* Affichage de la miniature si une photo est sélectionnée */}
                 {mediaPreview && (
-                    <div className="relative mt-4">
-                        <img src={mediaPreview} alt="Prévisualisation" className="w-32 h-32 object-cover rounded-md" />
-
-                        {/* Bouton de suppression (icône poubelle) */}
-                        <button
-                            type="button"
-                            onClick={handleRemoveMedia}
-                            className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1"
-                        >
-                            🗑
-                        </button>
-                    </div>
+                    <ImagePreview
+                        src={mediaPreview}
+                        onRemove={handleRemoveMedia}
+                    />
                 )}
 
                 {/* Boutons pour soumettre ou skipper */}
