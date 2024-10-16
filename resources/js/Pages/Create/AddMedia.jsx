@@ -26,9 +26,18 @@ export default function AddMedia({ mood_id }) {
         }
     };
 
-    // Simuler le clic sur l'input file quand on clique sur le bouton
+    // Simuler le clic sur l'input file quand on clique sur la carte
     const handleImportClick = () => {
         if (fileInputRef.current) {
+            fileInputRef.current.setAttribute('capture', ''); // Réinitialiser pour l'import
+            fileInputRef.current.click(); // Ouvre le sélecteur de fichiers
+        }
+    };
+
+    // Simuler le clic sur l'input file pour prendre une photo
+    const handleTakePhotoClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.setAttribute('capture', 'environment'); // Utilise l'appareil photo
             fileInputRef.current.click(); // Ouvre le sélecteur de fichiers
         }
     };
@@ -36,13 +45,13 @@ export default function AddMedia({ mood_id }) {
     // Supprimer l'image sélectionnée
     const handleRemoveMedia = () => {
         setData('media', null);
-        setMediaPreview(null);
+        setMediaPreview(null); // Réinitialise l'aperçu de l'image
         fileInputRef.current.value = ''; // Réinitialise l'input file
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/create/save'); // Route vers l'étape suivante
+        post('/posts/submit-media'); // Route vers l'étape suivante
     };
 
     return (
@@ -59,10 +68,10 @@ export default function AddMedia({ mood_id }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Choix entre importer ou prendre une photo */}
                     <ChooseMedia title="📁 Importer une photo" onClick={handleImportClick} />
-                    <ChooseMedia title="📷 Prendre une photo" link="#capture" />
+                    <ChooseMedia title="📷 Prendre une photo" onClick={handleTakePhotoClick} />
                 </div>
 
-                {/* Input file pour importer la photo */}
+                {/* Input file pour importer ou prendre la photo */}
                 <input
                     type="file"
                     ref={fileInputRef}
@@ -80,7 +89,7 @@ export default function AddMedia({ mood_id }) {
                         <button
                             type="button"
                             onClick={handleRemoveMedia}
-                            className="absolute top-0 right-0 bg-white text-white rounded-full p-1"
+                            className="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1"
                         >
                             🗑
                         </button>

@@ -43,7 +43,10 @@ Route::get('/create/talk', [PostController::class, 'showTalkForm']);
 
 // Route pour ajouter une image
 Route::get('/create/add-media', [PostController::class, 'addMedia']);
-Route::post('/create/save-media', [PostController::class, 'saveMedia']);
+Route::post('/posts/submit-media', [PostController::class, 'saveMedia']);
+
+Route::get('/create/confirm', [PostController::class, 'showConfirm']);
+
 
 // Route pour sauvegarder le post final
 Route::post('/create/save', [PostController::class, 'store']);

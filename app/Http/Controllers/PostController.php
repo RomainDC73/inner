@@ -125,18 +125,31 @@ class PostController extends Controller
     }
 
     public function saveMedia(Request $request)
-    {
-        $request->validate([
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    $request->validate([
+        'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        if ($request->hasFile('media')) {
-            // Stocker le fichier en session pour un enregistrement ultérieur
-            session(['media_path' => $request->file('media')->store('media', 'public')]);
-        }
-
-        return redirect('/create/confirm');
+    if ($request->hasFile('media')) {
+        // Stocker le fichier en session pour un enregistrement ultérieur
+        session(['media_path' => $request->file('media')->store('media', 'public')]);
     }
+
+    return redirect('/create/confirm'); // Assurez-vous que cette route existe
+}
+
+public function showConfirm()
+{
+    $mediaPath = session('media_path'); // Récupérer le chemin de l'image
+    $mood_id = session('mood_id'); // Récupérer l'humeur, si nécessaire
+    $description = session('description'); // Récupérer la description, si nécessaire
+
+    return Inertia::render('Create/ShowConfirm', [
+        'mediaPath' => $mediaPath,
+        'mood_id' => $mood_id,
+        'description' => $description,
+    ]);
+}
 
     // public function create(Request $request)
     // {
