@@ -26,16 +26,23 @@ export default function AddMedia({ mood_id }) {
         }
     };
 
-    // Simuler le clic sur l'input file quand on clique sur la carte
+    // Simuler le clic sur l'input file quand on clique sur le bouton
     const handleImportClick = () => {
         if (fileInputRef.current) {
             fileInputRef.current.click(); // Ouvre le sélecteur de fichiers
         }
     };
 
+    // Supprimer l'image sélectionnée
+    const handleRemoveMedia = () => {
+        setData('media', null);
+        setMediaPreview(null);
+        fileInputRef.current.value = ''; // Réinitialise l'input file
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/posts/submit-media'); // Route vers l'étape suivante
+        post('/create/save'); // Route vers l'étape suivante
     };
 
     return (
@@ -66,8 +73,17 @@ export default function AddMedia({ mood_id }) {
 
                 {/* Affichage de la miniature si une photo est sélectionnée */}
                 {mediaPreview && (
-                    <div className="mt-4">
+                    <div className="relative mt-4">
                         <img src={mediaPreview} alt="Prévisualisation" className="w-32 h-32 object-cover rounded-md" />
+
+                        {/* Bouton de suppression (icône poubelle) */}
+                        <button
+                            type="button"
+                            onClick={handleRemoveMedia}
+                            className="absolute top-0 right-0 bg-white text-white rounded-full p-1"
+                        >
+                            🗑
+                        </button>
                     </div>
                 )}
 
