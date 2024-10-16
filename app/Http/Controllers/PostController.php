@@ -100,6 +100,8 @@ class PostController extends Controller
         session(['mood_id' => $request->input('mood_id')]);
         session(['description' => $request->input('description')]);
 
+        Log::info('Description stored in session: ' . session('description'));
+
         // Rediriger vers l'étape suivante (ajout de média par ex.)
         return redirect('create/add-media');
     }
