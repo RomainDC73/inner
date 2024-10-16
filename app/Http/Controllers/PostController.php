@@ -117,10 +117,12 @@ class PostController extends Controller
         // Récupérer les données stockées en session
         $mood_id = session('mood_id');
         $description = session('description');
+        $media_path = session('media_path');
 
         return Inertia::render('Create/AddMedia', [
             'mood_id' => $mood_id,
             'description' => $description,
+            'media_path' => $media_path,
         ]);
     }
 
@@ -131,8 +133,10 @@ class PostController extends Controller
     ]);
 
     if ($request->hasFile('media')) {
+        // Stocker le chemin du fichier média dans la session pour un usage ultérieur
+        $mediaPath = $request->file('media')->store('media', 'public');
         // Stocker le fichier en session pour un enregistrement ultérieur
-        session(['media_path' => $request->file('media')->store('media', 'public')]);
+        session(['media_path' => $mediaPath]);
     }
     Log::info('Media path stored in session: ' . session('media_path'));
     return redirect('/create/confirm'); // Assurez-vous que cette route existe

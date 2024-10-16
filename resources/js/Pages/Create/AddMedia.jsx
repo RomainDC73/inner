@@ -4,12 +4,12 @@ import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
 import { useRef, useState } from 'react';
 
-export default function AddMedia({ mood_id }) {
+export default function AddMedia({ mood_id, media_path }) {
     const { data, setData, post } = useForm({
         media: null,  // Pour stocker l'image uploadée
     });
 
-    const [mediaPreview, setMediaPreview] = useState(null);
+    const [mediaPreview, setMediaPreview] = useState(media_path ? `/storage/${media_path}` : null);
     const fileInputRef = useRef(null); // Référence à l'input file
 
     // Gérer l'upload de la photo
@@ -27,19 +27,11 @@ export default function AddMedia({ mood_id }) {
         }
     };
 
-    // Simuler le clic sur l'input file quand on clique sur la carte
-    const handleImportClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.setAttribute('capture', ''); // Réinitialiser pour l'import
-            fileInputRef.current.click(); // Ouvre le sélecteur de fichiers
-        }
-    };
-
-    // Simuler le clic sur l'input file pour prendre une photo
+    const handleImportClick = () => fileInputRef.current && fileInputRef.current.click();
     const handleTakePhotoClick = () => {
         if (fileInputRef.current) {
-            fileInputRef.current.setAttribute('capture', 'environment'); // Utilise l'appareil photo
-            fileInputRef.current.click(); // Ouvre le sélecteur de fichiers
+            fileInputRef.current.setAttribute('capture', 'environment');
+            fileInputRef.current.click();
         }
     };
 
