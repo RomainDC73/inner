@@ -2,11 +2,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import LongTextInput from '@/Components/LongTextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { useEffect } from 'react';
 
-export default function Write({ mood_id }) {
+export default function Write({ mood_id, initial_description }) {
     const { data, setData, post } = useForm({
         mood_id: mood_id,
-        description: '' // Le texte écrit par l'utilisateur
+        description: initial_description || '' // Le texte écrit par l'utilisateur
     });
 
     const handleSubmit = (e) => {
