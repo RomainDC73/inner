@@ -134,7 +134,7 @@ class PostController extends Controller
         // Stocker le fichier en session pour un enregistrement ultérieur
         session(['media_path' => $request->file('media')->store('media', 'public')]);
     }
-
+    Log::info('Media path stored in session: ' . session('media_path'));
     return redirect('/create/confirm'); // Assurez-vous que cette route existe
 }
 
