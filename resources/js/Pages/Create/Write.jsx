@@ -4,10 +4,10 @@ import LongTextInput from '@/Components/LongTextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useEffect } from 'react';
 
-export default function Write({ mood_id, initial_description }) {
+export default function Write({ mood_id, initial_description }) { // Récupérer la description initiale depuis la session
     const { data, setData, post } = useForm({
         mood_id: mood_id,
-        description: initial_description || '' // Le texte écrit par l'utilisateur
+        description: initial_description || '' // Pré-remplir le champ avec la description depuis la session
     });
 
     const handleSubmit = (e) => {

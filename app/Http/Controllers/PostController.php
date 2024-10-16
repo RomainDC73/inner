@@ -87,7 +87,7 @@ class PostController extends Controller
     public function showWriteForm()
     {
         $mood_id = session('mood_id'); // Récupérer le mood sélectionné
-        $description = session('description'); // Récupérer la description, si elle existe
+        $description = session('description', ''); // Récupérer la description, si elle existe
         return Inertia::render('Create/Write', [
             'mood_id' => $mood_id, // Passer l'humeur à la vue
             'initial_description' => $description, // Passer la description à la vue
