@@ -34,7 +34,9 @@ class MediaController extends Controller
             // Stocker le fichier en session pour un enregistrement ultérieur
             session(['media_path' => $mediaPath]);
         }
+
         Log::info('Media path stored in session: ' . session('media_path'));
-        return redirect('/create/confirm'); // Assurez-vous que cette route existe
+        return redirect()->route('create.confirm'); // Assurez-vous que cette route existe
     }
 }
+

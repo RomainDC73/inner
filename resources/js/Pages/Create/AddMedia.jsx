@@ -4,20 +4,21 @@ import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
 import { useRef, useState, useEffect } from 'react';
 
-export default function AddMedia({ mood_id, media_path }) {
-    const { data, setData, post } = useForm({
+export default function AddMedia({ mood_id }) {
+    const { data, setData, post, processing } = useForm({
         media: null,  // Pour stocker l'image uploadée
     });
 
-    const [mediaPreview, setMediaPreview] = useState(media_path ? `/storage/${media_path}` : null);
+    const [mediaPreview, setMediaPreview] = useState(null);
     const fileInputRef = useRef(null); // Référence à l'input file
 
-    // Sauvegarde automatique du média en session lorsqu'il change
+    // Utilisation de useEffect pour charger l'image depuis le local storage
     useEffect(() => {
-        if (data.media) {
-            post('/posts/submit-media', { preserveScroll: true }); // Envoi automatique sans recharger la page
+        const savedMedia = localStorage.getItem('media');
+        if (savedMedia) {
+            setMediaPreview(savedMedia);
         }
-    }, [data.media]); // L'effet se déclenche chaque fois que le média change
+    }, []);
 
     // Gérer l'upload de la photo
     const handleMediaChange = (e) => {
@@ -28,7 +29,9 @@ export default function AddMedia({ mood_id, media_path }) {
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                setMediaPreview(reader.result);
+                const imageUrl = reader.result;
+                setMediaPreview(imageUrl);
+                localStorage.setItem('media', imageUrl); // Stocker l'image dans le local storage
             };
             reader.readAsDataURL(file);
         }
@@ -47,11 +50,17 @@ export default function AddMedia({ mood_id, media_path }) {
         setData('media', null);
         setMediaPreview(null); // Réinitialise l'aperçu de l'image
         fileInputRef.current.value = ''; // Réinitialise l'input file
+        localStorage.removeItem('media'); // Supprimer l'image du local storage
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/posts/submit-media'); // Route vers l'étape suivante
+        post('/create/submit-media', {
+            onSuccess: () => {
+                // Redirection vers l'étape suivante après succès
+                window.location.href = '/create/confirm'; // Remplacez par l'URL correcte
+            },
+        }); // Route vers l'étape suivante
     };
 
     return (
@@ -92,7 +101,8 @@ export default function AddMedia({ mood_id, media_path }) {
                 <div className="mt-8 flex space-x-4">
                     <button
                         onClick={handleSubmit}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+                        className={`px-4 py-2 bg-blue-500 text-white rounded-lg ${processing ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        disabled={processing} // Désactiver le bouton si traitement en cours
                     >
                         Continuer
                     </button>
