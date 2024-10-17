@@ -4,15 +4,16 @@ import LongTextInput from '@/Components/LongTextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useEffect } from 'react';
 
-export default function Write({ mood_id, initial_description }) { // Récupérer la description initiale depuis la session
-    const { data, setData, post } = useForm({
+export default function Write({ mood_id, initial_description }) {
+    const { data, setData, post, reset } = useForm({
         mood_id: mood_id,
-        description: initial_description || '' // Pré-remplir le champ avec la description depuis la session
+        description: initial_description || '', // Pré-remplir avec la description en session
     });
 
+    // Soumettre le formulaire lorsque l'utilisateur clique sur "Enregistrer"
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/create/write'); // Soumettre le texte au serveur
+        post('/create/write'); // Envoie les données au backend pour sauvegarde
     };
 
     return (
@@ -27,7 +28,7 @@ export default function Write({ mood_id, initial_description }) { // Récupérer
             <form onSubmit={handleSubmit} className="flex flex-col items-center">
                 <LongTextInput
                     value={data.description}
-                    onChange={(e) => setData('description', e.target.value)} // Met à jour le texte
+                    onChange={(e) => setData('description', e.target.value)} // Met à jour le texte en local
                 />
                 <PrimaryButton
                     type="submit"

@@ -63,4 +63,3 @@ class DescriptionController extends Controller
     }
 
 }
-

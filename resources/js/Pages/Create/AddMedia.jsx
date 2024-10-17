@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function AddMedia({ mood_id, media_path }) {
     const { data, setData, post } = useForm({
@@ -11,6 +11,13 @@ export default function AddMedia({ mood_id, media_path }) {
 
     const [mediaPreview, setMediaPreview] = useState(media_path ? `/storage/${media_path}` : null);
     const fileInputRef = useRef(null); // Référence à l'input file
+
+    // Sauvegarde automatique du média en session lorsqu'il change
+    useEffect(() => {
+        if (data.media) {
+            post('/posts/submit-media', { preserveScroll: true }); // Envoi automatique sans recharger la page
+        }
+    }, [data.media]); // L'effet se déclenche chaque fois que le média change
 
     // Gérer l'upload de la photo
     const handleMediaChange = (e) => {
