@@ -58,7 +58,7 @@ export default function AddMedia({ mood_id }) {
         post('/create/submit-media', {
             onSuccess: () => {
                 // Redirection vers l'étape suivante après succès
-                window.location.href = '/create/confirm'; // Remplacez par l'URL correcte
+                Inertia.visit('/create/confirm'); // Remplacez par l'URL correcte
             },
         }); // Route vers l'étape suivante
     };
