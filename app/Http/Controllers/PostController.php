@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mood;
 use App\Models\Post;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
+
 
 class PostController extends Controller
 {
@@ -43,107 +40,6 @@ class PostController extends Controller
             'post' => $post,
             'moodTranslations' => $moodTranslations,
         ]);
-    }
-
-    public function chooseMood()
-    {
-        // Récupérer tous les moods pour les afficher dans la vue
-        $moods = Mood::all();
-        $moodTranslations = Lang::get('moods');
-
-        // Rendre la vue Inertia avec les moods disponibles
-        return Inertia::render('Create/ChooseMood', [
-            'moods' => $moods,
-            'moodTranslations' => $moodTranslations,
-        ]);
-    }
-
-    public function saveMood(Request $request)
-    {
-        $request->validate([
-            'mood_id' => 'required|exists:moods,id',
-        ]);
-        // Stocker l'humeur sélectionnée dans la session
-        session(['mood_id' => $request->input('mood_id')]);
-
-        // Vérification de la session (affiche un message dans le log)
-        Log::info('Mood stored in session: ' . session('mood_id'));
-
-        // Redirection vers la page pour choisir l'action
-        return redirect('/create/choose-action');
-    }
-
-    public function chooseAction(Request $request)
-    {
-        // Récupérer l'humeur sélectionnée depuis la requête
-        $moodId = $request->input('mood_id');
-
-        // Rendre la vue pour choisir entre écrire ou enregistrer un vocal
-        return Inertia::render('Create/ChooseAction', [
-            'moodId' => $moodId,
-        ]);
-    }
-
-    public function showWriteForm()
-    {
-        $mood_id = session('mood_id'); // Récupérer le mood sélectionné
-        $description = session('description', ''); // Récupérer la description, si elle existe
-        return Inertia::render('Create/Write', [
-            'mood_id' => $mood_id, // Passer l'humeur à la vue
-            'initial_description' => $description, // Passer la description à la vue
-        ]);
-    }
-
-    public function addDescription(Request $request)
-    {
-        $request->validate([
-            'mood_id' => 'required|exists:moods,id',
-            'description' => 'required|string|max:1000', // Limite de texte
-        ]);
-        // Stocker la description dans la session
-        session(['mood_id' => $request->input('mood_id')]);
-        session(['description' => $request->input('description')]);
-
-        Log::info('Description stored in session: ' . session('description'));
-
-        // Rediriger vers l'étape suivante (ajout de média par ex.)
-        return redirect('create/add-media');
-    }
-
-    public function showTalkForm()
-    {
-        $mood_id = session('mood_id'); // Récupérer le mood sélectionné
-        return Inertia::render('Create/Talk', ['mood_id' => $mood_id]);
-    }
-
-    public function addMedia()
-    {
-        // Récupérer les données stockées en session
-        $mood_id = session('mood_id');
-        $description = session('description');
-        $media_path = session('media_path');
-
-        return Inertia::render('Create/AddMedia', [
-            'mood_id' => $mood_id,
-            'description' => $description,
-            'media_path' => $media_path,
-        ]);
-    }
-
-    public function saveMedia(Request $request)
-    {
-        $request->validate([
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        if ($request->hasFile('media')) {
-            // Stocker le chemin du fichier média dans la session pour un usage ultérieur
-            $mediaPath = $request->file('media')->store('media', 'public');
-            // Stocker le fichier en session pour un enregistrement ultérieur
-            session(['media_path' => $mediaPath]);
-        }
-        Log::info('Media path stored in session: ' . session('media_path'));
-        return redirect('/create/confirm'); // Assurez-vous que cette route existe
     }
 
     public function showConfirm()

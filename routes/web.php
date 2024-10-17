@@ -3,9 +3,12 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\MoodController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DescriptionController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -30,20 +33,20 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route pour choisir le mood
-Route::get('/create/choose-mood', [PostController::class, 'chooseMood']);
-Route::post('/create/save-mood', [PostController::class, 'saveMood']);
+Route::get('/create/choose-mood', [MoodController::class, 'chooseMood']);
+Route::post('/create/save-mood', [MoodController::class, 'saveMood']);
 
 // Route pour choisir entre écrire ou parler
-Route::get('/create/choose-action', [PostController::class, 'chooseAction']);
+Route::get('/create/choose-action', [DescriptionController::class, 'chooseAction']);
 
 // Routes pour écrire et parler
-Route::get('/create/write', [PostController::class, 'showWriteForm']);
-Route::post('/create/write', [PostController::class, 'addDescription']);
-Route::get('/create/talk', [PostController::class, 'showTalkForm']);
+Route::get('/create/write', [DescriptionController::class, 'showWriteForm']);
+Route::post('/create/write', [DescriptionController::class, 'addDescription']);
+Route::get('/create/talk', [DescriptionController::class, 'showTalkForm']);
 
 // Route pour ajouter une image
-Route::get('/create/add-media', [PostController::class, 'addMedia']);
-Route::post('/posts/submit-media', [PostController::class, 'saveMedia']);
+Route::get('/create/add-media', [MediaController::class, 'addMedia']);
+Route::post('/posts/submit-media', [MediaController::class, 'saveMedia']);
 
 Route::get('/create/confirm', [PostController::class, 'showConfirm']);
 
