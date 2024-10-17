@@ -5,15 +5,29 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useEffect } from 'react';
 
 export default function Write({ mood_id, initial_description }) {
-    const { data, setData, post, reset } = useForm({
+    // Récupérer la description depuis le localStorage si elle existe
+    const savedDescription = localStorage.getItem('description') || initial_description;
+
+    // Initialiser le formulaire avec useForm
+    const { data, setData, post } = useForm({
         mood_id: mood_id,
-        description: initial_description || '', // Pré-remplir avec la description en session
+        description: savedDescription || '', // Pré-remplir avec la description en session ou localStorage
     });
 
-    // Soumettre le formulaire lorsque l'utilisateur clique sur "Enregistrer"
+    // Chaque fois que la description change, la sauvegarder dans le localStorage
+    useEffect(() => {
+        localStorage.setItem('description', data.description);
+    }, [data.description]);
+
+    // Soumettre le formulaire au backend lorsque l'utilisateur clique sur "Enregistrer"
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/create/write'); // Envoie les données au backend pour sauvegarde
+        post('/create/write', {
+            onSuccess: () => {
+                // Si la soumission réussit, on nettoie le localStorage
+                //localStorage.removeItem('description');
+            },
+        });
     };
 
     return (
@@ -26,14 +40,16 @@ export default function Write({ mood_id, initial_description }) {
         >
             <Head title="Écrire" />
             <form onSubmit={handleSubmit} className="flex flex-col items-center">
+                {/* LongTextInput pour écrire la description */}
                 <LongTextInput
                     value={data.description}
-                    onChange={(e) => setData('description', e.target.value)} // Met à jour le texte en local
+                    onChange={(e) => setData('description', e.target.value)} // Met à jour la description localement
                 />
+                {/* Bouton pour soumettre */}
                 <PrimaryButton
                     type="submit"
                     className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg"
-                    disabled={!data.description} // Désactiver le bouton si le champ est vide
+                    disabled={!data.description} // Désactiver si le champ est vide
                 >
                     Enregistrer
                 </PrimaryButton>

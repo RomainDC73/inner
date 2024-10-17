@@ -30,20 +30,19 @@ class DescriptionController extends Controller
     }
 
     public function addDescription(Request $request)
-    {
-        $request->validate([
-            'mood_id' => 'required|exists:moods,id',
-            'description' => 'required|string|max:1000', // Limite de texte
-        ]);
-        // Stocker la description dans la session
-        session(['mood_id' => $request->input('mood_id')]);
-        session(['description' => $request->input('description')]);
+{
+    $request->validate([
+        'mood_id' => 'required|exists:moods,id',
+        'description' => 'required|string|max:1000',
+    ]);
 
-        Log::info('Description stored in session: ' . session('description'));
-
-        // Rediriger vers l'étape suivante (ajout de média par ex.)
-        return redirect('create/add-media');
-    }
+    // Stocker la description dans la session
+    session(['mood_id' => $request->input('mood_id')]);
+    session(['description' => $request->input('description')]);
+    Log::info('Description stored in session: ' . session('description'));
+    // Rediriger vers l'étape suivante (ajout de média par ex.)
+    return redirect('create/add-media');
+}
 
     public function saveDescription(Request $request)
     {
@@ -52,6 +51,7 @@ class DescriptionController extends Controller
         ]);
 
         session(['description' => $request->input('description')]);
+
 
         return redirect('/create/add-media');
     }
