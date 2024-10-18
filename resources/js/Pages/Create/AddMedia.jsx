@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
+import PrimaryButton from '@/Components/PrimaryButton';
 import { useRef, useState, useEffect } from 'react';
 
 export default function AddMedia({ mood_id }) {
@@ -99,16 +100,16 @@ export default function AddMedia({ mood_id }) {
 
                 {/* Boutons pour soumettre ou skipper */}
                 <div className="mt-8 flex space-x-4">
-                    <button
+                    <PrimaryButton
                         onClick={handleSubmit}
                         className={`px-4 py-2 bg-blue-500 text-white rounded-lg ${processing ? 'opacity-50 cursor-not-allowed' : ''}`}
                         disabled={processing} // Désactiver le bouton si traitement en cours
                     >
                         Continuer
-                    </button>
-                    <Link href="/posts/review" className="px-4 py-2 bg-gray-500 text-white rounded-lg">
-                        Skipper
-                    </Link>
+                    </PrimaryButton>
+                    {/* <Link href="/posts/review" className="px-4 py-2 bg-gray-500 text-white rounded-lg">
+                        Suivant
+                    </Link> */}
                 </div>
             </div>
         </AuthenticatedLayout>
