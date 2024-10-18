@@ -7,6 +7,7 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Http\Request;
 
 
 class PostController extends Controller
@@ -58,6 +59,27 @@ class PostController extends Controller
             'description' => $description,
             'mediaPath' => $mediaPath,
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+            'description' => 'required|string|max:1000',
+            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+
+        // Créer une nouvelle entrée avec les données de la session validées
+        $post = new Post();
+        $post->user_id = Auth::id();
+        $post->mood_id = $request->input('mood_id');
+        $post->description = $request->input('description');
+        $post->media_path = $request->input('media_path');
+        $post->save();
+
+        // Redirection après la sauvegarde
+        return redirect()->route('posts.index')->with('success', 'Post créé avec succès !');
     }
 
     // public function create(Request $request)

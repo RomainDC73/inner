@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import MoodCard from '@/Components/MoodCard';
 import ImagePreview from '@/Components/ImagePreview';
+import CreateButton from '@/Components/CreateButton';
 
 export default function ShowRecap({ mood, moodTranslations, description, mediaPath }) {
     return (
@@ -37,6 +38,7 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
                         </div>
                     )}
                 </div>
+
             </div>
         </AuthenticatedLayout>
     );
