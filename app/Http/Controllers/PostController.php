@@ -44,7 +44,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function showRecap()
+    public function recap()
     {
         $mood_id = session('mood_id'); // Récupérer l'humeur, si nécessaire
         $mood = Mood::find($mood_id); // Si le mood_id est présent dans la session, on récupère l'objet Mood correspondant
@@ -53,7 +53,7 @@ class PostController extends Controller
 
         $moodTranslations = Lang::get('moods'); // Charger les traductions pour moods
 
-        return Inertia::render('Create/ShowRecap', [
+        return Inertia::render('Create/Recap', [
             'mood' => $mood,
             'moodTranslations' => $moodTranslations,
             'description' => $description,
