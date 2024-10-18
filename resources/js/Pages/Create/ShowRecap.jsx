@@ -1,10 +1,27 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import MoodCard from '@/Components/MoodCard';
 import ImagePreview from '@/Components/ImagePreview';
 import CreateButton from '@/Components/CreateButton';
 
 export default function ShowRecap({ mood, moodTranslations, description, mediaPath }) {
+    const { post, processing } = useForm({
+        mood_id: mood ? mood.id : null,
+        description: description || '',
+        media_path: mediaPath || '',
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        Inertia.post(route('posts.store'), {
+            mood_id: mood ? mood.id : null,
+            description: description || '',
+            media_path: mediaPath || '',
+        });
+    };
+
+
     return (
         <AuthenticatedLayout
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Récapitulatif</h2>}
@@ -37,8 +54,11 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
                             <ImagePreview src={`/storage/${mediaPath}`} />  {/* Affichage de l'image */}
                         </div>
                     )}
+                    {/* Bouton pour sauvegarder */}
+                    <CreateButton disabled={processing} onClick={handleSubmit}>
+                        Sauvegarder
+                    </CreateButton>
                 </div>
-
             </div>
         </AuthenticatedLayout>
     );
