@@ -55,6 +55,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route pour la confirmation finale
         Route::get('/recap', [PostController::class, 'recap'])->name('recap');
     });
+
+    Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
 });
 
 require __DIR__.'/auth.php';
