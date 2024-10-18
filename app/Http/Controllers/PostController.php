@@ -78,8 +78,11 @@ class PostController extends Controller
         $post->media_path = $request->input('media_path');
         $post->save();
 
+        // Vider la session
+        $request->session()->forget(['mood_id', 'description', 'media_path']);
+
         // Redirection après la sauvegarde
-        return redirect()->route('posts.index')->with('success', 'Post créé avec succès !');
+        return redirect()->route('dashboard')->with('success', 'Post créé avec succès !');
     }
 
     // public function create(Request $request)
