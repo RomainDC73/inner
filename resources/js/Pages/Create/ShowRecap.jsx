@@ -15,7 +15,7 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
 
                     {/* MoodCard */}
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <h3 className="text-lg font-semibold mb-4">Votre humeur</h3>
+                        <h3 className="text-lg font-semibold mb-4">Comment tu te sens</h3>
                         {mood ? (
                             <MoodCard mood={mood} moodTranslations={moodTranslations} />
                         ) : (
@@ -25,14 +25,14 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
 
                     {/* Description */}
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                        <h3 className="text-lg font-semibold mb-4">Votre description</h3>
+                        <h3 className="text-lg font-semibold mb-4">Ta description</h3>
                         <p>{description || 'Aucune description fournie.'}</p>
                     </div>
 
                     {/* Image */}
                     {mediaPath && (
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                            <h3 className="text-lg font-semibold mb-4">Votre image</h3>
+                            <h3 className="text-lg font-semibold mb-4">Ton image</h3>
                             <ImagePreview src={`/storage/${mediaPath}`} />  {/* Affichage de l'image */}
                         </div>
                     )}
