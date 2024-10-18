@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 
-export default function ShowConfirm({ mood_id }) {
+export default function ShowRecap({ mood_id }) {
 
     return (
         <AuthenticatedLayout

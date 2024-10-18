@@ -42,13 +42,13 @@ class PostController extends Controller
         ]);
     }
 
-    public function showConfirm()
+    public function showRecap()
     {
         $mediaPath = session('media_path'); // Récupérer le chemin de l'image
         $mood_id = session('mood_id'); // Récupérer l'humeur, si nécessaire
         $description = session('description'); // Récupérer la description, si nécessaire
 
-        return Inertia::render('Create/ShowConfirm', [
+        return Inertia::render('Create/ShowRecap', [
             'mediaPath' => $mediaPath,
             'mood_id' => $mood_id,
             'description' => $description,

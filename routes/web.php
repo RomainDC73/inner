@@ -53,7 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/submit-media', [MediaController::class, 'saveMedia'])->name('submit-media');
 
         // Route pour la confirmation finale
-        Route::get('/confirm', [PostController::class, 'showConfirm'])->name('confirm');
+        Route::get('/showrecap', [PostController::class, 'showRecap'])->name('recap');
     });
 });
 
