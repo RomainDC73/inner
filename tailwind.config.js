@@ -29,6 +29,7 @@ export default {
             }
         },
     },
+    important: true,
 
     plugins: [forms],
 };

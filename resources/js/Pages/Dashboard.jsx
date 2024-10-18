@@ -35,7 +35,7 @@ export default function Dashboard() {
         >
             <Head title="Dashboard" />
             <div className="flex justify-center py-6">
-                <CreateButton href="/">Publier</CreateButton>
+                <CreateButton href="/create/choose-mood">Publier</CreateButton>
             </div>
             <div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

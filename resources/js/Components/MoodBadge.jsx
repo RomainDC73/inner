@@ -1,5 +1,3 @@
-import React from 'react';
-
 const MoodBadge = ({ mood }) => {
     const moodColors = {
         good: 'bg-innergreen',
