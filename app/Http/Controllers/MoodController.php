@@ -28,6 +28,6 @@ class MoodController extends Controller
 
         session(['mood_id' => $request->input('mood_id')]);
 
-        return redirect('/create/choose-action');
+        return redirect()->route('create.choose-action');
     }
 }

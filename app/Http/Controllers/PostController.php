@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mood;
 use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -44,14 +45,18 @@ class PostController extends Controller
 
     public function showRecap()
     {
-        $mediaPath = session('media_path'); // Récupérer le chemin de l'image
         $mood_id = session('mood_id'); // Récupérer l'humeur, si nécessaire
+        $mood = Mood::find($mood_id); // Si le mood_id est présent dans la session, on récupère l'objet Mood correspondant
         $description = session('description'); // Récupérer la description, si nécessaire
+        $mediaPath = session('media_path'); // Récupérer le chemin de l'image
+
+        $moodTranslations = Lang::get('moods'); // Charger les traductions pour moods
 
         return Inertia::render('Create/ShowRecap', [
-            'mediaPath' => $mediaPath,
-            'mood_id' => $mood_id,
+            'mood' => $mood,
+            'moodTranslations' => $moodTranslations,
             'description' => $description,
+            'mediaPath' => $mediaPath,
         ]);
     }
 
