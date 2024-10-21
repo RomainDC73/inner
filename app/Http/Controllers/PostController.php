@@ -38,7 +38,7 @@ class PostController extends Controller
         $moodTranslations = Lang::get('moods');
 
         // Retourne la vue avec Inertia, en passant les données du post
-        return Inertia::render('PostShow', [
+        return Inertia::render('Post', [
             'post' => $post,
             'moodTranslations' => $moodTranslations,
         ]);
