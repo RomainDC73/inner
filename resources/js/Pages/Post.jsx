@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
 import MoodBadge from '@/Components/MoodBadge';
 import CustomPlayer from '@/Components/Player';
+import DangerButton from '@/Components/DangerButton';
 
 export default function PostShow() {
     // Récupère les données du post passées par Inertia depuis le contrôleur
@@ -53,7 +54,7 @@ export default function PostShow() {
                             {/* Image */}
                             {post.media_path && (
                                 <img
-                                    className="mt-4 rounded-lg" // Marge supérieure et coins arrondis pour l'image
+                                    className=" w-1/2 mx-auto mt-4 rounded-lg" // Marge supérieure et coins arrondis pour l'image
                                     src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
                                     alt="Media"
                                 />
@@ -65,11 +66,18 @@ export default function PostShow() {
                                 src="/storage/audio_tests/audio_test_01.mp3"
                             />
                             )}
-
                         </div>
                     </div>
-                </div>
+                    <DangerButton
+                                as="a"
+                                href={route('posts.destroy', post.id)}
+                                method="delete"
+                                className="w-full"
+                            >
+                                Supprimer
+                            </DangerButton>
             </div>
+        </div>
 
         </AuthenticatedLayout>
     );

@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('posts.index');
         Route::get('/{id}', [PostController::class, 'show'])->name('posts.show');
         Route::post('/create/save', [PostController::class, 'store'])->name('posts.store');
+        Route::delete('/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
     // Routes pour la création de posts avec un préfixe et un nom
