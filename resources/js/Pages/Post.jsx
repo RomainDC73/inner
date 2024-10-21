@@ -17,9 +17,10 @@ export default function PostShow() {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-    });
+    }) + ' à ' + new Date(post.created_at).toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit',
+    }).replace(':', 'h');
 
     const postTitle = 'Votre humeur du ' + formattedDate + '';
 
@@ -44,7 +45,7 @@ export default function PostShow() {
         >
             <Head title={postTitle} />
 
-            <div className="py-12">
+            <div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 space-y-3"> {/* Ajoute un espacement vertical */}
