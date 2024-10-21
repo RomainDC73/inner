@@ -1,6 +1,6 @@
-import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import MoodBadge from '@/Components/MoodBadge';
 import CustomPlayer from '@/Components/Player';
 import DangerButton from '@/Components/DangerButton';
@@ -18,6 +18,17 @@ export default function PostShow() {
     });
 
     const postTitle = 'Votre humeur du ' + formattedDate + '';
+
+    const handleDelete = (postId) => {
+        if (confirm('Voulez-vous vraiment supprimer ce post ?')) {
+            Inertia.delete(route('posts.destroy', postId), {
+                onSuccess: () => {
+                    alert('Post supprimé avec succès!');
+                }
+            });
+        }
+    };
+
 
     return (
         <AuthenticatedLayout
@@ -67,18 +78,17 @@ export default function PostShow() {
                             />
                             )}
                         </div>
-                    </div>
-                    <DangerButton
-                                as="a"
-                                href={route('posts.destroy', post.id)}
-                                method="delete"
-                                className="w-full"
+                        <DangerButton
+                            onClick={() => handleDelete(post.id)}
                             >
                                 Supprimer
                             </DangerButton>
+                    </div>
+
             </div>
         </div>
 
         </AuthenticatedLayout>
     );
 }
+
