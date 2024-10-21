@@ -9,7 +9,6 @@ import DangerButton from '@/Components/DangerButton';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function PostShow() {
-
     // Récupère les données du post passées par Inertia depuis le contrôleur
     const { post, moodTranslations } = usePage().props;
 
@@ -45,10 +44,10 @@ export default function PostShow() {
         >
             <Head title={postTitle} />
 
-            <div>
+            <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 space-y-3"> {/* Ajoute un espacement vertical */}
+                        <div className="p-6 text-gray-900 space-y-3">
                             {/* Humeur */}
                             <div className="flex items-center space-x-2">
                                 <h3 className="text-lg font-bold">Humeur </h3>
@@ -69,7 +68,7 @@ export default function PostShow() {
                             {/* Image */}
                             {post.media_path && (
                                 <img
-                                    className="w-1/2 mx-auto mt-4 rounded-lg" // Marge supérieure et coins arrondis pour l'image
+                                    className="w-1/2 mx-auto mt-4 rounded-lg"
                                     src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
                                     alt="Media"
                                 />
@@ -82,12 +81,14 @@ export default function PostShow() {
                                 />
                             )}
                         </div>
+
+                        {/* Boutons */}
                         <div className="flex justify-between p-6">
                             <PrimaryButton>
                                 Modifier
                             </PrimaryButton>
                             <DangerButton
-                                onClick={() => setShowModal(true)}
+                                onClick={() => setShowModal(true)} // Ouvre le modal au clic
                             >
                                 Supprimer
                             </DangerButton>
@@ -95,6 +96,8 @@ export default function PostShow() {
                     </div>
                 </div>
             </div>
+
+            {/* Modal de confirmation */}
             <Modal show={showModal} onClose={() => setShowModal(false)}>
                 <div className="p-6">
                     <h2 className="text-lg font-semibold">Confirmation de suppression</h2>

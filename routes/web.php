@@ -33,7 +33,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('posts')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('posts.index');
         Route::get('/{id}', [PostController::class, 'show'])->name('posts.show');
-        Route::get('/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::post('/create/save', [PostController::class, 'store'])->name('posts.store');
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
@@ -58,6 +57,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
+    Route::post('/posts/{id}/updateMood', [MoodController::class, 'updateMood'])->name('posts.updateMood');
+
 
 });
 
