@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mood;
 use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Http\Request;
 
 
 class PostController extends Controller
@@ -42,17 +44,45 @@ class PostController extends Controller
         ]);
     }
 
-    public function showConfirm()
+    public function recap()
     {
-        $mediaPath = session('media_path'); // Récupérer le chemin de l'image
         $mood_id = session('mood_id'); // Récupérer l'humeur, si nécessaire
+        $mood = Mood::find($mood_id); // Si le mood_id est présent dans la session, on récupère l'objet Mood correspondant
         $description = session('description'); // Récupérer la description, si nécessaire
+        $mediaPath = session('media_path'); // Récupérer le chemin de l'image
 
-        return Inertia::render('Create/ShowConfirm', [
-            'mediaPath' => $mediaPath,
-            'mood_id' => $mood_id,
+        $moodTranslations = Lang::get('moods'); // Charger les traductions pour moods
+
+        return Inertia::render('Create/Recap', [
+            'mood' => $mood,
+            'moodTranslations' => $moodTranslations,
             'description' => $description,
+            'mediaPath' => $mediaPath,
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+            'description' => 'required|string|max:1000',
+            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+
+        // Créer une nouvelle entrée avec les données de la session validées
+        $post = new Post();
+        $post->user_id = Auth::id();
+        $post->mood_id = $request->input('mood_id');
+        $post->description = $request->input('description');
+        $post->media_path = $request->input('media_path');
+        $post->save();
+
+        // Vider la session
+        $request->session()->forget(['mood_id', 'description', 'media_path']);
+
+        // Redirection après la sauvegarde
+        return redirect()->route('dashboard')->with('success', 'Post créé avec succès !');
     }
 
     // public function create(Request $request)

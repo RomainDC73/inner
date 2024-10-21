@@ -36,7 +36,7 @@ class MediaController extends Controller
         }
 
         Log::info('Media path stored in session: ' . session('media_path'));
-        return redirect()->route('create.confirm'); // Assurez-vous que cette route existe
+        return redirect()->route('create.recap'); // Assurez-vous que cette route existe
     }
 }
 

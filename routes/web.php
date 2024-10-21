@@ -53,8 +53,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/submit-media', [MediaController::class, 'saveMedia'])->name('submit-media');
 
         // Route pour la confirmation finale
-        Route::get('/confirm', [PostController::class, 'showConfirm'])->name('confirm');
+        Route::get('/recap', [PostController::class, 'recap'])->name('recap');
     });
+
+    Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
+
 });
 
 require __DIR__.'/auth.php';
