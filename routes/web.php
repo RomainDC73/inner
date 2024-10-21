@@ -33,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('posts')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('posts.index');
         Route::get('/{id}', [PostController::class, 'show'])->name('posts.show');
+        Route::get('/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::post('/create/save', [PostController::class, 'store'])->name('posts.store');
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
@@ -41,7 +42,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('create')->name('create.')->group(function () {
         Route::get('/choose-mood', [MoodController::class, 'chooseMood'])->name('choose-mood');
         Route::post('/save-mood', [MoodController::class, 'saveMood'])->name('save-mood');
-
         Route::get('/choose-action', [DescriptionController::class, 'chooseAction'])->name('choose-action');
 
         // Routes pour écrire ou parler

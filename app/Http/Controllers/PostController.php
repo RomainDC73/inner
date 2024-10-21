@@ -84,6 +84,14 @@ class PostController extends Controller
         return redirect()->route('dashboard')->with('success', 'Post créé avec succès !');
     }
 
+    public function edit($id)
+    {
+        $post = Post::with('mood')->findOrFail($id);
+        return Inertia::render('Create/ChooseMood', [
+            'post' => $post,
+        ]);
+    }
+
     public function destroy($id)
     {
          // Récupérer le post correspondant à l'utilisateur authentifié
