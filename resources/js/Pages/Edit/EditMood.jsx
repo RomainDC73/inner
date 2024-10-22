@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import MoodCard from '@/Components/MoodCard';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function EditMood({ post, moods, moodTranslations }) {
     // Vérifie si post.mood existe avant d'accéder à ses propriétés
@@ -40,7 +41,7 @@ export default function EditMood({ post, moods, moodTranslations }) {
                         <div
                             key={mood.id}
                             onClick={() => handleMoodSelect(mood.id)}
-                            className={`cursor-pointer ${data.mood_id === mood.id ? 'ring-2 ring-indigo-500' : ''}`}
+                            className={`cursor-pointer ${data.mood_id === mood.id ? 'ring-2 rounded-lg ring-slate-300' : ''}`}
                         >
                             {/* MoodCard avec moodTranslations */}
                             <MoodCard mood={mood} moodTranslations={moodTranslations} />
@@ -50,13 +51,12 @@ export default function EditMood({ post, moods, moodTranslations }) {
 
                 {/* Bouton pour enregistrer */}
                 <div className="mt-6">
-                    <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    <PrimaryButton
                         onClick={saveMood}
                         disabled={processing} // Désactive le bouton pendant le traitement
                     >
                         {processing ? 'Enregistrement...' : 'Enregistrer'}
-                    </button>
+                    </PrimaryButton>
                 </div>
             </div>
         </AuthenticatedLayout>

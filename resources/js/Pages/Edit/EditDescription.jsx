@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 export default function EditDescription({ post }) {
     // Initialisation du formulaire avec la description actuelle du post
@@ -41,14 +42,13 @@ export default function EditDescription({ post }) {
                         />
                     </div>
 
-                    <div className="flex justify-end">
-                        <button
+                    <div className="flex justify-center">
+                        <PrimaryButton
                             type="submit"
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             disabled={processing} // Désactive le bouton pendant le traitement
                         >
                             {processing ? 'Enregistrement...' : 'Enregistrer'}
-                        </button>
+                        </PrimaryButton>
                     </div>
                 </form>
             </div>
