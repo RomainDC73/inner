@@ -56,9 +56,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/recap', [PostController::class, 'recap'])->name('recap');
     });
 
+    Route::prefix('modify')->name('modify.')->group(function () {
+        Route::get('/{id}/choose-mood', [MoodController::class, 'editMood'])->name('edit-mood');
+        Route::patch('/{id}/choose-mood', [MoodController::class, 'update'])->name('update');
+    });
+
     Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
-    Route::post('/posts/{id}/updateMood', [MoodController::class, 'updateMood'])->name('posts.updateMood');
 
 
 });

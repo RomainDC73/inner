@@ -7,6 +7,7 @@ import MoodBadge from '@/Components/MoodBadge';
 import CustomPlayer from '@/Components/Player';
 import DangerButton from '@/Components/DangerButton';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { MdEdit } from 'react-icons/md';
 
 export default function PostShow() {
     // Récupère les données du post passées par Inertia depuis le contrôleur
@@ -24,6 +25,7 @@ export default function PostShow() {
     const postTitle = 'Votre humeur du ' + formattedDate + '';
 
     const [showModal, setShowModal] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
     const handleDelete = () => {
         Inertia.delete(route('posts.destroy', post.id), {
@@ -52,6 +54,13 @@ export default function PostShow() {
                             <div className="flex items-center space-x-2">
                                 <h3 className="text-lg font-bold">Humeur </h3>
                                 <MoodBadge mood={post.mood.name} />
+                                {/* Affiche l'icône MdEdit si le mode édition est activé */}
+                                {editMode && (
+                                    <MdEdit
+                                        className="text-gray-500 cursor-pointer"
+                                        onClick={() => alert('Lien vers la modification de l\'humeur')} // Action de modification de l'humeur
+                                    />
+                                )}
                             </div>
 
                             {/* Date */}
@@ -64,14 +73,30 @@ export default function PostShow() {
                                     <br />
                                 </span>
                             ))}</p>
+                            {/* Affiche l'icône MdEdit si le mode édition est activé */}
+                            {editMode && (
+                                    <MdEdit
+                                        className="text-gray-500 cursor-pointer"
+                                        onClick={() => alert('Lien vers la modification de la description')} // Action de modification de la description
+                                    />
+                                )}
 
                             {/* Image */}
                             {post.media_path && (
-                                <img
-                                    className="w-1/2 mx-auto mt-4 rounded-lg"
-                                    src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
-                                    alt="Media"
-                                />
+                                <div className="relative">
+                                    <img
+                                        className="w-1/2 mx-auto mt-4 rounded-lg"
+                                        src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
+                                        alt="Media"
+                                    />
+                                    {/* Affiche l'icône MdEdit si le mode édition est activé */}
+                                    {editMode && (
+                                        <MdEdit
+                                            className="absolute top-2 right-2 text-gray-500 cursor-pointer"
+                                            onClick={() => alert('Lien vers la modification du média')} // Action de modification du média
+                                        />
+                                    )}
+                                </div>
                             )}
 
                             {/* Audio */}
@@ -84,8 +109,8 @@ export default function PostShow() {
 
                         {/* Boutons */}
                         <div className="flex justify-between p-6">
-                            <PrimaryButton>
-                                Modifier
+                            <PrimaryButton onClick={() => setEditMode(!editMode)}>
+                                {editMode ? 'Terminer' : 'Modifier'} {/* Change le texte du bouton en fonction du mode */}  
                             </PrimaryButton>
                             <DangerButton
                                 onClick={() => setShowModal(true)} // Ouvre le modal au clic

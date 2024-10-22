@@ -32,18 +32,7 @@ class MoodController extends Controller
         return redirect()->route('create.choose-action');
     }
 
-    public function updateMood(Request $request, $id)
-{
-    $request->validate([
-        'mood_id' => 'required|exists:moods,id',
-    ]);
-
-    $post = Post::findOrFail($id);
-    $post->mood_id = $request->input('mood_id');
-    $post->save();
-
-    return redirect()->back()->with('success', 'Humeur mise à jour avec succès!');
-}
+   
 }
 
 
