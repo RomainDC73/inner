@@ -93,7 +93,7 @@ export default function PostShow() {
                                     {editMode && (
                                         <MdEdit
                                             className="absolute top-2 right-2 text-gray-500 cursor-pointer"
-                                            onClick={() => alert('Lien vers la modification du média')} // Action de modification du média
+                                            onClick={() => Inertia.get(`/post/${post.id}/edit/media`)} // Action de modification du média
                                         />
                                     )}
                                 </div>

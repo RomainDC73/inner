@@ -26,6 +26,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/post/{id}/edit/mood', [MoodController::class, 'updateMood'])->name('posts.updateMood');
     Route::get('/post/{id}/edit/description', [DescriptionController::class, 'editDescription'])->name('posts.edit-description');
     Route::patch('/post/{id}/edit/description', [DescriptionController::class, 'updateDescription'])->name('posts.updateDescription');
+    Route::get('/post/{id}/edit/media', [MediaController::class, 'editMedia'])->name('posts.edit-media');
+    Route::post('/post/{id}/edit/media', [MediaController::class, 'updateMedia'])->name('posts.updateMedia');
+
 
     // Gestion du profil
     Route::prefix('profile')->name('profile.')->group(function () {
