@@ -58,7 +58,7 @@ export default function PostShow() {
                                 {editMode && (
                                     <MdEdit
                                         className="text-gray-500 cursor-pointer"
-                                        onClick={() => alert('Lien vers la modification de l\'humeur')} // Action de modification de l'humeur
+                                        onClick={() => Inertia.get(`/post/${post.id}/edit/mood`)} // Action de modification de l'humeur
                                     />
                                 )}
                             </div>
@@ -110,7 +110,7 @@ export default function PostShow() {
                         {/* Boutons */}
                         <div className="flex justify-between p-6">
                             <PrimaryButton onClick={() => setEditMode(!editMode)}>
-                                {editMode ? 'Terminer' : 'Modifier'} {/* Change le texte du bouton en fonction du mode */}  
+                                {editMode ? 'Terminer' : 'Modifier'} {/* Change le texte du bouton en fonction du mode */}
                             </PrimaryButton>
                             <DangerButton
                                 onClick={() => setShowModal(true)} // Ouvre le modal au clic

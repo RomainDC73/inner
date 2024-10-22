@@ -32,7 +32,44 @@ class MoodController extends Controller
         return redirect()->route('create.choose-action');
     }
 
-   
+    // Affiche la page d'édition de l'humeur pour un post donné
+    public function editMood($postId)
+    {
+        // Récupération du post
+        $post = Post::findOrFail($postId);
+
+        // Récupération des moods
+        $moods = Mood::all();
+
+        // Récupération des traductions des moods
+        $moodTranslations = Lang::get('moods');
+
+        return Inertia::render('Edit/EditMood', [
+            'post' => $post,
+            'moods' => $moods,
+            'moodTranslations' => $moodTranslations,
+        ]);
+    }
+
+    // Met à jour l'humeur d'un post
+    public function updateMood(Request $request, $postId)
+    {
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+        ]);
+
+        // Récupération du post
+        $post = Post::findOrFail($postId);
+
+        // Mise à jour de l'humeur
+        $post->mood_id = $request->input('mood_id');
+        $post->save();
+
+        return redirect()->route('posts.show', $postId)
+                         ->with('success', 'Humeur mise à jour avec succès');
+    }
+
+
 }
 
 
