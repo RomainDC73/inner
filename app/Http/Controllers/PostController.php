@@ -38,7 +38,7 @@ class PostController extends Controller
         $moodTranslations = Lang::get('moods');
 
         // Retourne la vue avec Inertia, en passant les données du post
-        return Inertia::render('PostShow', [
+        return Inertia::render('Post', [
             'post' => $post,
             'moodTranslations' => $moodTranslations,
         ]);
@@ -69,7 +69,6 @@ class PostController extends Controller
             'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-
         // Créer une nouvelle entrée avec les données de la session validées
         $post = new Post();
         $post->user_id = Auth::id();
@@ -83,6 +82,18 @@ class PostController extends Controller
 
         // Redirection après la sauvegarde
         return redirect()->route('dashboard')->with('success', 'Post créé avec succès !');
+    }
+
+
+    public function destroy($id)
+    {
+         // Récupérer le post correspondant à l'utilisateur authentifié
+        $post = Post::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        // Supprimer le post
+        $post->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Post supprimé avec succès !');
     }
 
     // public function create(Request $request)

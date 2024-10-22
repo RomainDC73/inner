@@ -1,4 +1,4 @@
-import{Link} from '@inertiajs/react';
+import {Link} from '@inertiajs/react';
 import MoodBadge from './MoodBadge';
 
 const moodColors = {
@@ -13,9 +13,10 @@ const PostCard = ({ post }) => {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-    });
+    }) + ' à ' + new Date(post.created_at).toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit',
+    }).replace(':', 'h');
 
     // Extrait de description
     const getExcerpt = (text, length = 40) => {

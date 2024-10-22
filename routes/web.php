@@ -22,6 +22,14 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('/post/{id}/edit/mood', [MoodController::class, 'editMood'])->name('posts.edit-mood');
+    Route::patch('/post/{id}/edit/mood', [MoodController::class, 'updateMood'])->name('posts.updateMood');
+    Route::get('/post/{id}/edit/description', [DescriptionController::class, 'editDescription'])->name('posts.edit-description');
+    Route::patch('/post/{id}/edit/description', [DescriptionController::class, 'updateDescription'])->name('posts.updateDescription');
+    Route::get('/post/{id}/edit/media', [MediaController::class, 'editMedia'])->name('posts.edit-media');
+    Route::post('/post/{id}/edit/media', [MediaController::class, 'updateMedia'])->name('posts.updateMedia');
+
+
     // Gestion du profil
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
@@ -34,13 +42,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('posts.index');
         Route::get('/{id}', [PostController::class, 'show'])->name('posts.show');
         Route::post('/create/save', [PostController::class, 'store'])->name('posts.store');
+        Route::delete('/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
     // Routes pour la création de posts avec un préfixe et un nom
     Route::prefix('create')->name('create.')->group(function () {
         Route::get('/choose-mood', [MoodController::class, 'chooseMood'])->name('choose-mood');
         Route::post('/save-mood', [MoodController::class, 'saveMood'])->name('save-mood');
-
         Route::get('/choose-action', [DescriptionController::class, 'chooseAction'])->name('choose-action');
 
         // Routes pour écrire ou parler
@@ -55,6 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route pour la confirmation finale
         Route::get('/recap', [PostController::class, 'recap'])->name('recap');
     });
+
 
     Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
 
