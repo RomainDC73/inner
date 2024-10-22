@@ -22,6 +22,9 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('/post/{id}/edit/mood', [MoodController::class, 'editMood'])->name('posts.edit-mood');
+    Route::patch('/post/{id}/edit/mood', [MoodController::class, 'updateMood'])->name('posts.updateMood');
+
     // Gestion du profil
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
@@ -58,12 +61,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
-
-Route::get('/post/{id}/edit/mood', [MoodController::class, 'editMood'])->name('posts.edit-mood');
-Route::post('/post/{id}/update/mood', [MoodController::class, 'updateMood'])->name('posts.update-mood');
-
-
-
 
 });
 
