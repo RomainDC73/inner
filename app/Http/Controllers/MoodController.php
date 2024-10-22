@@ -53,23 +53,20 @@ class MoodController extends Controller
 
     // Met à jour l'humeur d'un post
     public function updateMood(Request $request, $id)
-{
-    // Valide l'ID du mood
-    $request->validate([
-        'mood_id' => 'required|exists:moods,id',
-    ]);
+    {
+        // Valide l'ID du mood
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+        ]);
 
-    // Récupère le post via l'ID
-    $post = Post::findOrFail($id);
+        // Récupère le post via l'ID
+        $post = Post::findOrFail($id);
 
-    // Met à jour le mood du post
-    $post->mood_id = $request->input('mood_id');
-    $post->save();
+        // Met à jour le mood du post
+        $post->mood_id = $request->input('mood_id');
+        $post->save();
 
-    // Redirige vers une autre page ou retour à la même page avec un message de succès
-    return redirect()->route('posts.show', $id)->with('success', 'Mood mis à jour avec succès');
+        // Redirige vers une autre page ou retour à la même page avec un message de succès
+        return redirect()->route('posts.show', $id)->with('success', 'Mood mis à jour avec succès');
+    }
 }
-
-}
-
-

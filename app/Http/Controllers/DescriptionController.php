@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Mood;
+use App\Models\Post;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class DescriptionController extends Controller
@@ -54,6 +56,34 @@ class DescriptionController extends Controller
 
 
         return redirect('/create/add-media');
+    }
+
+    public function editDescription($postId)
+    {
+        // Récupération du post
+        $post = Post::findOrFail($postId);
+
+        return Inertia::render('Edit/EditDescription', [
+            'post' => $post,
+        ]);
+    }
+
+    public function updateDescription(Request $request, $postId)
+    {
+        // Valide la description
+        $request->validate([
+            'description' => 'required|string|max:5000',
+        ]);
+
+        // Récupère le post via l'ID
+        $post = Post::findOrFail($postId);
+
+        // Met à jour la description du post
+        $post->description = $request->input('description');
+        $post->save();
+
+        // Redirige vers une autre page ou retour à la même page avec un message de succès
+        return redirect()->route('posts.show', $postId)->with('success', 'Description mise à jour avec succès');
     }
 
     public function showTalkForm()

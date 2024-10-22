@@ -77,7 +77,7 @@ export default function PostShow() {
                             {editMode && (
                                     <MdEdit
                                         className="text-gray-500 cursor-pointer"
-                                        onClick={() => alert('Lien vers la modification de la description')} // Action de modification de la description
+                                        onClick={() => Inertia.get(`/post/${post.id}/edit/description`)} // Action de modification de la description
                                     />
                                 )}
 

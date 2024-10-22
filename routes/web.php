@@ -24,6 +24,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/post/{id}/edit/mood', [MoodController::class, 'editMood'])->name('posts.edit-mood');
     Route::patch('/post/{id}/edit/mood', [MoodController::class, 'updateMood'])->name('posts.updateMood');
+    Route::get('/post/{id}/edit/description', [DescriptionController::class, 'editDescription'])->name('posts.edit-description');
+    Route::patch('/post/{id}/edit/description', [DescriptionController::class, 'updateDescription'])->name('posts.updateDescription');
 
     // Gestion du profil
     Route::prefix('profile')->name('profile.')->group(function () {
