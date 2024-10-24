@@ -36,12 +36,12 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
         >
             <Head title="Récapitulatif" />
 
-            <div className="flex items-center justify-center min-h-screen py-12"> {/* Ajout de classes pour centrer */}
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 w-full"> {/* Ajuste la largeur si besoin */}
+            <div className="flex items-center justify-center"> {/* Ajout de classes pour centrer */}
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4 w-full"> {/* Ajuste la largeur si besoin */}
 
                     {/* MoodCard */}
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-center"> {/* Centrer le texte */}
-                        <h3 className="text-lg font-semibold mb-4">Comment tu te sens</h3>
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center"> {/* Centrer le texte */}
+                        <h3 className="text-lg font-semibold mb-2">Comment tu te sens</h3>
                         {mood ? (
                             <MoodCard mood={mood} moodTranslations={moodTranslations} />
                         ) : (
@@ -50,14 +50,14 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
                     </div>
 
                     {/* Description */}
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-center"> {/* Centrer le texte */}
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center"> {/* Centrer le texte */}
                         <h3 className="text-lg font-semibold mb-4">Ta description</h3>
                         <p>{description || 'Aucune description fournie.'}</p>
                     </div>
 
                     {/* Image */}
                     {mediaPath && (
-                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-center"> {/* Centrer le texte */}
+                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center"> {/* Centrer le texte */}
                             <h3 className="text-lg font-semibold mb-4">Ton image</h3>
                             <div className="flex justify-center">
                                 <ImagePreview src={`/storage/${mediaPath}`} />  {/* Affichage de l'image */}
