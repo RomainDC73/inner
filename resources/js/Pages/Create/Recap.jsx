@@ -1,11 +1,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
+import { useState } from 'react';
 import MoodCard from '@/Components/MoodCard';
 import ImagePreview from '@/Components/ImagePreview';
 import CreateButton from '@/Components/CreateButton';
+import PrimaryButton from '@/Components/PrimaryButton';
 import { Inertia } from '@inertiajs/inertia';
+import { MdEdit } from 'react-icons/md';
 
 export default function ShowRecap({ mood, moodTranslations, description, mediaPath }) {
+    const [editMode, setEditMode] = useState(false);
+
     const { post, processing } = useForm({
         mood_id: mood ? mood.id : null,
         description: description || '',
@@ -19,7 +24,6 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
             description: description || '',
             media_path: mediaPath || '',
         }).then(() => {
-            // Vider la session et le localStorage après la soumission réussie
             sessionStorage.removeItem('mood_id');
             sessionStorage.removeItem('description');
             sessionStorage.removeItem('media_path');
@@ -36,36 +40,61 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
         >
             <Head title="Récapitulatif" />
 
-            <div className="flex items-center justify-center"> {/* Ajout de classes pour centrer */}
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-4 w-full"> {/* Ajuste la largeur si besoin */}
-
+            <div>
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 w-full">
                     {/* MoodCard */}
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center"> {/* Centrer le texte */}
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                         <h3 className="text-lg font-semibold mb-2">Comment tu te sens</h3>
-                        {mood ? (
-                            <MoodCard mood={mood} moodTranslations={moodTranslations} />
-                        ) : (
-                            <p>Chargement de l'humeur...</p>
-                        )}
+                        <div className="flex items-center gap-2">
+                            {mood ? (
+                                <MoodCard mood={mood} moodTranslations={moodTranslations} />
+                            ) : (
+                                <p>Chargement de l'humeur...</p>
+                            )}
+                            {editMode && (
+                                <MdEdit
+                                    className="text-gray-500 cursor-pointer"
+                                    onClick={() => Inertia.get(`/create/choose-mood`)}
+                                />
+                            )}
+                        </div>
                     </div>
 
                     {/* Description */}
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center"> {/* Centrer le texte */}
-                        <h3 className="text-lg font-semibold mb-4">Ta description</h3>
-                        <p>{description || 'Aucune description fournie.'}</p>
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
+                        <h3 className="text-lg font-semibold mb-2">Ta description</h3>
+                        <div className="flex items-center justify-center gap-2">
+                            <p>{description || 'Aucune description fournie.'}</p>
+                            {editMode && (
+                                <MdEdit
+                                    className="text-gray-500 cursor-pointer"
+                                    onClick={() => Inertia.get(`/create/write`)} // Rediriger si nécessaire
+                                />
+                            )}
+                        </div>
                     </div>
 
                     {/* Image */}
                     {mediaPath && (
-                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center"> {/* Centrer le texte */}
-                            <h3 className="text-lg font-semibold mb-4">Ton image</h3>
-                            <div className="flex justify-center">
-                                <ImagePreview src={`/storage/${mediaPath}`} />  {/* Affichage de l'image */}
+                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
+                            <h3 className="text-lg font-semibold mb-2">Ton image</h3>
+                            <div className="flex items-center justify-center gap-2">
+                                <ImagePreview src={`/storage/${mediaPath}`} />
+                                {editMode && (
+                                    <MdEdit
+                                        className="text-gray-500 cursor-pointer"
+                                        onClick={() => Inertia.get(`/create/add-media`)} // Rediriger si nécessaire
+                                    />
+                                )}
                             </div>
                         </div>
                     )}
-                    {/* Bouton pour sauvegarder */}
-                    <div className="text-center"> {/* Centrer le bouton */}
+
+                    {/* Boutons */}
+                    <div className="flex justify-center p-6 space-x-4">
+                        <PrimaryButton onClick={() => setEditMode(!editMode)}>
+                            {editMode ? 'Terminer' : 'Modifier'}
+                        </PrimaryButton>
                         <CreateButton disabled={processing} onClick={handleSubmit}>
                             Sauvegarder
                         </CreateButton>
