@@ -19,19 +19,20 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         Inertia.post(route('posts.store'), {
             mood_id: mood ? mood.id : null,
             description: description || '',
             media_path: mediaPath || '',
-        }).then(() => {
-            sessionStorage.removeItem('mood_id');
-            sessionStorage.removeItem('description');
-            sessionStorage.removeItem('media_path');
-
-            localStorage.removeItem('mood_id');
-            localStorage.removeItem('description');
-            localStorage.removeItem('media_path');
+        }, {
+            onFinish: () => {
+                localStorage.removeItem('mood_id');
+                localStorage.removeItem('description');
+                localStorage.removeItem('media');
+                console.log("Les données du localStorage ont été supprimées");
+            }
         });
+
     };
 
     return (
