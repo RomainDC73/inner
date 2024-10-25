@@ -4,28 +4,28 @@ import LongTextInput from '@/Components/LongTextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useEffect } from 'react';
 
-export default function Write({ mood_id, initial_description }) {
-    // Récupérer la description depuis le localStorage si elle existe
-    const savedDescription = localStorage.getItem('description') || initial_description;
 
-    // Initialiser le formulaire avec useForm
+export default function Write({ mood_id, initial_description }) {
+    useEffect(() => {
+        // Nettoie le localStorage au montage pour éviter la récupération d'une ancienne description
+        localStorage.removeItem('description');
+    }, []);
+    // Initialisez la description à partir du localStorage ou de la prop initial_description
+    const savedDescription = localStorage.getItem('description') || '';
+
+    // Initialisez le formulaire avec useForm
     const { data, setData, post } = useForm({
         mood_id: mood_id,
-        description: savedDescription || '', // Pré-remplir avec la description en session ou localStorage
+        description: savedDescription, // Remplit initialement la description depuis le localStorage si elle existe
     });
 
-    // Chaque fois que la description change, la sauvegarder dans le localStorage
-    useEffect(() => {
-        localStorage.setItem('description', data.description);
-    }, [data.description]);
-
-    // Soumettre le formulaire au backend lorsque l'utilisateur clique sur "Enregistrer"
+    // Soumet le formulaire et sauvegarde la description dans le localStorage
     const handleSubmit = (e) => {
         e.preventDefault();
         post('/create/write', {
             onSuccess: () => {
-                // Si la soumission réussit, on nettoie le localStorage
-                //localStorage.removeItem('description');
+                // Sauvegarde la description dans le localStorage
+                localStorage.setItem('description', data.description);
             },
         });
     };
