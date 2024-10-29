@@ -29,7 +29,6 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
                 localStorage.removeItem('mood_id');
                 localStorage.removeItem('description');
                 localStorage.removeItem('media');
-                console.log("Les données du localStorage ont été supprimées");
             }
         });
 

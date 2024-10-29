@@ -5,7 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useEffect } from 'react';
 
 
-export default function Write({ mood_id, initial_description }) {
+export default function Write({ mood_id }) {
     useEffect(() => {
         // Nettoie le localStorage au montage pour éviter la récupération d'une ancienne description
         localStorage.removeItem('description');

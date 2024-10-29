@@ -3,6 +3,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { Inertia } from '@inertiajs/inertia';
 import { useRef, useState, useEffect } from 'react';
 
 export default function AddMedia({ mood_id }) {
@@ -56,13 +57,13 @@ export default function AddMedia({ mood_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/create/submit-media', {
+        post(route('create.submit-media'), {
             onSuccess: () => {
-                // Redirection vers l'étape suivante après succès
-                Inertia.visit('/create/confirm'); // Remplacez par l'URL correcte
+                Inertia.visit('/create/recap'); // Utilise directement la route nommée pour la redirection
             },
-        }); // Route vers l'étape suivante
+        });
     };
+
 
     return (
         <AuthenticatedLayout
