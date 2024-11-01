@@ -22,13 +22,14 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/post/{id}/edit/mood', [MoodController::class, 'editMood'])->name('posts.edit-mood');
-    Route::patch('/post/{id}/edit/mood', [MoodController::class, 'updateMood'])->name('posts.updateMood');
-    Route::get('/post/{id}/edit/description', [DescriptionController::class, 'editDescription'])->name('posts.edit-description');
-    Route::patch('/post/{id}/edit/description', [DescriptionController::class, 'updateDescription'])->name('posts.updateDescription');
-    Route::get('/post/{id}/edit/media', [MediaController::class, 'editMedia'])->name('posts.edit-media');
-    Route::post('/post/{id}/edit/media', [MediaController::class, 'updateMedia'])->name('posts.updateMedia');
-
+    Route::prefix('post')->name('posts.')->group(function () {
+        Route::get('{id}/edit/mood', [MoodController::class, 'editMood'])->name('edit-mood');
+        Route::patch('{id}/edit/mood', [MoodController::class, 'updateMood'])->name('updateMood');
+        Route::get('{id}/edit/description', [DescriptionController::class, 'editDescription'])->name('edit-description');
+        Route::patch('{id}/edit/description', [DescriptionController::class, 'updateDescription'])->name('updateDescription');
+        Route::get('{id}/edit/media', [MediaController::class, 'editMedia'])->name('edit-media');
+        Route::post('{id}/edit/media', [MediaController::class, 'updateMedia'])->name('updateMedia');
+    });
 
     // Gestion du profil
     Route::prefix('profile')->name('profile.')->group(function () {
@@ -38,11 +39,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // Routes des posts
-    Route::prefix('posts')->group(function () {
-        Route::get('/', [PostController::class, 'showPostsPage'])->name('posts.index');
-        Route::get('/{id}', [PostController::class, 'show'])->name('posts.show');
-        Route::post('/create/save', [PostController::class, 'store'])->name('posts.store');
-        Route::delete('/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::prefix('posts')->name('posts.')->group(function () {
+        Route::get('/', [PostController::class, 'showPostsPage'])->name('index');
+        Route::get('/{id}', [PostController::class, 'show'])->name('show');
+        Route::post('/create/save', [PostController::class, 'store'])->name('store');
+        Route::delete('/{id}', [PostController::class, 'destroy'])->name('destroy');
     });
 
     // Routes pour la création de posts avec un préfixe et un nom
@@ -63,10 +64,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Route pour la confirmation finale
         Route::get('/recap', [PostController::class, 'recap'])->name('recap');
     });
-
-
-    Route::get('/post/{id}', [PostController::class, 'show'])->name('post.show');
-
 });
 
 require __DIR__.'/auth.php';
+
