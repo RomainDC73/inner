@@ -3,7 +3,7 @@ import PostCard from './PostCard';
 const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour 'posts'
     return (
         <div>
-        <h1>Mes derniers posts</h1>
+        <h1 className="mb-6">Mes derniers posts</h1>
         <ul>
             {posts.length > 0 ? (
                 posts.map(post => (

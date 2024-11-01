@@ -1,10 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PostsList from '@/Components/PostsList';
+import FilterForm from '@/Components/FilterForm';
 import { Head, usePage, Link } from '@inertiajs/react';
 
 export default function Posts() {
     // Récupère l'utilisateur et les posts paginés passés depuis le contrôleur
-    const { auth, posts } = usePage().props;
+    const { auth, posts, moods, filters } = usePage().props;
 
     return (
         <AuthenticatedLayout>
@@ -14,9 +15,10 @@ export default function Posts() {
                     {/* Ajout du composant PostsList pour afficher les posts de l'utilisateur */}
                     <div className="mt-2 overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6">
+                            <FilterForm moods={moods} filters={filters}/>
+
                             <PostsList posts={posts.data} /> {/* Passe les données des posts */}
 
-                            {/* Pagination */}
                             <div className="flex justify-center mt-4 space-x-2">
                                 {posts.links.map((link, index) => {
                                     // Masquer "Précédent" si on est sur la première page

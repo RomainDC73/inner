@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mood;
 use App\Models\Post;
+use Carbon\Carbon;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
@@ -12,17 +13,31 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function showPostsPage()
+    public function showPostsPage(Request $request)
     {
-        // Récupérer les posts de l'utilisateur connecté avec la relation mood
-        $posts = Post::where('user_id', Auth::id())
-            ->with('mood')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        $query = Post::query()->where('user_id', Auth::id())->with('mood');
+
+        //Appliquer le filtre par mood s'il est sélectionné
+        if ($request->filled('mood')) {
+            $query->where('mood_id', $request->mood);
+        }
+
+        // Appliquer le filtre par date s'il est sélectionné
+        if ($request->filled('date')) {
+            $date = Carbon::parse($request->date);
+            $query->whereDate('created_at', $date);
+        }
+
+        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+
+        // Renvoyer les données à la vue avec la liste des moods
+        $moods = Mood::all();
 
         // Rendre la vue Inertia avec les posts
         return Inertia::render('Posts', [
-            'posts' => $posts
+            'posts' => $posts,
+            'moods' => $moods,
+            'filters' => $request->all('mood', 'date'), // Passer les filtres à la vue
         ]);
     }
 
