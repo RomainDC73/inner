@@ -18,14 +18,22 @@ export default function Posts() {
 
                             {/* Pagination */}
                             <div className="flex justify-center mt-4 space-x-2">
-                                {posts.links.map((link, index) => (
-                                    <Link
-                                        key={index}
-                                        href={link.url || '#'}
-                                        className={`px-4 py-2 rounded ${link.active ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800'}`}
-                                        dangerouslySetInnerHTML={{ __html: link.label }}
-                                    />
-                                ))}
+                                {posts.links.map((link, index) => {
+                                    // Masquer "Précédent" si on est sur la première page
+                                    if (link.label.includes('Précédent') && link.url === null) return null;
+
+                                    // Masquer "Suivant" si on est sur la dernière page
+                                    if (link.label.includes('Suivant') && link.url === null) return null;
+
+                                    return (
+                                        <Link
+                                            key={index}
+                                            href={link.url || '#'}
+                                            className={`px-4 py-2 rounded ${link.active ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800'}`}
+                                            dangerouslySetInnerHTML={{ __html: link.label }} // Utilisation de dangerouslySetInnerHTML
+                                        />
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
