@@ -39,7 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Routes des posts
     Route::prefix('posts')->group(function () {
-        Route::get('/', [PostController::class, 'index'])->name('posts.index');
+        Route::get('/', [PostController::class, 'showPostsPage'])->name('posts.index');
         Route::get('/{id}', [PostController::class, 'show'])->name('posts.show');
         Route::post('/create/save', [PostController::class, 'store'])->name('posts.store');
         Route::delete('/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
