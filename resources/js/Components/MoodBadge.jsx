@@ -3,6 +3,7 @@ const MoodBadge = ({ mood }) => {
         good: 'bg-innergreen',
         meh: 'bg-innerpurple',
         bad: 'bg-innerred',
+        all: 'border border-innerlightblue',
     };
 
     const moodColorClass = moodColors[mood] || 'bg-gray-300';

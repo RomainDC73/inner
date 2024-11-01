@@ -1,61 +1,58 @@
-import { useForm, Link } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
+import MoodBadge from './MoodBadge';
 import { useEffect } from 'react';
 
 const FilterForm = ({ moods, filters }) => {
     const { data, setData, get } = useForm({
-        mood: filters.mood || '',
-        date: filters.date || ''
+        mood: filters.mood || ''
     });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        get(route('posts.index')); // Soumet les filtres en tant que requête GET
+    // Utiliser un useEffect pour écouter les changements de mood
+    useEffect(() => {
+        // Effectuer une requête GET lorsque le mood change
+        get(route('posts.index', { mood: data.mood }), {
+            preserveState: true,
+            replace: true
+        });
+    }, [data.mood]); // Déclencheur basé sur data.mood
+
+    const handleMoodClick = (moodId) => {
+        setData('mood', moodId); // Met à jour le filtre de mood
+        // Si moodId est vide, cela signifie "Tous"
+        if (moodId === '') {
+            get(route('posts.index'), {
+                preserveState: true,
+                replace: true
+            });
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mb-6 flex space-x-4 items-end">
+        <div className="mb-6 flex space-x-4 items-end">
             <div>
-                <label className="block text-gray-700">Mood</label>
-                <select
-                    value={data.mood}
-                    onChange={(e) => setData('mood', e.target.value)}
-                    className="border border-gray-300 rounded px-4 py-2"
-                >
-                    <option value="">Tous</option>
+                <span className="block text-gray-700">Filtrer</span>
+                <div className="flex space-x-2 mt-2">
+                    <div
+                        className={`cursor-pointer ${!data.mood ? 'font-bold' : ''}`}
+                        onClick={() => handleMoodClick('')} // Réinitialiser le filtre à "Tous"
+                    >
+                        <MoodBadge mood="all" />
+                        {/* <span>Tous</span> */}
+                    </div>
                     {moods.map((mood) => (
-                        <option key={mood.id} value={mood.id}>
-                            {mood.name}
-                        </option>
+                        <div
+                            key={mood.id}
+                            className="cursor-pointer"
+                            onClick={() => handleMoodClick(mood.id)} // Utiliser l'ID du mood ici
+                        >
+                            <MoodBadge mood={mood.name} />
+                            {/* <span>{mood.name}</span> */}
+                        </div>
                     ))}
-                </select>
+                </div>
             </div>
-            <div>
-                <label className="block text-gray-700">Date</label>
-                <input
-                    type="date"
-                    value={data.date}
-                    onChange={(e) => setData('date', e.target.value)}
-                    className="border border-gray-300 rounded px-4 py-2"
-                />
-            </div>
-            <button
-                type="submit"
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-            >
-                Filtrer
-            </button>
-            <Link
-                href={route('posts.index')}
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100 transition"
-                as="button"
-                preserveScroll
-            >
-                Réinitialiser
-            </Link>
-        </form>
+        </div>
     );
 };
 
 export default FilterForm;
-
-
