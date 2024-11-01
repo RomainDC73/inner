@@ -29,8 +29,13 @@ export default function Posts() {
                                         <Link
                                             key={index}
                                             href={link.url || '#'}
-                                            className={`px-4 py-2 rounded ${link.active ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-800'}`}
-                                            dangerouslySetInnerHTML={{ __html: link.label }} // Utilisation de dangerouslySetInnerHTML
+                                            className={`
+                                                px-4 py-2 mx-1
+                                                ${link.active ? 'border border-innerdarkblue rounded-lg text-innerdarkblue font-semibold' : 'text-innerlightblue'}
+                                                hover:bg-innerdarkblue rounded-lg hover:text-white
+                                                transition duration-200
+                                            `}
+                                            dangerouslySetInnerHTML={{ __html: link.label }}
                                         />
                                     );
                                 })}
