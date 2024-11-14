@@ -4,6 +4,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import '../../css/cloud.css';
 
 
 export default function Authenticated({ header, children }) {
@@ -13,7 +14,12 @@ export default function Authenticated({ header, children }) {
         useState(false);
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen relative overflow-hidden">
+
+    <div className="orb"></div>
+    <div className="orb"></div>
+    <div className="orb"></div>
+
             <nav>
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
