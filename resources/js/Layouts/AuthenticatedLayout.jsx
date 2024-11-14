@@ -14,7 +14,7 @@ export default function Authenticated({ header, children }) {
 
     return (
         <div className="min-h-screen">
-            <nav className="bg-white">
+            <nav>
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
@@ -164,7 +164,7 @@ export default function Authenticated({ header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white">
+                <header>
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {header}
                     </div>
