@@ -1,9 +1,14 @@
 /* Styles pour les orbes */
-.min-h-screen {
-    position: relative;
-    overflow: hidden;
- /* Couleur de fond de la div */
+.orb-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* En arrière-plan */
+    pointer-events: none; /* Pour que les clics passent à travers */
 }
+
 .orb {
     position: absolute;
     width: 500px;
@@ -11,7 +16,7 @@
     /* background: radial-gradient(circle, rgba(255, 0, 150, 0.1) 40%, rgba(0, 150, 255, 0) 100%); */
     border-radius: 50%;
     animation: float 10s infinite ease-in-out;
-    opacity: 0.4;
+    opacity: 0.8;
 }
 
 /* Positionnement initial aléatoire pour chaque orbe */
@@ -33,7 +38,7 @@
     bottom: 70%;
     left: 5%;
     animation-duration: 6s;
-    background: radial-gradient(rgba(208,214,181,1) 0%, rgba(0,0,0,0) 60%);
+    background: radial-gradient(rgba(208,214,181,0.7) 0%, rgba(0,0,0,0) 60%);
 }
 
 /* Animation de flottement */

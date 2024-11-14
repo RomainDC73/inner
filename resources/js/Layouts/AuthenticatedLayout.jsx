@@ -15,12 +15,13 @@ export default function Authenticated({ header, children }) {
 
     return (
         <div className="min-h-screen relative overflow-hidden">
+            <div className="orbContainer">
+                <div className="orb"></div>
+                <div className="orb"></div>
+                <div className="orb"></div>
+            </div>
 
-    <div className="orb"></div>
-    <div className="orb"></div>
-    <div className="orb"></div>
-
-            <nav>
+            <nav className="relative z-10">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
@@ -170,14 +171,14 @@ export default function Authenticated({ header, children }) {
             </nav>
 
             {header && (
-                <header>
+                <header className="relative z-10">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {header}
                     </div>
                 </header>
             )}
 
-            <main>{children}</main>
+            <main className="relative z-10">{children}</main>
         </div>
     );
 }
