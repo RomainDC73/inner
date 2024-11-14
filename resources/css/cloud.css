@@ -1,20 +1,50 @@
-@keyframes cloud {
+/* Styles pour les orbes */
+.min-h-screen {
+    position: relative;
+    overflow: hidden;
+    background: yellow; /* Couleur de fond de la div */
+}
+.orb {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255, 0, 150, 0.6), transparent);
+    border-radius: 50%;
+    animation: float 10s infinite ease-in-out;
+    opacity: 0.7;
+}
+
+/* Positionnement initial aléatoire pour chaque orbe */
+.orb:nth-child(1) {
+    top: 10%;
+    left: 15%;
+    animation-duration: 12s;
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.6), transparent);
+}
+
+.orb:nth-child(2) {
+    top: 20%;
+    left: 60%;
+    animation-duration: 15s;
+    background: radial-gradient(circle, rgba(255, 255, 0, 0.6), transparent);
+}
+
+.orb:nth-child(3) {
+    top: 30%;
+    left: 80%;
+    animation-duration: 18s;
+    background: radial-gradient(circle, rgba(150, 255, 150, 0.6), transparent);
+}
+
+/* Animation de flottement */
+@keyframes float {
     0% {
-        transform: translateX(100%);
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-20px) translateX(20px);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateY(0) translateX(0);
     }
-}
-
-.animate-cloud {
-    animation: cloud 30s linear infinite;
-}
-
-.animation-delay-2000 {
-    animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-    animation-delay: 4s;
 }

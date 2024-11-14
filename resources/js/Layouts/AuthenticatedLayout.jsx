@@ -15,10 +15,11 @@ export default function Authenticated({ header, children }) {
 
     return (
         <div className="min-h-screen relative overflow-hidden">
-            {/* Nuages animés */}
-            <div className="absolute top-10 -left-40 h-32 w-32 bg-blue-200 rounded-full opacity-30 animate-cloud" />
-            <div className="absolute top-1/3 -left-60 h-24 w-24 bg-purple-200 rounded-full opacity-30 animate-cloud animation-delay-2000" />
-            <div className="absolute top-1/2 -left-80 h-28 w-28 bg-pink-200 rounded-full opacity-30 animate-cloud animation-delay-4000" />
+
+    <div className="orb"></div>
+    <div className="orb"></div>
+    <div className="orb"></div>
+
             <nav>
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
