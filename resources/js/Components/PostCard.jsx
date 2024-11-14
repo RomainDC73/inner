@@ -25,7 +25,7 @@ const PostCard = ({ post }) => {
 
     return (
         <li className="mb-4">
-            <Link href={`/post/${post.id}`}>
+            <Link href={`/posts/${post.id}`}>
                 {/* Appliquer les couleurs dynamiques basées sur le mood */}
                 <div className={`${moodColors[post.mood.name] || 'bg-gradient-to-br from-white to-gray-200'} rounded-lg p-4 shadow-md`}>
                     <div className="flex items-center mb-2 space-x-2">
