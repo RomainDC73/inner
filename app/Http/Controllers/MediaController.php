@@ -27,7 +27,7 @@ class MediaController extends Controller
     public function saveMedia(Request $request)
     {
         $request->validate([
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
         if ($request->hasFile('media')) {

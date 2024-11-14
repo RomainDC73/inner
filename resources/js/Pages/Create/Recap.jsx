@@ -43,7 +43,7 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
             <div>
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 w-full">
                     {/* MoodCard */}
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
+                    <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                         <h3 className="text-lg font-semibold mb-2">Comment tu te sens</h3>
                         <div className="flex items-center gap-2">
                             {mood ? (
@@ -61,7 +61,7 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
                     </div>
 
                     {/* Description */}
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
+                    <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                         <h3 className="text-lg font-semibold mb-2">Ta description</h3>
                         <div className="flex items-center justify-center gap-2">
                             <p>{description || 'Aucune description fournie.'}</p>
@@ -76,7 +76,7 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
 
                     {/* Image */}
                     {mediaPath && (
-                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
+                        <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                             <h3 className="text-lg font-semibold mb-2">Ton image</h3>
                             <div className="flex items-center justify-center gap-2">
                                 <ImagePreview src={`/storage/${mediaPath}`} />
