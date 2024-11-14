@@ -89,32 +89,5 @@ class MediaController extends Controller
 
 }
 
-
-
-
-//     public function updateMedia(Request $request, $id)
-// {
-
-//     $request->validate([
-//         'media' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-//     ]);
-
-//     $post = Post::findOrFail($id);
-
-//     if ($request->hasFile('media')) {
-//         // Gérer la mise à jour de l'image
-//         if ($post->media_path) {
-//             Storage::delete($post->media_path);
-//         }
-
-//         $path = $request->file('media')->store('media', 'public');
-//         $post->media_path = $path;
-//         $post->save();
-//     }
-
-//     return redirect()->route('posts.show', $id)->with('success', 'Media mis à jour avec succès');
-// }
-
-
 }
 
