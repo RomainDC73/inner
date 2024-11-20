@@ -3,12 +3,15 @@ import { IoMicCircle } from "react-icons/io5";
 import { IoStopCircle } from "react-icons/io5";
 import { IoPlayCircle } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
+import '../../css/wave.css'; // Remplace par le bon chemin vers ton fichier wave.css
+
 
 export default function VoiceRecorder() {
     const [audioBlob, setAudioBlob] = useState(null);
     const [recording, setRecording] = useState(false);
     const mediaRecorderRef = useRef(null);
 
+    // Fonction de démarrage de l'enregistrement
     const startRecording = async () => {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             alert("Votre navigateur ne supporte pas l'enregistrement audio.");
@@ -37,6 +40,7 @@ export default function VoiceRecorder() {
         }
     };
 
+    // Fonction pour arrêter l'enregistrement
     const stopRecording = () => {
         if (mediaRecorderRef.current) {
             mediaRecorderRef.current.stop();
@@ -44,6 +48,7 @@ export default function VoiceRecorder() {
         }
     };
 
+    // Fonction pour lire l'audio enregistré
     const playAudio = () => {
         if (audioBlob) {
             const audioURL = URL.createObjectURL(audioBlob);
@@ -52,10 +57,21 @@ export default function VoiceRecorder() {
     };
 
     return (
-        <div>
+        <div className="text-center">
             <button onClick={recording ? stopRecording : startRecording}>
-                {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE"/>}
+                {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE" />}
             </button>
+
+            {/* Afficher l'animation d'onde pendant l'enregistrement */}
+            {recording && (
+                <div className="wave-container mt-4">
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                    <div className="wave"></div>
+                </div>
+            )}
+
             {audioBlob && (
                 <>
                     <button onClick={playAudio}><IoPlayCircle size={40} color="#D0D6B5" /></button>
