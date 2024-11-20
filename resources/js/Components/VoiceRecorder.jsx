@@ -1,4 +1,8 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { IoMicCircle } from "react-icons/io5";
+import { IoStopCircle } from "react-icons/io5";
+import { IoPlayCircle } from "react-icons/io5";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function VoiceRecorder() {
     const [audioBlob, setAudioBlob] = useState(null);
@@ -50,12 +54,12 @@ export default function VoiceRecorder() {
     return (
         <div>
             <button onClick={recording ? stopRecording : startRecording}>
-                {recording ? 'Stop Recording' : 'Start Recording'}
+                {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE"/>}
             </button>
             {audioBlob && (
                 <>
-                    <button onClick={playAudio}>Play Audio</button>
-                    <button onClick={() => setAudioBlob(null)}>Delete Recording</button>
+                    <button onClick={playAudio}><IoPlayCircle size={40} color="#D0D6B5" /></button>
+                    <button onClick={() => setAudioBlob(null)}><MdDeleteForever size={40} color="#F9B5AC" /></button>
                 </>
             )}
         </div>
