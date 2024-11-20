@@ -1,8 +1,22 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { useState } from 'react';
 import { Head } from '@inertiajs/react';
 import VoiceRecorder from '@/Components/VoiceRecorder';
+import PrimaryButton from '@/Components/PrimaryButton'; // Assurez-vous que ce bouton est importé
 
 export default function Talk() {
+    const [audioBlob, setAudioBlob] = useState(null);
+
+    const handleRecordingComplete = (audio) => {
+        setAudioBlob(audio);
+    };
+
+    const handleNextStep = () => {
+        // Rediriger vers la page suivante (ajout de média, par exemple)
+        // Utilise `Inertia.visit` ou un autre mécanisme de redirection
+        window.location.href = '/create/add-media';  // Exemple de redirection
+    };
+
     return (
         <AuthenticatedLayout>
             <Head title="Parler" />
@@ -13,10 +27,16 @@ export default function Talk() {
                     </h1>
                     <div className="overflow-hidden shadow-sm rounded-lg">
                         <div className="p-6 text-gray-900 space-y-3">
-                            <h2 className="text-lg font-medium">Enregistrez votre voix :</h2>
-                            <VoiceRecorder />
+                            <VoiceRecorder onRecordingComplete={handleRecordingComplete} />
                         </div>
                     </div>
+
+                    {/* Afficher le bouton uniquement si un enregistrement a été fait */}
+                    {audioBlob && (
+                        <div className="mt-6">
+                            <PrimaryButton onClick={handleNextStep}>suivant</PrimaryButton>
+                        </div>
+                    )}
                 </div>
             </div>
         </AuthenticatedLayout>
