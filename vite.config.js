@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import fs from 'fs';
 
 export default defineConfig({
     plugins: [
@@ -11,6 +12,16 @@ export default defineConfig({
         react(),
     ],
     server: {
-        host: '192.168.1.77'
-    }
+        https: {
+            key: fs.readFileSync('/Users/fantaz/.config/valet/Certificates/inner.test.key'),
+            cert: fs.readFileSync('/Users/fantaz/.config/valet/Certificates/inner.test.crt'),
+        },
+        host: 'localhost',
+        port: 5173,
+        cors: true,
+        watch: {
+            usePolling: true,
+            interval: 100,
+        },
+    },
 });

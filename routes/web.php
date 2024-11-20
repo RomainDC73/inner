@@ -56,6 +56,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/write', [DescriptionController::class, 'showWriteForm'])->name('write');
         Route::post('/write', [DescriptionController::class, 'addDescription'])->name('save-description');
         Route::get('/talk', [DescriptionController::class, 'showTalkForm'])->name('talk');
+        Route::post('/talk/upload-audio', [DescriptionController::class, 'uploadAudio'])->name('upload-audio');
 
         // Route pour l'ajout de média
         Route::get('/add-media', [MediaController::class, 'addMedia'])->name('add-media');

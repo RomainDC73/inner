@@ -92,4 +92,19 @@ class DescriptionController extends Controller
         return Inertia::render('Create/Talk', ['mood_id' => $mood_id]);
     }
 
+    public function uploadAudio(Request $request)
+    {
+        $request->validate([
+            'audio' => 'required|mimes:webm|max:10240', // Limite à 10 Mo
+        ]);
+
+        // Sauvegarder le fichier audio
+        $path = $request->file('audio')->store('audio', 'public');
+
+        // Stocker le chemin dans la session ou base de données
+        session(['audio_path' => $path]);
+
+        return redirect('create/add-media')->with('success', 'Enregistrement vocal ajouté avec succès.');
+    }
+
 }
