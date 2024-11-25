@@ -33,8 +33,12 @@ const PostCard = ({ post }) => {
                         <MoodBadge mood={post.mood.name} />
                         <p className="text-sm text-gray-500">{formattedDate}</p>
                     </div>
-                    {/* Afficher un extrait de la description */}
-                    <p className="mb-2">{getExcerpt(post.description)}</p>
+                    {/* Afficher un extrait de la description uniquement si elle existe */}
+                    {post.description ? (
+                        <p className="mb-2">{getExcerpt(post.description)}</p>
+                    ) : (
+                        <p className="mb-2 text-gray-400 italic">Aucune description fournie.</p>
+                    )}
                 </div>
             </Link>
         </li>
