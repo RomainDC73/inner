@@ -1,16 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
-import { IoMicCircle } from "react-icons/io5";
-import { IoStopCircle } from "react-icons/io5";
-import { IoPlayCircle } from "react-icons/io5";
+import { useState, useRef } from 'react';
+import { IoMicCircle, IoStopCircle, IoPlayCircle } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 import '../../css/wave.css';
 
 export default function VoiceRecorder({ onRecordingComplete }) {
     const [audioBlob, setAudioBlob] = useState(null);
+    const [audioURL, setAudioURL] = useState(null);
     const [recording, setRecording] = useState(false);
-    const [time, setTime] = useState(0);  // Etat pour le temps écoulé
+    const [time, setTime] = useState(0);
     const mediaRecorderRef = useRef(null);
-    const intervalRef = useRef(null); // Référence pour stocker l'intervalle
+    const intervalRef = useRef(null);
 
     const startRecording = async () => {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -29,18 +28,19 @@ export default function VoiceRecorder({ onRecordingComplete }) {
             };
 
             mediaRecorder.onstop = () => {
+                stream.getTracks().forEach(track => track.stop()); // Libère les ressources
                 const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                 setAudioBlob(audioBlob);
-                onRecordingComplete(audioBlob); // Informer le parent qu'un enregistrement a été effectué
+                setAudioURL(URL.createObjectURL(audioBlob));
+                onRecordingComplete(audioBlob);
             };
 
             mediaRecorder.start();
             setRecording(true);
-            intervalRef.current = setInterval(() => {
-                setTime((prevTime) => prevTime + 1); // Met à jour le temps toutes les secondes
-            }, 1000); // Intervalle de 1 seconde
+            intervalRef.current = setInterval(() => setTime((prev) => prev + 1), 1000);
         } catch (error) {
             console.error("Erreur d'accès au microphone :", error);
+            alert("Erreur d'accès au microphone : " + error.message);
         }
     };
 
@@ -48,60 +48,49 @@ export default function VoiceRecorder({ onRecordingComplete }) {
         if (mediaRecorderRef.current) {
             mediaRecorderRef.current.stop();
             setRecording(false);
-            clearInterval(intervalRef.current);  // Arrête l'intervalle quand l'enregistrement s'arrête
+            clearInterval(intervalRef.current);
         }
     };
 
     const playAudio = () => {
-        if (audioBlob) {
-            const audioURL = URL.createObjectURL(audioBlob);
-            new Audio(audioURL).play();
-            console.log("URL de l'audio :", audioURL);
-        }
+        if (audioURL) new Audio(audioURL).play();
     };
 
-    const resetTimer = () => {
-        setTime(0);  // Réinitialise le timer
+    const resetRecording = () => {
+        setAudioBlob(null);
+        setAudioURL(null);
+        setTime(0);
+        onRecordingComplete(null);
     };
 
-    // Formater le temps en minutes:secondes
     const formatTime = (timeInSeconds) => {
-        const minutes = Math.floor(timeInSeconds / 60);  // Nombre de minutes
-        const seconds = timeInSeconds % 60;  // Reste des secondes
-        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;  // Formate en mm:ss
+        const minutes = Math.floor(timeInSeconds / 60);
+        const seconds = timeInSeconds % 60;
+        return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     };
 
     return (
         <div className="text-center">
-            {/* Afficher l'icône d'enregistrement ou d'arrêt selon l'état */}
-            {!audioBlob && (
-                <button onClick={recording ? stopRecording : startRecording}>
-                    {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE" />}
-                </button>
-            )}
+            <button onClick={recording ? stopRecording : startRecording}>
+                {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE" />}
+            </button>
 
-            {/* Afficher l'animation d'onde pendant l'enregistrement */}
             {recording && (
-                <div className="wave-container mt-4">
-                    <div className="wave"></div>
-                    <div className="wave"></div>
-                    <div className="wave"></div>
-                    <div className="wave"></div>
-                </div>
-            )}
-
-            {/* Afficher le timer pendant l'enregistrement */}
-            {recording && (
-                <div className="mt-4">
+                <div>
+                    <div className="wave-container mt-4">
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                    </div>
                     <p>{`Durée : ${formatTime(time)}`}</p>
                 </div>
             )}
 
-            {/* Afficher les boutons Lecture et Suppression après l'enregistrement */}
             {audioBlob && (
                 <div className="mt-4">
                     <button onClick={playAudio}><IoPlayCircle size={40} color="#D0D6B5" /></button>
-                    <button onClick={() => { setAudioBlob(null); resetTimer(); onRecordingComplete(null); }}><MdDeleteForever size={40} color="#F9B5AC" /></button>
+                    <button onClick={resetRecording}><MdDeleteForever size={40} color="#F9B5AC" /></button>
                 </div>
             )}
         </div>

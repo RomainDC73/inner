@@ -4,48 +4,48 @@ import { Head, useForm } from '@inertiajs/react';
 import VoiceRecorder from '@/Components/VoiceRecorder';
 import PrimaryButton from '@/Components/PrimaryButton';
 
-
 export default function Talk() {
-    const [audioBlob, setAudioBlob] = useState(null);
 
-    const { post, processing } = useForm();
+    const { data, setData, post, processing } = useForm({
+        audio: null,
+    });
+
+    const [error, setError] = useState('');
 
     const handleRecordingComplete = (audio) => {
-        setAudioBlob(audio);
+        if (audio && audio instanceof Blob) {
+            setData('audio', audio);
+        } else {
+            setError('Le fichier audio est invalide.');
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!audioBlob) {
-            alert('Veuillez enregistrer un message avant de continuer.');
+        if (!data.audio) {
+            setError('Veuillez enregistrer un message avant de continuer.');
             return;
         }
 
-        // Créer un FormData pour inclure l'audio
-        const formData = new FormData();
-        formData.append('audio', audioBlob, 'recording.webm');
-
-        // Vérification que le fichier est bien attaché
-        console.log("FormData entries:");
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
-        }
-
+        // Envoie du formulaire
         post('/create/save-talk', {
-            data: formData,
             onSuccess: () => {
                 console.log('Audio enregistré avec succès');
+                setError(''); // Réinitialiser l'erreur après succès
             },
             onError: (errors) => {
                 console.error('Erreur lors de l\'enregistrement de l\'audio', errors);
+                setError('Une erreur est survenue lors de l\'enregistrement. Veuillez réessayer.');
             },
         });
     };
 
     return (
         <AuthenticatedLayout>
-            <Head title="Parler" />
+            <Head>
+                <title>Enregistrer un message vocal</title>
+            </Head>
             <div className="flex flex-col items-center mt-10 min-h-screen mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h1 className="text-xl font-semibold leading-tight text-gray-800 mt-4 mb-4">
@@ -57,11 +57,18 @@ export default function Talk() {
                         </div>
                     </div>
 
-                    {/* Afficher le bouton uniquement si un enregistrement a été fait */}
-                    {audioBlob && (
+                    {error && <p className="text-red-500 mt-4">{error}</p>}
+
+                    {data.audio && (
                         <div className="mt-6">
                             <PrimaryButton onClick={handleSubmit} disabled={processing}>
-                                {processing ? 'Enregistrement...' : 'Suivant'}
+                                {processing ? (
+                                    <span className="flex items-center">
+                                        <span className="loader mr-2"></span> Enregistrement...
+                                    </span>
+                                ) : (
+                                    'Suivant'
+                                )}
                             </PrimaryButton>
                         </div>
                     )}

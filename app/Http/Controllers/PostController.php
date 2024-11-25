@@ -86,7 +86,7 @@ class PostController extends Controller
         $request->validate([
             'mood_id' => 'required|exists:moods,id',
             'description' => 'required|string|max:1000',
-            'audio' => 'nullable|mimes:webm|max:10240', // Limite à 10 Mo
+            'audio' => 'nullable|mimes:webm|max:20000', // Limite à 10 Mo
             'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

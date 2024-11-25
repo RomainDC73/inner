@@ -95,8 +95,8 @@ class DescriptionController extends Controller
     public function saveTalk(Request $request)
 {
     // Validation du fichier audio
-    $validated = $request->validate([
-        'audio' => 'required|mimes:webm|max:10240',
+    $request->validate([
+        'audio' => 'required|mimes:webm|max:20000',
     ]);
 
     try {
