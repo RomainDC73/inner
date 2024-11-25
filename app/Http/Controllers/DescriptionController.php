@@ -112,7 +112,7 @@ class DescriptionController extends Controller
         Log::info('Nom du fichier : ' . $file->getClientOriginalName());
     }
 
-    return response()->json(['message' => 'Audio enregistré avec succès']);
+    return redirect('/create/add-media');
 }
 
 
