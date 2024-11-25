@@ -85,7 +85,7 @@ class PostController extends Controller
     {
         $request->validate([
             'mood_id' => 'required|exists:moods,id',
-            'description' => 'required|string|max:1000',
+            'description' => 'nullable|string|max:1000',
             'audio' => 'nullable|mimes:webm|max:20000', // Limite à 10 Mo
             'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -99,8 +99,8 @@ class PostController extends Controller
         $post->media_path = $request->input('media_path');
         $post->save();
 
-        // // Vider la session
-        // $request->sessions()->forget(['mood_id', 'description', 'media_path']);
+        // Vider la session
+        $request->session()->forget(['mood_id', 'description', 'media_path', 'audio_path']);
 
         // Redirection après la sauvegarde
         return redirect()->route('dashboard')->with('success', 'Post créé avec succès !');

@@ -24,7 +24,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
         Inertia.post(route('posts.store'), {
             mood_id: mood ? mood.id : null,
             description: description || '',
-            audio_path: audio || '',
+            audio_path: audioPath || '',
             media_path: mediaPath || '',
         }, {
             onFinish: () => {
