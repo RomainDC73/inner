@@ -67,6 +67,7 @@ class PostController extends Controller
         $mood_id = session('mood_id'); // Récupérer l'humeur, si nécessaire
         $mood = Mood::find($mood_id); // Si le mood_id est présent dans la session, on récupère l'objet Mood correspondant
         $description = session('description'); // Récupérer la description, si nécessaire
+        $audio = session('audio_path');
         $mediaPath = session('media_path'); // Récupérer le chemin de l'image
 
         $moodTranslations = Lang::get('moods'); // Charger les traductions pour moods
@@ -75,6 +76,7 @@ class PostController extends Controller
             'mood' => $mood,
             'moodTranslations' => $moodTranslations,
             'description' => $description,
+            'audioPath' => $audio,
             'mediaPath' => $mediaPath,
         ]);
     }
@@ -84,6 +86,7 @@ class PostController extends Controller
         $request->validate([
             'mood_id' => 'required|exists:moods,id',
             'description' => 'required|string|max:1000',
+            'audio' => 'nullable|mimes:webm|max:10240', // Limite à 10 Mo
             'media' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -92,6 +95,7 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->mood_id = $request->input('mood_id');
         $post->description = $request->input('description');
+        $$post->audio_path = $request->file('audio')->store('audio', 'public');
         $post->media_path = $request->input('media_path');
         $post->save();
 
@@ -114,5 +118,5 @@ class PostController extends Controller
         return redirect()->route('dashboard')->with('success', 'Post supprimé avec succès !');
     }
 
-    
+
 }

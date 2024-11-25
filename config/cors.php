@@ -15,17 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', '*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'create/*', '*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        'http://localhost:5173',    // Frontend local (desktop)
-        'https://localhost:5173',   // Frontend sécurisé (desktop)
-        'http://192.168.1.x:5173', // Remplace x par l'IP de ton PC pour mobile (réseau local)
-        'https://192.168.1.x:5173',
-        'https://inner.test'
-    ],
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 

@@ -3,7 +3,7 @@ import { IoMicCircle } from "react-icons/io5";
 import { IoStopCircle } from "react-icons/io5";
 import { IoPlayCircle } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
-import '../../css/wave.css'; // Assure-toi d'importer ton fichier CSS ici !
+import '../../css/wave.css';
 
 export default function VoiceRecorder({ onRecordingComplete }) {
     const [audioBlob, setAudioBlob] = useState(null);
@@ -56,6 +56,7 @@ export default function VoiceRecorder({ onRecordingComplete }) {
         if (audioBlob) {
             const audioURL = URL.createObjectURL(audioBlob);
             new Audio(audioURL).play();
+            console.log("URL de l'audio :", audioURL);
         }
     };
 

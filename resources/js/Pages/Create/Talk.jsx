@@ -1,20 +1,46 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useState } from 'react';
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import VoiceRecorder from '@/Components/VoiceRecorder';
-import PrimaryButton from '@/Components/PrimaryButton'; // Assurez-vous que ce bouton est importé
+import PrimaryButton from '@/Components/PrimaryButton';
+
 
 export default function Talk() {
     const [audioBlob, setAudioBlob] = useState(null);
+
+    const { post, processing } = useForm();
 
     const handleRecordingComplete = (audio) => {
         setAudioBlob(audio);
     };
 
-    const handleNextStep = () => {
-        // Rediriger vers la page suivante (ajout de média, par exemple)
-        // Utilise `Inertia.visit` ou un autre mécanisme de redirection
-        window.location.href = '/create/add-media';  // Exemple de redirection
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!audioBlob) {
+            alert('Veuillez enregistrer un message avant de continuer.');
+            return;
+        }
+
+        // Créer un FormData pour inclure l'audio
+        const formData = new FormData();
+        formData.append('audio', audioBlob, 'recording.webm');
+
+        // Vérification que le fichier est bien attaché
+        console.log("FormData entries:");
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+
+        post('/create/save-talk', {
+            data: formData,
+            onSuccess: () => {
+                console.log('Audio enregistré avec succès');
+            },
+            onError: (errors) => {
+                console.error('Erreur lors de l\'enregistrement de l\'audio', errors);
+            },
+        });
     };
 
     return (
@@ -34,7 +60,9 @@ export default function Talk() {
                     {/* Afficher le bouton uniquement si un enregistrement a été fait */}
                     {audioBlob && (
                         <div className="mt-6">
-                            <PrimaryButton onClick={handleNextStep}>suivant</PrimaryButton>
+                            <PrimaryButton onClick={handleSubmit} disabled={processing}>
+                                {processing ? 'Enregistrement...' : 'Suivant'}
+                            </PrimaryButton>
                         </div>
                     )}
                 </div>

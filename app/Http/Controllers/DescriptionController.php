@@ -92,19 +92,43 @@ class DescriptionController extends Controller
         return Inertia::render('Create/Talk', ['mood_id' => $mood_id]);
     }
 
-    public function uploadAudio(Request $request)
-    {
-        $request->validate([
-            'audio' => 'required|mimes:webm|max:10240', // Limite à 10 Mo
-        ]);
+    public function saveTalk(Request $request)
+{
+    // Validation du fichier audio
+    $validated = $request->validate([
+        'audio' => 'required|mimes:webm|max:10240',
+    ]);
 
-        // Sauvegarder le fichier audio
-        $path = $request->file('audio')->store('audio', 'public');
+    try {
+        if ($request->hasFile('audio')) {
+            // Log avant de sauvegarder le fichier
+            Log::info('Fichier audio reçu : ' . $request->file('audio')->getClientOriginalName());
 
-        // Stocker le chemin dans la session ou base de données
-        session(['audio_path' => $path]);
+            // Sauvegarder le fichier
+            $audioPath = $request->file('audio')->store('audio', 'public');
 
-        return redirect('create/add-media')->with('success', 'Enregistrement vocal ajouté avec succès.');
+            // Log du chemin de sauvegarde
+            Log::info('Chemin du fichier sauvegardé : ' . $audioPath);
+
+            // Sauvegarder le chemin dans la session ou la base de données
+            session(['audio_path' => $audioPath]);
+
+            // Rediriger avec un message de succès
+            return redirect('create/add-media')->with('success', 'Enregistrement vocal ajouté avec succès.');
+        } else {
+            Log::error('Aucun fichier audio reçu');
+            return redirect()->back()->withErrors(['audio' => 'Aucun fichier audio n\'a été téléchargé.']);
+        }
+    } catch (\Exception $e) {
+        // En cas d'erreur, log de l'exception
+        Log::error('Erreur lors de la sauvegarde de l\'audio : ' . $e->getMessage());
+
+        // Retourner un message d'erreur à l'utilisateur
+        return redirect()->back()->withErrors(['audio' => 'Une erreur est survenue lors de l\'enregistrement de l\'audio.']);
     }
+}
+
+
+
 
 }
