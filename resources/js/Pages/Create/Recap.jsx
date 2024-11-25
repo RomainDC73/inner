@@ -8,12 +8,13 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { Inertia } from '@inertiajs/inertia';
 import { MdEdit } from 'react-icons/md';
 
-export default function ShowRecap({ mood, moodTranslations, description, mediaPath }) {
+export default function ShowRecap({ mood, moodTranslations, description, audioPath, mediaPath }) {
     const [editMode, setEditMode] = useState(false);
 
     const { post, processing } = useForm({
         mood_id: mood ? mood.id : null,
         description: description || '',
+        audio_path: audioPath || '',
         media_path: mediaPath || '',
     });
 
@@ -23,12 +24,14 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
         Inertia.post(route('posts.store'), {
             mood_id: mood ? mood.id : null,
             description: description || '',
+            audio_path: audioPath || '',
             media_path: mediaPath || '',
         }, {
             onFinish: () => {
                 localStorage.removeItem('mood_id');
                 localStorage.removeItem('description');
                 localStorage.removeItem('media');
+                localStorage.removeItem('audio_path');
             }
         });
 
@@ -65,6 +68,20 @@ export default function ShowRecap({ mood, moodTranslations, description, mediaPa
                         <h3 className="text-lg font-semibold mb-2">Ta description</h3>
                         <div className="flex items-center justify-center gap-2">
                             <p>{description || 'Aucune description fournie.'}</p>
+                            {editMode && (
+                                <MdEdit
+                                    className="text-gray-500 cursor-pointer"
+                                    onClick={() => Inertia.get(`/create/write`)} // Rediriger si nécessaire
+                                />
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Description Audio */}
+                    <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
+                        <h3 className="text-lg font-semibold mb-2">Ton vocal</h3>
+                        <div className="flex items-center justify-center gap-2">
+                            <p>{audioPath || 'Aucune description fournie.'}</p>
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"

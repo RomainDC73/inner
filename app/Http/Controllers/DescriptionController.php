@@ -92,4 +92,28 @@ class DescriptionController extends Controller
         return Inertia::render('Create/Talk', ['mood_id' => $mood_id]);
     }
 
+    public function saveTalk(Request $request)
+{
+    $request->validate([
+        'audio' => 'required|file|max:20000', // Limite à 20 Mo
+    ]);
+
+    if ($request->hasFile('audio')) {
+        // Stockage du fichier audio
+
+        $audioPath = $request->file('audio')->store('audio', 'public');
+
+        session(['audio_path' => $audioPath]); // Stocker le chemin dans la session
+    }
+
+    if ($request->hasFile('audio')) {
+        $file = $request->file('audio');
+        Log::info('Type MIME : ' . $file->getMimeType());
+        Log::info('Nom du fichier : ' . $file->getClientOriginalName());
+    }
+
+    return redirect('/create/add-media');
+}
+
+
 }
