@@ -67,7 +67,7 @@ class PostController extends Controller
         $mood_id = session('mood_id'); // Récupérer l'humeur, si nécessaire
         $mood = Mood::find($mood_id); // Si le mood_id est présent dans la session, on récupère l'objet Mood correspondant
         $description = session('description'); // Récupérer la description, si nécessaire
-        $audio = session('audio_path');
+        $audioPath = session('audio_path', null);
         $mediaPath = session('media_path'); // Récupérer le chemin de l'image
 
         $moodTranslations = Lang::get('moods'); // Charger les traductions pour moods
@@ -76,7 +76,7 @@ class PostController extends Controller
             'mood' => $mood,
             'moodTranslations' => $moodTranslations,
             'description' => $description,
-            'audioPath' => $audio,
+            'audioPath' => $audioPath,
             'mediaPath' => $mediaPath,
         ]);
     }
@@ -95,7 +95,7 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->mood_id = $request->input('mood_id');
         $post->description = $request->input('description');
-        $$post->audio_path = $request->file('audio')->store('audio', 'public');
+        $post->audio_path = $request->input('audio_path');
         $post->media_path = $request->input('media_path');
         $post->save();
 

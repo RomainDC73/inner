@@ -94,41 +94,26 @@ class DescriptionController extends Controller
 
     public function saveTalk(Request $request)
 {
-    // Validation du fichier audio
     $request->validate([
-        'audio' => 'required|mimes:webm|max:20000',
+        'audio' => 'required|file|max:20000', // Limite à 20 Mo
     ]);
 
-    try {
-        if ($request->hasFile('audio')) {
-            // Log avant de sauvegarder le fichier
-            Log::info('Fichier audio reçu : ' . $request->file('audio')->getClientOriginalName());
+    if ($request->hasFile('audio')) {
+        // Stockage du fichier audio
 
-            // Sauvegarder le fichier
-            $audioPath = $request->file('audio')->store('audio', 'public');
+        $audioPath = $request->file('audio')->store('audio', 'public');
 
-            // Log du chemin de sauvegarde
-            Log::info('Chemin du fichier sauvegardé : ' . $audioPath);
-
-            // Sauvegarder le chemin dans la session ou la base de données
-            session(['audio_path' => $audioPath]);
-
-            // Rediriger avec un message de succès
-            return redirect('create/add-media')->with('success', 'Enregistrement vocal ajouté avec succès.');
-        } else {
-            Log::error('Aucun fichier audio reçu');
-            return redirect()->back()->withErrors(['audio' => 'Aucun fichier audio n\'a été téléchargé.']);
-        }
-    } catch (\Exception $e) {
-        // En cas d'erreur, log de l'exception
-        Log::error('Erreur lors de la sauvegarde de l\'audio : ' . $e->getMessage());
-
-        // Retourner un message d'erreur à l'utilisateur
-        return redirect()->back()->withErrors(['audio' => 'Une erreur est survenue lors de l\'enregistrement de l\'audio.']);
+        session(['audio_path' => $audioPath]); // Stocker le chemin dans la session
     }
+
+    if ($request->hasFile('audio')) {
+        $file = $request->file('audio');
+        Log::info('Type MIME : ' . $file->getMimeType());
+        Log::info('Nom du fichier : ' . $file->getClientOriginalName());
+    }
+
+    return response()->json(['message' => 'Audio enregistré avec succès']);
 }
-
-
 
 
 }
