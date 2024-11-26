@@ -67,19 +67,26 @@ export default function PostShow() {
                             <p className="text-sm text-gray-500">Publié le {formattedDate}</p>
 
                             {/* Description */}
-                            <p>{post.description.split('\n').map((paragraph, index) => (
-                                <span key={index}>
-                                    {paragraph}
-                                    <br />
-                                </span>
-                            ))}</p>
+                            <p>
+                            {post.description ? (
+                                post.description.split('\n').map((paragraph, index) => (
+                                    <span key={index}>
+                                        {paragraph}
+                                        <br />
+                                    </span>
+                                ))
+                            ) : (
+                                <span className="italic text-gray-500">Aucune description écrite</span>
+                            )}
+                            </p>
+
                             {/* Affiche l'icône MdEdit si le mode édition est activé */}
                             {editMode && (
-                                    <MdEdit
-                                        className="text-gray-500 cursor-pointer"
-                                        onClick={() => Inertia.get(`/post/${post.id}/edit/description`)} // Action de modification de la description
-                                    />
-                                )}
+                            <MdEdit
+                                className="text-gray-500 cursor-pointer"
+                                onClick={() => Inertia.get(`/post/${post.id}/edit/description`)} // Action de modification de la description
+                            />
+                        )}
 
                             {/* Image */}
                             {post.media_path && (
