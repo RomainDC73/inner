@@ -1,11 +1,10 @@
 .custom-audio-player .rhap_container {
-    background-color: #75B9BE;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .custom-audio-player .rhap_progress-indicator {
-    background-color: white;
+    background-color: #37515F;
 }
 
 .custom-audio-player .rhap_progress-filled {
@@ -13,6 +12,10 @@
 }
 
 .custom-audio-player .rhap_volume-indicator {
+    background-color: #37515F;
+}
+
+.rhap_volume-filled {
     background-color: white;
 }
 
@@ -21,7 +24,7 @@
 }
 
 .custom-audio-player .rhap_time {
-    color: white;
+    color: #37515F;
 }
 
 .custom-audio-player .rhap_button-clear {
@@ -29,7 +32,7 @@
 }
 
 .custom-audio-player .rhap_button-clear:hover {
-    color: white;
+    color: rgb(204, 204, 204);
 }
 
 .custom-audio-player .rhap_volume-bar {
