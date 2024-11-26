@@ -66,8 +66,9 @@ export default function PostShow() {
                             {/* Date */}
                             <p className="text-sm text-gray-500">Publié le {formattedDate}</p>
 
+                            <div className="space-y-10">
                             {/* Description */}
-                            <p>
+                            <p className="mb-6">
                             {post.description ? (
                                 post.description.split('\n').map((paragraph, index) => (
                                     <span key={index}>
@@ -90,7 +91,7 @@ export default function PostShow() {
 
                             {/* Image */}
                             {post.media_path && (
-                                <div className="relative">
+                                <div className="relative mb-6">
                                     <img
                                         className="w-1/2 mx-auto mt-4 rounded-lg"
                                         src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
@@ -113,7 +114,7 @@ export default function PostShow() {
                                 />
                             ) : null}
                         </div>
-
+                        </div>
                         {/* Boutons */}
                         <div className="flex justify-between p-6">
                             <PrimaryButton onClick={() => setEditMode(!editMode)}>
