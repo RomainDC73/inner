@@ -7,14 +7,10 @@ const CustomPlayer = ({ src }) => {
       <div className="custom-audio-player">
         <AudioPlayer
           src={src}
-          onPlay={() => console.log('Audio is playing')}
+          onPlay={[]}
           customAdditionalControls={[]} // Tu peux ajouter des options pour le personnaliser davantage
           showJumpControls={false}     // Retirer les boutons de saut de piste
           showVolumeControls={true}   // Retirer les boutons de volume
-          style={{
-            borderRadius: '10px',
-            color: '#FFFFFF',
-          }} // Tu peux ajouter tes styles ici ou utiliser du CSS externe
         />
       </div>
     );

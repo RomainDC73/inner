@@ -66,48 +66,67 @@ export default function PostShow() {
                             {/* Date */}
                             <p className="text-sm text-gray-500">Publié le {formattedDate}</p>
 
-                            {/* Description */}
-                            <p>{post.description.split('\n').map((paragraph, index) => (
-                                <span key={index}>
-                                    {paragraph}
-                                    <br />
-                                </span>
-                            ))}</p>
-                            {/* Affiche l'icône MdEdit si le mode édition est activé */}
-                            {editMode && (
-                                    <MdEdit
-                                        className="text-gray-500 cursor-pointer"
-                                        onClick={() => Inertia.get(`/post/${post.id}/edit/description`)} // Action de modification de la description
-                                    />
-                                )}
+                            <div className="space-y-10">
+                                {/* Description */}
+                                <div className="flex items-center space-x-2">
+                                    <p>
+                                        {post.description ? (
+                                            post.description.split('\n').map((paragraph, index) => (
+                                                <span key={index}>
+                                                    {paragraph}
+                                                    <br />
+                                                </span>
+                                            ))
+                                        ) : (
+                                            <span className="italic text-gray-500">Aucune description écrite</span>
+                                        )}
+                                    </p>
 
-                            {/* Image */}
-                            {post.media_path && (
-                                <div className="relative">
-                                    <img
-                                        className="w-1/2 mx-auto mt-4 rounded-lg"
-                                        src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
-                                        alt="Media"
-                                    />
                                     {/* Affiche l'icône MdEdit si le mode édition est activé */}
                                     {editMode && (
                                         <MdEdit
-                                            className="absolute top-2 right-2 text-gray-500 cursor-pointer"
-                                            onClick={() => Inertia.get(`/post/${post.id}/edit/media`)} // Action de modification du média
+                                            className="text-gray-500 cursor-pointer"
+                                            onClick={() => Inertia.get(`/post/${post.id}/edit/description`)} // Action de modification de la description
                                         />
                                     )}
                                 </div>
-                            )}
+                                {/* Image */}
+                                {post.media_path && (
+                                    <div className="relative mb-6">
+                                        <img
+                                            className="w-1/2 mx-auto mt-4 rounded-lg"
+                                            src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
+                                            alt="Media"
+                                        />
+                                        {/* Affiche l'icône MdEdit si le mode édition est activé */}
+                                        {editMode && (
+                                            <MdEdit
+                                                className="absolute top-2 right-2 text-gray-500 cursor-pointer"
+                                                onClick={() => Inertia.get(`/post/${post.id}/edit/media`)} // Action de modification du média
+                                            />
+                                        )}
+                                    </div>
+                                )}
 
-                            {/* Audio */}
-                            {post.audio_path && (
-                                <CustomPlayer
-                                    src="/storage/audio_tests/audio_test_01.mp3"
-                                />
-                            )}
+                                {/* Audio */}
+                                <div className="flex items-center justify-between">
+                                    <div className="flex-grow">
+                                        {post.audio_path ? (
+                                            <CustomPlayer
+                                                src={post.audio_path.startsWith('http') ? post.audio_path : `/storage/${post.audio_path}`}
+                                            />
+                                        ) : null}
+                                    </div>
+                                    {/* Affiche l'icône MdEdit si le mode édition est activé */}
+                                    {editMode && (
+                                        <MdEdit
+                                            className="ml-4 text-gray-500 cursor-pointer"
+                                            onClick={() => Inertia.get(`/post/${post.id}/edit/audio`)} // Action de modification de l'audio
+                                        />
+                                    )}
+                                </div>
+                            </div>
                         </div>
-
-                        {/* Boutons */}
                         <div className="flex justify-between p-6">
                             <PrimaryButton onClick={() => setEditMode(!editMode)}>
                                 {editMode ? 'Terminer' : 'Modifier'} {/* Change le texte du bouton en fonction du mode */}
