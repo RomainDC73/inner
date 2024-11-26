@@ -32,19 +32,20 @@ class DescriptionController extends Controller
     }
 
     public function addDescription(Request $request)
-{
-    $request->validate([
-        'mood_id' => 'required|exists:moods,id',
-        'description' => 'required|string|max:1000',
-    ]);
+    {
+        $request->validate([
+            'mood_id' => 'required|exists:moods,id',
+            'description' => 'required|string|max:1000',
+        ]);
 
-    // Stocker la description dans la session
-    session(['mood_id' => $request->input('mood_id')]);
-    session(['description' => $request->input('description')]);
-    Log::info('Description stored in session: ' . session('description'));
-    // Rediriger vers l'étape suivante (ajout de média par ex.)
-    return redirect('create/add-media');
-}
+        // Stocker la description dans la session
+        session(['mood_id' => $request->input('mood_id')]);
+        session(['description' => $request->input('description')]);
+        Log::info('Description stored in session: ' . session('description'));
+
+        // Rediriger vers l'étape suivante (ajout de média par ex.)
+        return redirect('create/add-media');
+    }
 
     public function saveDescription(Request $request)
     {
@@ -53,7 +54,6 @@ class DescriptionController extends Controller
         ]);
 
         session(['description' => $request->input('description')]);
-
 
         return redirect('/create/add-media');
     }
@@ -93,27 +93,62 @@ class DescriptionController extends Controller
     }
 
     public function saveTalk(Request $request)
-{
-    $request->validate([
-        'audio' => 'required|file|max:20000', // Limite à 20 Mo
-    ]);
+    {
+        $request->validate([
+            'audio' => 'required|file|max:20000', // Limite à 20 Mo
+        ]);
 
-    if ($request->hasFile('audio')) {
-        // Stockage du fichier audio
+        if ($request->hasFile('audio')) {
+            // Stockage du fichier audio
+            $audioPath = $request->file('audio')->store('audio', 'public');
+            session(['audio_path' => $audioPath]); // Stocker le chemin dans la session
+        }
 
-        $audioPath = $request->file('audio')->store('audio', 'public');
+        if ($request->hasFile('audio')) {
+            $file = $request->file('audio');
+            Log::info('Type MIME : ' . $file->getMimeType());
+            Log::info('Nom du fichier : ' . $file->getClientOriginalName());
+        }
 
-        session(['audio_path' => $audioPath]); // Stocker le chemin dans la session
+        return redirect('/create/add-media');
     }
 
-    if ($request->hasFile('audio')) {
-        $file = $request->file('audio');
-        Log::info('Type MIME : ' . $file->getMimeType());
-        Log::info('Nom du fichier : ' . $file->getClientOriginalName());
+    public function editAudio($postId)
+    {
+        // Récupération du post
+        $post = Post::findOrFail($postId);
+
+        return Inertia::render('Edit/EditAudio', [
+            'post' => $post,
+        ]);
     }
 
-    return redirect('/create/add-media');
-}
+    public function updateAudio(Request $request, $postId)
+    {
+        // Valide que le fichier est bien un audio et qu'il ne dépasse pas 20 Mo
+        $request->validate([
+            'audio' => 'required|file|mimes:audio/mpeg,mp3,wav,ogg|max:20000', // Vérifie le type et limite la taille
+        ]);
 
+        // Récupère le post via l'ID
+        $post = Post::findOrFail($postId);
 
+        // Supprime l'ancien fichier audio s'il existe
+        if ($post->audio_path) {
+            $oldAudioPath = public_path('storage/' . $post->audio_path);
+            if (file_exists($oldAudioPath)) {
+                unlink($oldAudioPath);
+            }
+        }
+
+        // Stocke le nouveau fichier audio
+        $newAudioPath = $request->file('audio')->store('audio', 'public');
+
+        // Met à jour le chemin du fichier audio dans le post
+        $post->audio_path = $newAudioPath;
+        $post->save();
+
+        // Redirige vers la page du post avec un message de succès
+        return redirect()->route('posts.show', $postId)->with('success', 'Audio mis à jour avec succès');
+    }
 }
