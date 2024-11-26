@@ -107,11 +107,11 @@ export default function PostShow() {
                             )}
 
                             {/* Audio */}
-                            {post.audio_path && (
+                            {post.audio_path ? (
                                 <CustomPlayer
-                                    src="/storage/audio_tests/audio_test_01.mp3"
+                                    src={post.audio_path.startsWith('http') ? post.audio_path : `/storage/${post.audio_path}`}
                                 />
-                            )}
+                            ) : null}
                         </div>
 
                         {/* Boutons */}
