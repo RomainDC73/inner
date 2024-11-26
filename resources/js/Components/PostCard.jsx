@@ -1,5 +1,6 @@
 import {Link} from '@inertiajs/react';
 import MoodBadge from './MoodBadge';
+import { GiSoundWaves } from "react-icons/gi";
 
 const moodColors = {
     good: 'bg-gradient-to-br from-white from-30% to-innergreenfade',
@@ -34,11 +35,15 @@ const PostCard = ({ post }) => {
                         <p className="text-sm text-gray-500">{formattedDate}</p>
                     </div>
                     {/* Afficher un extrait de la description uniquement si elle existe */}
+                    <div className="flex items-center mb-2 space-x-2">
                     {post.description ? (
-                        <p className="mb-2">{getExcerpt(post.description)}</p>
-                    ) : (
-                        <p className="mb-2 text-gray-400 italic">Aucune description fournie.</p>
-                    )}
+                        <p className="text-gray-700">{getExcerpt(post.description)}</p>
+                    ) : null}
+                    {/* Afficher une icône s'il y a un fichier audio */}
+                    {post.audio_path ? (
+                            <GiSoundWaves size={24} className="text-gray-700" />
+                    ) : null}
+                    </div>
                 </div>
             </Link>
         </li>
