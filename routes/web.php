@@ -29,6 +29,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('{id}/edit/description', [DescriptionController::class, 'updateDescription'])->name('updateDescription');
         Route::get('{id}/edit/media', [MediaController::class, 'editMedia'])->name('edit-media');
         Route::post('{id}/edit/media', [MediaController::class, 'updateMedia'])->name('updateMedia');
+        Route::get('{id}/edit/audio', [DescriptionController::class, 'editAudio'])->name('edit-audio');
+        Route::post('{id}/edit/audio', [DescriptionController::class, 'updateAudio'])->name('updateAudio');
     });
 
     // Gestion du profil
