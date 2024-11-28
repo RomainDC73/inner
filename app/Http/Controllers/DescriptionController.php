@@ -6,6 +6,7 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class DescriptionController extends Controller
 {
@@ -124,31 +125,39 @@ class DescriptionController extends Controller
     }
 
     public function updateAudio(Request $request, $postId)
-    {
-        // Valide que le fichier est bien un audio et qu'il ne dépasse pas 20 Mo
-        $request->validate([
-            'audio' => 'required|file|mimes:audio/mpeg,mp3,wav,ogg|max:20000', // Vérifie le type et limite la taille
-        ]);
+{
+    // Logs pour voir ce qui est envoyé avant toute manipulation
+    Log::info('Données de la requête : ', $request->all());
+    Log::info('Fichier audio : ', [$request->file('audio')]);
 
-        // Récupère le post via l'ID
-        $post = Post::findOrFail($postId);
+    // Valide que le fichier est bien un audio et qu'il ne dépasse pas 20 Mo
+    $request->validate([
+        'audio' => 'required|file|max:20000', // Vérifie le type et limite la taille
+    ]);
 
-        // Supprime l'ancien fichier audio s'il existe
+    // Récupère le post via l'ID
+    $post = Post::findOrFail($postId);
+
+    // Supprime l'ancien fichier audio s'il existe
+    if ($request->hasFile('audio')) {
+        Log::info('Fichier reçu', ['audio' => $request->file('audio')]);
+
+        // Supprime l'ancien fichier audio
         if ($post->audio_path) {
-            $oldAudioPath = public_path('storage/' . $post->audio_path);
-            if (file_exists($oldAudioPath)) {
-                unlink($oldAudioPath);
-            }
+            Storage::delete($post->audio_path);
         }
 
         // Stocke le nouveau fichier audio
         $newAudioPath = $request->file('audio')->store('audio', 'public');
-
-        // Met à jour le chemin du fichier audio dans le post
         $post->audio_path = $newAudioPath;
         $post->save();
-
-        // Redirige vers la page du post avec un message de succès
-        return redirect()->route('posts.show', $postId)->with('success', 'Audio mis à jour avec succès');
+    } else {
+        Log::info('Aucun fichier audio reçu');
     }
+
+    // Redirige vers la page du post avec un message de succès
+    return response()->json(['redirect' => route('posts.show', $postId)]);
 }
+
+}
+

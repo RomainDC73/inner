@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
-import { IoMicCircle, IoStopCircle, IoPlayCircle } from "react-icons/io5";
+import { IoMicCircle, IoStopCircle } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
+import CustomPlayer from './Player';
 import '../../css/wave.css';
 
 export default function VoiceRecorder({ onRecordingComplete }) {
@@ -53,10 +54,6 @@ export default function VoiceRecorder({ onRecordingComplete }) {
         }
     };
 
-    const playAudio = () => {
-        if (audioURL) new Audio(audioURL).play();
-    };
-
     const resetRecording = () => {
         setAudioBlob(null);
         setAudioURL(null);
@@ -72,10 +69,12 @@ export default function VoiceRecorder({ onRecordingComplete }) {
 
     return (
         <div className="text-center">
+            {/* Bouton pour démarrer ou arrêter l'enregistrement */}
             <button onClick={recording ? stopRecording : startRecording}>
                 {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE" />}
             </button>
 
+            {/* Indicateur de durée et animation pendant l'enregistrement */}
             {recording && (
                 <div>
                     <div className="wave-container mt-4">
@@ -88,10 +87,20 @@ export default function VoiceRecorder({ onRecordingComplete }) {
                 </div>
             )}
 
+            {/* Affichage du lecteur audio personnalisé après l'enregistrement */}
             {audioBlob && (
                 <div className="mt-4">
-                    <button onClick={playAudio}><IoPlayCircle size={40} color="#D0D6B5" /></button>
-                    <button onClick={resetRecording}><MdDeleteForever size={40} color="#F9B5AC" /></button>
+                    {/* Composant CustomPlayer pour la lecture */}
+                    <CustomPlayer
+                        src={audioURL}
+                        controls
+                        className="mt-2"
+                    />
+
+                    {/* Bouton pour réinitialiser l'enregistrement */}
+                    <button onClick={resetRecording} className="mt-4">
+                        <MdDeleteForever size={40} color="#F9B5AC" />
+                    </button>
                 </div>
             )}
         </div>
