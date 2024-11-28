@@ -69,15 +69,11 @@ export default function VoiceRecorder({ onRecordingComplete }) {
 
     return (
         <div className="text-center">
-            {/* Bouton pour démarrer ou arrêter l'enregistrement */}
-            <button onClick={recording ? stopRecording : startRecording}>
-                {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE" />}
-            </button>
 
             {/* Indicateur de durée et animation pendant l'enregistrement */}
             {recording && (
-                <div>
-                    <div className="wave-container mt-4">
+                <div className="mb-4">
+                    <div className="wave-container">
                         <div className="wave"></div>
                         <div className="wave"></div>
                         <div className="wave"></div>
@@ -86,6 +82,11 @@ export default function VoiceRecorder({ onRecordingComplete }) {
                     <p>{`Durée : ${formatTime(time)}`}</p>
                 </div>
             )}
+
+            {/* Bouton pour démarrer ou arrêter l'enregistrement */}
+            <button className="mb-4" onClick={recording ? stopRecording : startRecording}>
+                {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE" />}
+            </button>
 
             {/* Affichage du lecteur audio personnalisé après l'enregistrement */}
             {audioBlob && (
