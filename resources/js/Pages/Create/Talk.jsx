@@ -46,12 +46,12 @@ export default function Talk() {
             <Head>
                 <title>Enregistrer un message vocal</title>
             </Head>
-            <div className="flex flex-col items-center mt-10 min-h-screen mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="flex flex-col mt-10">
                 <div className="text-center">
                     <h1 className="text-xl font-semibold leading-tight text-gray-800 mt-4 mb-4">
                         Parlons un peu...
                     </h1>
-                    <div className="overflow-hidden shadow-sm rounded-lg">
+                    <div className="overflow-hidden rounded-lg w-full max-w-3xl mx-auto">
                         <div className="p-6 text-gray-900 space-y-3">
                             <VoiceRecorder onRecordingComplete={handleRecordingComplete} />
                         </div>
