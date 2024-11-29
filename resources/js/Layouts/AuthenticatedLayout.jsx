@@ -179,6 +179,15 @@ export default function Authenticated({ header, children }) {
             )}
 
             <main className="relative z-10">{children}</main>
+
+            {/* Nuages en bottom du site */}
+            <div className="orbContainer-bottom">
+                <div className="orb-bottom"></div>
+                <div className="orb-bottom"></div>
+                <div className="orb-bottom"></div>
+            </div>
         </div>
+
+
     );
 }
