@@ -7,6 +7,7 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
 
 class MoodController extends Controller
 {
@@ -22,15 +23,17 @@ class MoodController extends Controller
     }
 
     public function saveMood(Request $request)
-    {
-        $request->validate([
-            'mood_id' => 'required|exists:moods,id',
-        ]);
+{
+    Log::info('Données reçues : ', $request->all());
 
-        session(['mood_id' => $request->input('mood_id')]);
+    $request->validate([
+        'mood_id' => 'required|exists:moods,id',
+    ]);
 
-        return redirect()->route('create.choose-action');
-    }
+    session(['mood_id' => $request->input('mood_id')]);
+
+    return redirect()->route('create.choose-action');
+}
 
     // Affiche la page d'édition de l'humeur pour un post donné
     public function editMood($postId)

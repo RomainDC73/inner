@@ -3,13 +3,22 @@ import { Head, useForm } from '@inertiajs/react';
 import MoodCard from '@/Components/MoodCard';
 
 export default function ChooseMood({ moods, moodTranslations }) {
-    const { setData, post } = useForm({
+    const { data, setData, post } = useForm({
         mood_id: '',
     });
 
     const handleMoodSelect = (id) => {
+        console.log('Mood selected:', id);
         setData('mood_id', id);
-        post('/create/save-mood');
+        post(route('create.save-mood'), {
+            preserveState: true,
+            onSuccess: () => {
+                console.log('Requête réussie, redirection en cours');
+            },
+            onError: (errors) => {
+                console.error("Erreur lors de la requête", errors);
+            },
+        });
     };
 
     return (
@@ -27,7 +36,12 @@ export default function ChooseMood({ moods, moodTranslations }) {
                     {moods.map(mood => (
                         <div key={mood.id} onClick={() => handleMoodSelect(mood.id)}>
                             {/* Passe moodTranslations ici */}
-                            <MoodCard mood={mood} moodTranslations={moodTranslations} />
+                            <MoodCard
+                                mood={mood}
+                                moodTranslations={moodTranslations}
+                                selected={data.mood_id === mood.id}
+                                onSelect={handleMoodSelect}
+                            />
                         </div>
                     ))}
                 </div>
