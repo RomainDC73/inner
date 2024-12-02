@@ -153,7 +153,7 @@ export default function Authenticated({ header, children }) {
                         </ResponsiveNavLink>
                     </div> */}
 
-                    <div className="border-t border-gray-200 pb-1 pt-4">
+                    <div className="border-t border-b border-gray-200 pb-1 pt-4">
                         <div className="px-4">
                             <div className="text-base font-medium text-gray-800">
                                 {user.name}
@@ -165,14 +165,14 @@ export default function Authenticated({ header, children }) {
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                                Profil
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
                                 href={route('logout')}
                                 as="button"
                             >
-                                Log Out
+                                Déconnexion
                             </ResponsiveNavLink>
                         </div>
                     </div>
