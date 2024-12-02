@@ -2,6 +2,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import { MdAccountCircle } from "react-icons/md";
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import '../../css/cloud.css';
@@ -72,14 +73,14 @@ export default function Authenticated({ header, children }) {
                                         <Dropdown.Link
                                             href={route('profile.edit')}
                                         >
-                                            Profile
+                                            Profil
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Déconnexion
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -101,7 +102,7 @@ export default function Authenticated({ header, children }) {
                                     fill="none"
                                     viewBox="0 0 24 24"
                                 >
-                                    <path
+                                    {/* <path
                                         className={
                                             !showingNavigationDropdown
                                                 ? 'inline-flex'
@@ -111,6 +112,14 @@ export default function Authenticated({ header, children }) {
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M4 6h16M4 12h16M4 18h16"
+                                    /> */}
+                                    <MdAccountCircle
+                                        className={
+                                            !showingNavigationDropdown
+                                                ? 'inline-flex'
+                                                : 'hidden'
+                                        }
+                                        size="24"
                                     />
                                     <path
                                         className={
