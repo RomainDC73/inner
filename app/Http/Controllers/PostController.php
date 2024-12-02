@@ -28,7 +28,7 @@ class PostController extends Controller
             $query->whereDate('created_at', $date);
         }
 
-        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+        $posts = $query->orderBy('created_at', 'desc')->paginate(5);
 
         // Renvoyer les données à la vue avec la liste des moods
         $moods = Mood::all();

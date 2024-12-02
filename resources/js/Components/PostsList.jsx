@@ -11,7 +11,7 @@ const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour '
                     <PostCard key={post.id} post={post} />
                 ))
             ) : (
-                <p>Aucun post trouvé.</p>  // Message quand il n'y a pas de posts
+                <p>Aucun post trouvé. N'hésitez pas à publier votre humeur !</p>  // Message quand il n'y a pas de posts
             )}
         </ul>
     </div>
