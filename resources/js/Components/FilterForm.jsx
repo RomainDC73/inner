@@ -30,7 +30,7 @@ const FilterForm = ({ moods, filters }) => {
     return (
         <div className="mb-6 flex space-x-4 items-end">
             <div>
-                <span className="block text-gray-700">Filtrer</span>
+                <span className="block text-gray-700">Filtrer par humeur</span>
                 <div className="flex space-x-2 mt-2">
                     <div
                         className={`cursor-pointer ${!data.mood ? 'font-bold' : ''}`}
