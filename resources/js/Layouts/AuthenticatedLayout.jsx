@@ -2,6 +2,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import { MdAccountCircle } from "react-icons/md";
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import '../../css/cloud.css';
@@ -26,19 +27,19 @@ export default function Authenticated({ header, children }) {
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href="/">
+                                <Link href={route('dashboard')}>
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            {/* <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
                                     Dashboard
                                 </NavLink>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
@@ -72,14 +73,14 @@ export default function Authenticated({ header, children }) {
                                         <Dropdown.Link
                                             href={route('profile.edit')}
                                         >
-                                            Profile
+                                            Profil
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Déconnexion
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -93,7 +94,7 @@ export default function Authenticated({ header, children }) {
                                         (previousState) => !previousState,
                                     )
                                 }
-                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
+                                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:text-gray-500 focus:text-gray-500 focus:outline-none"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -101,7 +102,7 @@ export default function Authenticated({ header, children }) {
                                     fill="none"
                                     viewBox="0 0 24 24"
                                 >
-                                    <path
+                                    {/* <path
                                         className={
                                             !showingNavigationDropdown
                                                 ? 'inline-flex'
@@ -111,6 +112,14 @@ export default function Authenticated({ header, children }) {
                                         strokeLinejoin="round"
                                         strokeWidth="2"
                                         d="M4 6h16M4 12h16M4 18h16"
+                                    /> */}
+                                    <MdAccountCircle
+                                        className={
+                                            !showingNavigationDropdown
+                                                ? 'inline-flex'
+                                                : 'hidden'
+                                        }
+                                        size="26"
                                     />
                                     <path
                                         className={
@@ -135,16 +144,16 @@ export default function Authenticated({ header, children }) {
                         ' sm:hidden'
                     }
                 >
-                    <div className="space-y-1 pb-3 pt-2">
+                    {/* <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
                             href={route('dashboard')}
                             active={route().current('dashboard')}
                         >
                             Dashboard
                         </ResponsiveNavLink>
-                    </div>
+                    </div> */}
 
-                    <div className="border-t border-gray-200 pb-1 pt-4">
+                    <div className="border-t border-b border-gray-200 pb-1 pt-4">
                         <div className="px-4">
                             <div className="text-base font-medium text-gray-800">
                                 {user.name}
@@ -156,14 +165,14 @@ export default function Authenticated({ header, children }) {
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                                Profil
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
                                 href={route('logout')}
                                 as="button"
                             >
-                                Log Out
+                                Déconnexion
                             </ResponsiveNavLink>
                         </div>
                     </div>
