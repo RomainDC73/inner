@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PostsList from '@/Components/PostsList';
 import FilterForm from '@/Components/FilterForm';
+import BackButton from '@/Components/BackButton';
 import { Head, usePage, router, Link } from '@inertiajs/react';
 
 export default function Posts() {
@@ -14,11 +15,14 @@ export default function Posts() {
 
     return (
         <AuthenticatedLayout>
+
             <Head title="Posts" />
             <div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="mt-2 overflow-hidden shadow-sm sm:rounded-lg">
+
                         <div className="p-6">
+                        <BackButton />
                             <FilterForm moods={moods} filters={filters} onFilterChange={handleFilterChange} />
 
                             <PostsList posts={posts.data} />
