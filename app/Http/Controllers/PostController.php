@@ -22,13 +22,7 @@ class PostController extends Controller
             $query->where('mood_id', $request->mood);
         }
 
-        // Appliquer le filtre par date s'il est sélectionné
-        if ($request->filled('date')) {
-            $date = Carbon::parse($request->date);
-            $query->whereDate('created_at', $date);
-        }
-
-        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+        $posts = $query->orderBy('created_at', 'desc')->paginate(5);
 
         // Renvoyer les données à la vue avec la liste des moods
         $moods = Mood::all();
@@ -37,7 +31,7 @@ class PostController extends Controller
         return Inertia::render('Posts', [
             'posts' => $posts,
             'moods' => $moods,
-            'filters' => $request->all('mood', 'date'), // Passer les filtres à la vue
+            'filters' => $request->only(['mood']), // Passer les filtres à la vue
         ]);
     }
 
