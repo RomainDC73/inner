@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import MoodCard from '@/Components/MoodCard';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 
 export default function EditMood({ post, moods, moodTranslations }) {
     // Vérifie si post.mood existe avant d'accéder à ses propriétés
@@ -28,9 +29,12 @@ export default function EditMood({ post, moods, moodTranslations }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     Modifier votre humeur
-                </h1>
+                    </h1>
+                </div>
             }
         >
             <Head title="Modifier Mood" />
