@@ -3,6 +3,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 import { Inertia } from '@inertiajs/inertia';
 import { useRef, useState, useEffect } from 'react';
 
@@ -68,9 +69,12 @@ export default function AddMedia({ mood_id }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     On ajoute une photo ?
-                </h1>
+                    </h1>
+                </div>
             }
         >
             <Head title="Partager une photo" />

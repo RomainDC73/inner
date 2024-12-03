@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import VoiceRecorder from '@/Components/VoiceRecorder';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 
 export default function Talk() {
 
@@ -42,15 +43,20 @@ export default function Talk() {
     };
 
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout
+            header={
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                    Parlons un peu...
+                    </h1>
+                </div>
+            }>
             <Head>
                 <title>Enregistrer un message vocal</title>
             </Head>
-            <div className="flex flex-col mt-10">
+            <div className="flex flex-col">
                 <div className="text-center">
-                    <h1 className="text-xl font-semibold leading-tight text-gray-800 mt-4 mb-4">
-                        Parlons un peu...
-                    </h1>
                     <div className="overflow-hidden rounded-lg w-full max-w-3xl mx-auto">
                         <div className="p-6 text-gray-900 space-y-3">
                             <VoiceRecorder onRecordingComplete={handleRecordingComplete} />

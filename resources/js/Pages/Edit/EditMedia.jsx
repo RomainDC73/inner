@@ -3,6 +3,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -72,14 +73,15 @@ export default function EditMedia({ post }) {
         }
     };
 
-
-
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     Modifier la photo
-                </h1>
+                    </h1>
+                </div>
             }
         >
             <Head title="Modifier la photo" />

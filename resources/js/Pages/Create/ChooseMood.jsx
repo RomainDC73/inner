@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import MoodCard from '@/Components/MoodCard';
+import BackButton from '@/Components/BackButton';
 
 export default function ChooseMood({ moods, moodTranslations }) {
     const { data, setData, post } = useForm({
@@ -24,9 +25,12 @@ export default function ChooseMood({ moods, moodTranslations }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     Avant tout, comment te sens-tu ?
-                </h1>
+                    </h1>
+                </div>
             }
         >
             <Head title="Choisis ton mood" />

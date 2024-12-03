@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 
 export default function EditDescription({ post }) {
     // Initialisation du formulaire avec la description actuelle du post
@@ -21,9 +22,12 @@ export default function EditDescription({ post }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton  />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     Modifier la description
-                </h1>
+                    </h1>
+                </div>
             }
         >
             <Head title="Modifier votre description" />

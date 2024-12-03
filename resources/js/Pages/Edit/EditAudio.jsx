@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import VoiceRecorder from '@/Components/VoiceRecorder';
 import DangerButton from '@/Components/DangerButton';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 
 export default function EditAudio({ post }) {
     // Utilisation de useForm pour gérer les données du formulaire
@@ -57,9 +58,12 @@ export default function EditAudio({ post }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     Modifier le fichier audio
                 </h1>
+                </div>
             }
         >
             <Head title="Modifier votre vocal" />
