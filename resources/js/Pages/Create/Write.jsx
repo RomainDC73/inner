@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import LongTextInput from '@/Components/LongTextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 import { useEffect } from 'react';
 
 
@@ -33,9 +34,12 @@ export default function Write({ mood_id }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     C'est parti pour écrire un peu...
-                </h1>
+                    </h1>
+                </div>
             }
         >
             <Head title="Écrire" />

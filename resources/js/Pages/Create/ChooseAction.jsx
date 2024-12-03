@@ -1,14 +1,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import ChooseCard from '@/Components/ChooseCard';
+import BackButton from '@/Components/BackButton';
 
 export default function ChooseAction({ mood_id }) {
     return (
         <AuthenticatedLayout
             header={
-                <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
+                <div>
+                    <BackButton />
+                    <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
                     Et si tu en disais un peu plus ?
-                </h1>
+                    </h1>
+                </div>
             }
         >
             <Head title="Écrire ou parler ?" />
