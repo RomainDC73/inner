@@ -5,13 +5,14 @@ import Modal from '@/Components/Modal';
 import { Inertia } from '@inertiajs/inertia';
 import MoodBadge from '@/Components/MoodBadge';
 import CustomPlayer from '@/Components/Player';
+import BackButton from '@/Components/BackButton';
 import DangerButton from '@/Components/DangerButton';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { MdEdit } from 'react-icons/md';
 
 export default function PostShow() {
     // Récupère les données du post passées par Inertia depuis le contrôleur
-    const { post, moodTranslations } = usePage().props;
+    const { post } = usePage().props;
 
     const formattedDate = new Date(post.created_at).toLocaleDateString('fr-FR', {
         year: 'numeric',
@@ -39,17 +40,22 @@ export default function PostShow() {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    {postTitle}
-                </h2>
+                <div>
+                    <BackButton />
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                        {postTitle}
+                    </h2>
+                </div>
             }
         >
             <Head title={postTitle} />
-
             <div>
+
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+
                     <div className="overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 space-y-3">
+
                             {/* Humeur */}
                             <div className="flex items-center space-x-2">
                                 <h3 className="text-lg font-bold">Humeur </h3>
