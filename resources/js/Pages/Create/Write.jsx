@@ -46,6 +46,7 @@ export default function Write({ mood_id }) {
             <form onSubmit={handleSubmit} className="flex flex-col items-center">
                 {/* LongTextInput pour écrire la description */}
                 <LongTextInput
+                    className="w-96 text-gray-700 border-slate-400 rounded-lg focus:border-innerlightblue focus:ring-innerlightblue focus:outline-none"
                     value={data.description}
                     onChange={(e) => setData('description', e.target.value)} // Met à jour la description localement
                 />
