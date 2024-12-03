@@ -39,7 +39,7 @@ export default function EditDescription({ post }) {
                         </label>
                         <textarea
                             id="description"
-                            className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+                            className="w-96 px-3 py-2 text-gray-700 border-slate-400 rounded-lg focus:border-innerlightblue focus:ring-innerlightblue focus:outline-none"
                             rows="5"
                             value={data.description}
                             onChange={(e) => setData('description', e.target.value)}

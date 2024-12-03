@@ -35,7 +35,6 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                 localStorage.removeItem('audio_path');
             }
         });
-
     };
 
     return (
@@ -66,7 +65,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
 
                     {/* Description */}
                     <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
-                        <h3 className="text-lg font-semibold mb-2">Ta description</h3>
+                        <h3 className="text-lg font-semibold mb-2">🖋</h3>
                         <div className="flex items-center justify-center gap-2">
                             <p>{description || 'Aucune description fournie.'}</p>
                             {editMode && (
@@ -80,28 +79,31 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
 
                     {/* Description Audio */}
                     <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
-    <h3 className="text-lg font-semibold mb-2">Ton vocal</h3>
-    <div className="flex items-center justify-center gap-2">
-        {audioPath ? (
-            <CustomPlayer src={`/storage/${audioPath}`} />
-        ) : (
-            <p>Aucune description audio fournie.</p>
-        )}
-        {editMode && (
-            <MdEdit
-                className="text-gray-500 cursor-pointer"
-                onClick={() => Inertia.get(`/create/write`)} // Rediriger si nécessaire
-            />
-        )}
-    </div>
-</div>
+                        <h3 className="text-lg font-semibold mb-2">🎤</h3>
+                        <div className="flex items-center justify-center gap-2">
+                            {audioPath ? (
+                                <CustomPlayer src={`/storage/${audioPath}`} />
+                            ) : (
+                                <p className="text-gray-400 italic">Aucun fichier vocal enregistré.</p>
+                            )}
+                            {editMode && (
+                                <MdEdit
+                                    className="text-gray-500 cursor-pointer"
+                                    onClick={() => Inertia.get(`/create/write`)} // Rediriger si nécessaire
+                                />
+                            )}
+                        </div>
+                    </div>
 
                     {/* Image */}
-                    {mediaPath && (
                         <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
-                            <h3 className="text-lg font-semibold mb-2">Ton image</h3>
+                            <h3 className="text-lg font-semibold mb-2">📷</h3>
                             <div className="flex items-center justify-center gap-2">
-                                <ImagePreview src={`/storage/${mediaPath}`} />
+                                {mediaPath ? (
+                                    <ImagePreview src={`/storage/${mediaPath}`} />
+                                ) : (
+                                    <p className="text-gray-400 italic">Aucune image sélectionnée.</p>
+                                )}
                                 {editMode && (
                                     <MdEdit
                                         className="text-gray-500 cursor-pointer"
@@ -110,7 +112,6 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                                 )}
                             </div>
                         </div>
-                    )}
 
                     {/* Boutons */}
                     <div className="flex justify-center p-6 space-x-4">

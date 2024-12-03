@@ -37,10 +37,10 @@
 }
 
 .orb:nth-child(3) {
-    top: 10%;
-    left: 5%;
+    top: 5%;
+    left: -45%;
     animation-duration: 6s;
-    background: radial-gradient(rgba(208, 214, 181, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
+    background: radial-gradient(rgba(208, 214, 181, 0.6) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
 /* Orbes du bas */
