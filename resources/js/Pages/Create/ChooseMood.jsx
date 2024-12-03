@@ -8,7 +8,8 @@ export default function ChooseMood({ moods, moodTranslations }) {
         mood_id: '',
     });
 
-    const handleMoodSelect = (id) => {
+    const handleMoodSelect = (id, event) => {
+        event.preventDefault();
         console.log('Mood selected:', id);
         setData('mood_id', id);
         post(route('create.save-mood'), {
@@ -37,14 +38,13 @@ export default function ChooseMood({ moods, moodTranslations }) {
             <div className="flex flex-col items-center">
                 {/* Formulaire */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {moods.map(mood => (
-                        <div key={mood.id} onClick={() => handleMoodSelect(mood.id)}>
+                    {moods.map((mood) => (
+                        <div key={mood.id} onClick={(event) => handleMoodSelect(mood.id, event)}>
                             {/* Passe moodTranslations ici */}
                             <MoodCard
                                 mood={mood}
                                 moodTranslations={moodTranslations}
                                 selected={data.mood_id === mood.id}
-                                onSelect={handleMoodSelect}
                             />
                         </div>
                     ))}
