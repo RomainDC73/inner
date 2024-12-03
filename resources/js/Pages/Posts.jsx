@@ -15,7 +15,7 @@ export default function Posts() {
                     {/* Ajout du composant PostsList pour afficher les posts de l'utilisateur */}
                     <div className="mt-2 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6">
-                            <FilterForm moods={moods} filters={filters}/>
+                            {/* <FilterForm moods={moods} filters={filters}/> */}
 
                             <PostsList posts={posts.data} /> {/* Passe les données des posts */}
 
