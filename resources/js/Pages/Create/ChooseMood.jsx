@@ -1,27 +1,29 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
+import axios from 'axios';
+import { useState } from 'react';
 import MoodCard from '@/Components/MoodCard';
 import BackButton from '@/Components/BackButton';
 
 export default function ChooseMood({ moods, moodTranslations }) {
-    const { data, setData, post } = useForm({
-        mood_id: '',
-    });
 
-    const handleMoodSelect = (id, event) => {
+    const [selectedMood, setSelectedMood] = useState(null);
+
+    const handleMoodSelect = async (id, event) => {
         event.preventDefault();
         console.log('Mood selected:', id);
-        setData('mood_id', id);
-        post(route('create.save-mood'), {
-            preserveState: true,
-            onSuccess: () => {
-                console.log('Requête réussie, redirection en cours');
-            },
-            onError: (errors) => {
-                console.error("Erreur lors de la requête", errors);
-            },
-        });
+        setSelectedMood(id);
+
+        try {
+            const response = await axios.post(route('create.save-mood'), { mood_id: id });
+            console.log('Requête réussie, redirection en cours', response.data);
+            // Redirection ou confirmation
+            window.location.href = route('create.choose-action'); // Remplacez 'next.step' par la route suivante
+        } catch (error) {
+            console.error("Erreur lors de la requête", error.response?.data || error.message);
+        }
     };
+
 
     return (
         <AuthenticatedLayout
@@ -29,22 +31,23 @@ export default function ChooseMood({ moods, moodTranslations }) {
                 <div>
                     <BackButton />
                     <h1 className="text-xl text-center font-semibold leading-tight text-gray-800 mt-4 mb-4">
-                    Avant tout, comment te sens-tu ?
+                        Avant tout, comment te sens-tu ?
                     </h1>
                 </div>
             }
         >
             <Head title="Choisis ton mood" />
             <div className="flex flex-col items-center">
-                {/* Formulaire */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {moods.map((mood) => (
-                        <div key={mood.id} onClick={(event) => handleMoodSelect(mood.id, event)}>
-                            {/* Passe moodTranslations ici */}
+                        <div
+                            key={mood.id}
+                            onClick={(event) => handleMoodSelect(mood.id, event)}
+                        >
                             <MoodCard
                                 mood={mood}
                                 moodTranslations={moodTranslations}
-                                selected={data.mood_id === mood.id}
+                                selected={selectedMood === mood.id}
                             />
                         </div>
                     ))}
