@@ -9,9 +9,9 @@ export default function Posts() {
 
     const handleFilterChange = (moodId) => {
         // Transmet le filtre au serveur
-        router.get(route('posts.index', { mood: moodId }, { preserveState: true }));
+        router.get(route('posts.index', { mood: moodId, page: 1 }, { preserveState: true }));
     }
-    
+
     return (
         <AuthenticatedLayout>
             <Head title="Posts" />
@@ -26,15 +26,24 @@ export default function Posts() {
                             <div className="flex justify-center mt-4 space-x-2">
                                 {posts.links.map((link, index) => {
                                     // Masquer "Précédent" si on est sur la première page
-                                    if (link.label.includes('Précédent') && link.url === null) return null;
+                                    if (link.label.includes('&laquo') && link.url === null) return null;
 
                                     // Masquer "Suivant" si on est sur la dernière page
-                                    if (link.label.includes('Suivant') && link.url === null) return null;
+                                    if (link.label.includes('&raquo;') && link.url === null) return null;
+
+                                    // Ajouter les filtres actifs aux liens de pagination
+                                    const url = new URL(link.url);
+                                    const searchParams = new URLSearchParams(url.search);
+
+                                    // Conserver les filtres dans l'URL
+                                    if (filters.mood) {
+                                        searchParams.set('mood', filters.mood);
+                                    }
 
                                     return (
                                         <Link
                                             key={index}
-                                            href={link.url || '#'}
+                                            href={`${url.pathname}?${searchParams.toString()}`}
                                             className={`
                                                 px-4 py-2 mx-1
                                                 ${link.active ? 'border border-innerdarkblue rounded-lg text-innerdarkblue font-semibold' : 'text-innerlightblue'}
