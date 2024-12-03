@@ -31,7 +31,7 @@ export default function EditDescription({ post }) {
             }
         >
             <Head title="Modifier votre description" />
-            <div className="max-w-2xl mx-auto p-4 bg-white shadow-md rounded-lg">
+            <div className="max-w-2xl mx-auto p-4 rounded-lg">
                 <form onSubmit={saveDescription}>
                     <div className="mb-4">
                         <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
