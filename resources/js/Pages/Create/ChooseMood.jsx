@@ -1,29 +1,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
-import axios from 'axios';
+import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
 import MoodCard from '@/Components/MoodCard';
 import BackButton from '@/Components/BackButton';
 
 export default function ChooseMood({ moods, moodTranslations }) {
-
     const [selectedMood, setSelectedMood] = useState(null);
 
-    const handleMoodSelect = async (id, event) => {
-        event.preventDefault();
-        console.log('Mood selected:', id);
+    const handleMoodSelect = (id) => {
         setSelectedMood(id);
-
-        try {
-            const response = await axios.post(route('create.save-mood'), { mood_id: id });
-            console.log('Requête réussie, redirection en cours', response.data);
-            // Redirection ou confirmation
-            window.location.href = route('create.choose-action'); // Remplacez 'next.step' par la route suivante
-        } catch (error) {
-            console.error("Erreur lors de la requête", error.response?.data || error.message);
-        }
+        router.post(route('create.save-mood'), { mood_id: id }, {
+            onSuccess: () => console.log('Mood enregistré avec succès'),
+        });
     };
-
 
     return (
         <AuthenticatedLayout
