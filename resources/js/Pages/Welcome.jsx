@@ -3,6 +3,7 @@ import { MdAccountCircle } from "react-icons/md";
 import Dropdown from '@/Components/Dropdown';
 import '../../css/cloud.css';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import CreateButton from '@/Components/CreateButton';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
@@ -63,20 +64,18 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     </Dropdown.Content>
                                 </Dropdown>
                             </div>
-                            <div className="flex items-center justify-center w-full mt-6">
+                            <div className="flex flex-col items-center justify-center w-full mt-6">
                                 <Link href={route('welcome')}>
                                     <ApplicationLogo className="h-14" />
                                 </Link>
+                                <h1 className="text-innerdarkblue uppercase mt-8 tracking-wider">
+                                Mémorisez vos émotions.
+                                </h1>
                             </div>
+
                         </header>
 
                         <main className="mt-6">
-                            <Link
-                                href={route('register')}
-                                className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]"
-                            >
-                                Enregistrement
-                            </Link>
                             <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
                                 <a
                                     href="https://laravel.com/docs"
@@ -157,6 +156,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         </svg>
                                     </div>
                                 </a>
+
+                                <CreateButton href={route('register')}>
+                                    s'incrire
+                                </CreateButton>
 
                                 <a
                                     href="https://laracasts.com"
