@@ -2,7 +2,11 @@ import { Head, Link } from '@inertiajs/react';
 import { MdAccountCircle } from "react-icons/md";
 import { LuBrain } from "react-icons/lu";
 import Dropdown from '@/Components/Dropdown';
+import Slideshow from '@/Components/Slideshow';
 import WelcomeImage01 from '@/Assets/welcome_inner_01.jpg'
+import AppInnerDashboardImage from '@/Assets/app_inner_dashboard.png';
+import InnerCreate01 from '@/Assets/app_inner_create_01.png';
+import InnerCreate02 from '@/Assets/app_inner_create_02.png';
 import '../../css/cloud.css';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import MoodBadgeCycler from '@/Components/MoodBadgeCycler';
@@ -19,6 +23,8 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             ?.classList.add('!flex-row');
         document.getElementById('background')?.classList.add('!hidden');
     };
+
+    const images = [AppInnerDashboardImage, InnerCreate01, InnerCreate02]
 
     return (
         <>
@@ -83,7 +89,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                         <main className="mt-6">
                             <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                                <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-innerdarkblue p-6 transition duration-300 hover:text-black/70 md:row-span-3 lg:p-10 lg:pb-10">
+                                <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-gradient-to-br from-innerlightblue to-innerdarkblue p-6 transition duration-300 hover:text-black/70 md:row-span-3 lg:p-10 lg:pb-10">
                                     <div
                                         id="screenshot-container"
                                         className="relative flex w-full flex-1 items-stretch"
@@ -124,7 +130,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     s'incrire
                                 </CreateButton>
 
-                                <div className="flex items-start gap-4 rounded-lg bg-innerlightblue p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
+                                <div className="flex items-start gap-4 rounded-lg bg-gradient-to-br from-innerdarkblue to-innerlightblue p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
                                     <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
 
                                     <MoodBadgeCycler />
@@ -132,16 +138,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                                     <div className="pt-3 sm:pt-5">
                                         <h2 className="text-xl font-semibold text-black dark:text-white">
-                                            Laravel News
+                                            Qu'on se sente bien...
                                         </h2>
 
                                         <p className="mt-4 text-sm/relaxed">
-                                            Laravel News is a community driven
-                                            portal and newsletter aggregating
-                                            all of the latest and most important
-                                            news in the Laravel ecosystem,
-                                            including new package releases and
-                                            tutorials.
+                                            ...pas bien ou d'humeur "moyenne", toutes les émotions sont importantes. Et pouvoir les relire, les réécouter, les revivre, c'est encore mieux.
                                         </p>
                                     </div>
                                 </div>
@@ -149,13 +150,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-innerdarkblue p-6 transition duration-300 hover:text-black/70 md:row-span-3 lg:p-10 lg:pb-10">
                                     <div
                                         id="screenshot-container"
-                                        className="relative flex w-full flex-1 items-stretch"
+                                        className="relative flex h-full w-full flex-1 items-stretch"
                                     >
-                                        <img
-                                            src={WelcomeImage01}
-                                            alt="Laravel documentation screenshot"
-                                            className="aspect-video h-full w-full flex-1 rounded-[10px] object-cover drop-shadow-[0px_4px_34px_rgba(0,0,0,0.25)] dark:block"
-                                        />
+                                        <Slideshow images={images} interval={3000} />
                                         <div className="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)]"></div>
                                     </div>
 
