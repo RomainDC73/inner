@@ -7,6 +7,10 @@ import WelcomeImage01 from '@/Assets/welcome_inner_01.jpg'
 import AppInnerDashboardImage from '@/Assets/app_inner_dashboard.png';
 import InnerCreate01 from '@/Assets/app_inner_create_01.png';
 import InnerCreate02 from '@/Assets/app_inner_create_02.png';
+import InnerCreate03 from '@/Assets/app_inner_create_03.png';
+import InnerCreate04 from '@/Assets/app_inner_create_04.png';
+import InnerCreate05 from '@/Assets/app_inner_create_05.png';
+import InnerCreate06 from '@/Assets/app_inner_create_06.png';
 import '../../css/cloud.css';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import MoodBadgeCycler from '@/Components/MoodBadgeCycler';
@@ -24,7 +28,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         document.getElementById('background')?.classList.add('!hidden');
     };
 
-    const images = [AppInnerDashboardImage, InnerCreate01, InnerCreate02]
+    const images = [AppInnerDashboardImage, InnerCreate01, InnerCreate02, InnerCreate03, InnerCreate04, InnerCreate05, InnerCreate06]
 
     return (
         <>
