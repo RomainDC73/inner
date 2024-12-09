@@ -1,6 +1,7 @@
 import {Link} from '@inertiajs/react';
 import MoodBadge from './MoodBadge';
 import { GiSoundWaves } from "react-icons/gi";
+import { CiImageOn } from "react-icons/ci";
 
 const moodColors = {
     good: 'bg-gradient-to-br from-white from-30% to-innergreenfade',
@@ -42,6 +43,10 @@ const PostCard = ({ post }) => {
                     {/* Afficher une icône s'il y a un fichier audio */}
                     {post.audio_path ? (
                             <GiSoundWaves size={24} className="text-gray-700" />
+                    ) : null}
+                    {/* Afficher une icône s'il y a une image */}
+                    {post.media_path ? (
+                            <CiImageOn size={24} className="text-gray-700" />
                     ) : null}
                     </div>
                 </div>
