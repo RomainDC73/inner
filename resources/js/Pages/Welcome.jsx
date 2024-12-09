@@ -6,8 +6,8 @@ import { FiLayers } from "react-icons/fi";
 import { FaHandHoldingHand } from "react-icons/fa6";
 import Dropdown from '@/Components/Dropdown';
 import Slideshow from '@/Components/Slideshow';
-import WelcomeImage01 from '@/Assets/welcome_inner_01.jpg'
-import WelcomeImage02 from '@/Assets/welcome_inner_02.jpg'
+import WelcomeImage01 from '@/Assets/welcome_inner_01.jpg';
+import WelcomeImage02 from '@/Assets/welcome_inner_02.jpg';
 import AppInnerDashboardImage from '@/Assets/app_inner_dashboard.png';
 import InnerCreate01 from '@/Assets/app_inner_create_01.png';
 import InnerCreate02 from '@/Assets/app_inner_create_02.png';
@@ -32,25 +32,22 @@ export default function Welcome({ auth }) {
         document.getElementById('background')?.classList.add('!hidden');
     };
 
-    const images = [AppInnerDashboardImage, InnerCreate01, InnerCreate02, InnerCreate03, InnerCreate04, InnerCreate05, InnerCreate06]
+    const images = [AppInnerDashboardImage, InnerCreate01, InnerCreate02, InnerCreate03, InnerCreate04, InnerCreate05, InnerCreate06];
 
     return (
         <>
             <Head title="Welcome" />
 
             <div className="orbContainer">
-                    <div className="orb"></div>
-                    <div className="orb"></div>
-                    <div className="orb"></div>
-                </div>
+                <div className="orb"></div>
+                <div className="orb"></div>
+                <div className="orb"></div>
+            </div>
+
             <div>
                 <div className="text-white relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-
-
-                    <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl ">
-
+                    <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <header className="gap-2 py-6 lg:grid-cols-3">
-
                             <div className="flex justify-end">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -91,10 +88,9 @@ export default function Welcome({ auth }) {
                                     <ApplicationLogo className="h-14" />
                                 </Link>
                                 <h1 className="text-innerdarkblue uppercase mt-8 tracking-wider">
-                                Mémorisez vos émotions.
+                                    Mémorisez vos émotions.
                                 </h1>
                             </div>
-
                         </header>
 
                         <main className="mt-6">
@@ -108,6 +104,7 @@ export default function Welcome({ auth }) {
                                             src={WelcomeImage01}
                                             alt="Inner, la plateforme de mémorisation des émotions"
                                             className="aspect-video h-full w-full flex-1 rounded-[10px] object-cover drop-shadow-[0px_4px_20px_rgba(0,0,0,0.25)]"
+                                            onError={handleImageError}
                                         />
                                         <div className="absolute inset-0 bg-innerlightblue/30 rounded-[10px]"></div>
                                     </div>
@@ -118,7 +115,7 @@ export default function Welcome({ auth }) {
                                             className="flex items-start gap-6 lg:flex-col"
                                         >
                                             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-innerlightblue sm:size-16">
-                                            <LuBrain className='text-2xl' />
+                                                <LuBrain className="text-2xl" />
                                             </div>
 
                                             <div className="pt-3 sm:pt-5 lg:pt-0">
@@ -128,7 +125,7 @@ export default function Welcome({ auth }) {
 
                                                 <p className="mt-4 text-base/relaxed">
                                                     Ce moment de grâce que vous avez vécu, une période désagréable que vous avez besoin de confier, ce que vous avez ressenti à un moment particulier.
-                                                    <br></br>
+                                                    <br />
                                                     <b>Gardez une trace de vos émotions.</b>
                                                 </p>
                                             </div>
@@ -137,13 +134,13 @@ export default function Welcome({ auth }) {
                                 </div>
 
                                 <CreateButton className="w-1/2 ml-0" href={route('register')}>
-                                <PiSignIn className="mr-4" />
-                                    s'incrire
+                                    <PiSignIn className="mr-4" />
+                                    s'inscrire
                                 </CreateButton>
 
                                 <div className="flex items-start gap-4 rounded-lg bg-gradient-to-br from-innerdarkblue to-innerlightblue p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-gray-200 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
                                     <div className="flex size-12 shrink-0 items-center justify-center rounded-full sm:size-16">
-                                    <MoodBadgeCycler />
+                                        <MoodBadgeCycler />
                                     </div>
 
                                     <div className="pt-3 sm:pt-5">
@@ -172,7 +169,7 @@ export default function Welcome({ auth }) {
                                             className="flex items-start gap-6 lg:flex-col"
                                         >
                                             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-innerlightblue sm:size-16">
-                                            <FiLayers className='text-2xl' />
+                                                <FiLayers className="text-2xl" />
                                             </div>
 
                                             <div className="pt-3 sm:pt-5 lg:pt-0">
@@ -182,7 +179,7 @@ export default function Welcome({ auth }) {
 
                                                 <p className="mt-4 text-base/relaxed">
                                                     Ce que vous avez ressenti, pourquoi vous avez ressenti cela, comment vous avez réagi, ce que vous avez fait pour vous sentir mieux.
-                                                    <br></br>
+                                                    <br />
                                                     <b>Du texte, de l'image, un enregistrement audio, choisissez le format qui vous convient.</b>
                                                 </p>
                                             </div>
@@ -199,6 +196,7 @@ export default function Welcome({ auth }) {
                                             src={WelcomeImage02}
                                             alt="Inner, la plateforme de mémorisation des émotions"
                                             className="aspect-video flex-1 rounded-[10px] object-cover object-top drop-shadow-[0px_4px_20px_rgba(0,0,0,0.25)]"
+                                            onError={handleImageError}
                                         />
                                         <div className="absolute inset-0 bg-innerlightblue/30 rounded-[10px]"></div>
                                     </div>
@@ -209,7 +207,7 @@ export default function Welcome({ auth }) {
                                             className="flex items-start gap-6 lg:flex-col"
                                         >
                                             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-innerlightblue sm:size-16">
-                                            <FaHandHoldingHand className='text-2xl' />
+                                                <FaHandHoldingHand className="text-2xl" />
                                             </div>
 
                                             <div className="pt-3 sm:pt-5 lg:pt-0">
@@ -219,9 +217,9 @@ export default function Welcome({ auth }) {
 
                                                 <p className="mt-4 text-base/relaxed">
                                                     Profitez et ressentez chaque instant, même les plus difficiles. Ils sont tous importants.
-                                                    <br></br>
+                                                    <br />
                                                     Notez-les, enregistrez-les, gardez-les précieusement pour vous.
-                                                    <br></br>
+                                                    <br />
                                                     <b>Et revenez-y quand vous en avez besoin.</b>
                                                 </p>
                                             </div>
@@ -230,27 +228,25 @@ export default function Welcome({ auth }) {
                                 </div>
 
                                 <CreateButton className="w-1/2 ml-0" href={route('register')}>
-                                <PiSignIn className="mr-4" />
-                                    s'incrire
+                                    <PiSignIn className="mr-4" />
+                                    s'inscrire
                                 </CreateButton>
-
-
                             </div>
                         </main>
+
                         <div className="orbContainer-bottom">
-                <div className="orb-bottom"></div>
-                <div className="orb-bottom"></div>
-                <div className="orb-bottom"></div>
-            </div>
+                            <div className="orb-bottom"></div>
+                            <div className="orb-bottom"></div>
+                            <div className="orb-bottom"></div>
+                        </div>
+
                         <footer className="py-16 text-center text-sm text-black">
-                            Projet de développement web par <a href="https://www.linkedin.com/in/romaindicandido/" target="_blank" rel="noreferrer" className="text-innerdarkblue hover:text-gray-700">Romain DI CANDIDO</a> - 2024
-
+                            Projet de développement web Laravel/React
+                            <br />
+                            par <a href="https://www.linkedin.com/in/romaindicandido/" target="_blank" rel="noreferrer" className="text-innerdarkblue hover:text-gray-700">Romain DI CANDIDO</a> - 2024
                         </footer>
-
                     </div>
-
                 </div>
-
             </div>
         </>
     );
