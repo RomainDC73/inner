@@ -38,6 +38,14 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
         });
     };
 
+    // Gérer le clic sur l'icône d'édition
+    const handleEdit = (url) => {
+        Inertia.visit(url, {
+            preserveState: true, // Permet de ne pas perdre l'état actuel de la page
+            replace: true, // Remplace l'historique pour éviter d'ajouter une nouvelle entrée
+        });
+    };
+
     return (
         <AuthenticatedLayout
             header={
@@ -47,7 +55,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                 Récapitulatif
                 </h1>
                 </div>
-                }>
+            }>
             <Head>
             <title>Récapitulatif</title>
             </Head>
@@ -66,7 +74,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => Inertia.get(`/create/choose-mood`)}
+                                    onClick={() => handleEdit(`/create/choose-mood`)} // Redirige de manière fluide
                                 />
                             )}
                         </div>
@@ -80,7 +88,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => Inertia.get(`/create/write`)} // Rediriger si nécessaire
+                                    onClick={() => handleEdit(`/create/write`)} // Redirige de manière fluide
                                 />
                             )}
                         </div>
@@ -98,29 +106,29 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => Inertia.get(`/create/talk`)} // Rediriger si nécessaire
+                                    onClick={() => handleEdit(`/create/talk`)} // Redirige de manière fluide
                                 />
                             )}
                         </div>
                     </div>
 
                     {/* Image */}
-                        <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
-                            <h3 className="text-lg font-semibold mb-2">📷</h3>
-                            <div className="flex items-center justify-center gap-2">
-                                {mediaPath ? (
-                                    <ImagePreview src={`/storage/${mediaPath}`} />
-                                ) : (
-                                    <p className="text-gray-400 italic">Aucune image sélectionnée.</p>
-                                )}
-                                {editMode && (
-                                    <MdEdit
-                                        className="text-gray-500 cursor-pointer"
-                                        onClick={() => Inertia.get(`/create/add-media`)} // Rediriger si nécessaire
-                                    />
-                                )}
-                            </div>
+                    <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
+                        <h3 className="text-lg font-semibold mb-2">📷</h3>
+                        <div className="flex items-center justify-center gap-2">
+                            {mediaPath ? (
+                                <ImagePreview src={`/storage/${mediaPath}`} />
+                            ) : (
+                                <p className="text-gray-400 italic">Aucune image sélectionnée.</p>
+                            )}
+                            {editMode && (
+                                <MdEdit
+                                    className="text-gray-500 cursor-pointer"
+                                    onClick={() => handleEdit(`/create/add-media`)} // Redirige de manière fluide
+                                />
+                            )}
                         </div>
+                    </div>
 
                     {/* Boutons */}
                     <div className="flex justify-center p-6 space-x-4">
