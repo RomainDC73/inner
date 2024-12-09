@@ -1,6 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
 import { MdAccountCircle } from "react-icons/md";
 import { LuBrain } from "react-icons/lu";
+import { PiSignIn } from "react-icons/pi";
+import { FiLayers } from "react-icons/fi";
 import Dropdown from '@/Components/Dropdown';
 import Slideshow from '@/Components/Slideshow';
 import WelcomeImage01 from '@/Assets/welcome_inner_01.jpg'
@@ -34,13 +36,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Head title="Welcome" />
             <div>
-
+            <div className="orbContainer">
+                    <div className="orb"></div>
+                    <div className="orb"></div>
+                    <div className="orb"></div>
+            </div>
                 <div className="text-white relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-                <div className="orbContainer">
-                    <div className="orb"></div>
-                    <div className="orb"></div>
-                    <div className="orb"></div>
-                </div>
+
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl ">
 
                         <header className="gap-2 py-6 lg:grid-cols-3">
@@ -93,7 +95,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                         <main className="mt-6">
                             <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                                <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-gradient-to-br from-innerlightblue to-innerdarkblue p-6 transition duration-300 hover:text-black/70 md:row-span-3 lg:p-10 lg:pb-10">
+                                <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-gradient-to-br from-innerlightblue to-innerdarkblue p-6 transition duration-300 hover:text-gray-200 md:row-span-3 lg:p-10 lg:pb-10">
                                     <div
                                         id="screenshot-container"
                                         className="relative flex w-full flex-1 items-stretch"
@@ -103,7 +105,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                             alt="Inner, la plateforme de mémorisation des émotions"
                                             className="aspect-video h-full w-full flex-1 rounded-[10px] object-cover drop-shadow-[0px_4px_20px_rgba(0,0,0,0.25)]"
                                         />
-                                        <div className="absolute inset-0 bg-innerlightblue/30 hover:bg-innerlightblue/20 rounded-[10px]"></div>
+                                        <div className="absolute inset-0 bg-innerlightblue/30 rounded-[10px]"></div>
                                     </div>
 
                                     <div className="relative flex items-center gap-6 lg:items-end">
@@ -112,7 +114,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                             className="flex items-start gap-6 lg:flex-col"
                                         >
                                             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-innerlightblue sm:size-16">
-                                            <LuBrain />
+                                            <LuBrain className='text-2xl' />
                                             </div>
 
                                             <div className="pt-3 sm:pt-5 lg:pt-0">
@@ -120,7 +122,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                                     Rappellez-vous...
                                                 </h2>
 
-                                                <p className="mt-4 text-sm/relaxed">
+                                                <p className="mt-4 text-base/relaxed">
                                                     Ce moment de grâce que vous avez vécu, une période désagréable que vous avez besoin de confier, ce que vous avez ressenti à un moment particulier.
                                                     <br></br>
                                                     <b>Gardez une trace de vos émotions.</b>
@@ -131,10 +133,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </div>
 
                                 <CreateButton href={route('register')}>
+                                <PiSignIn className="mr-4" />
                                     s'incrire
                                 </CreateButton>
 
-                                <div className="flex items-start gap-4 rounded-lg bg-gradient-to-br from-innerdarkblue to-innerlightblue p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
+                                <div className="flex items-start gap-4 rounded-lg bg-gradient-to-br from-innerdarkblue to-innerlightblue p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-gray-200 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
                                     <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
 
                                     <MoodBadgeCycler />
@@ -145,13 +148,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                             Qu'on se sente bien...
                                         </h2>
 
-                                        <p className="mt-4 text-sm/relaxed">
+                                        <p className="mt-4 text-base/relaxed">
                                             ...pas bien ou d'humeur "moyenne", toutes les émotions sont importantes. Et pouvoir les relire, les réécouter, les revivre, c'est encore mieux.
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-innerdarkblue p-6 transition duration-300 hover:text-black/70 md:row-span-3 lg:p-10 lg:pb-10">
+                                <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-innerdarkblue p-6 transition duration-300 hover:text-gray-200 md:row-span-3 lg:p-10 lg:pb-10">
                                     <div
                                         id="screenshot-container"
                                         className="relative flex h-full w-full flex-1 items-stretch"
@@ -166,33 +169,21 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                             className="flex items-start gap-6 lg:flex-col"
                                         >
                                             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-innerlightblue sm:size-16">
-                                            <LuBrain />
+                                            <FiLayers className='text-2xl' />
                                             </div>
 
                                             <div className="pt-3 sm:pt-5 lg:pt-0">
                                                 <h2 className="text-xl font-semibold text-black dark:text-white">
-                                                    Rappellez-vous
+                                                    Expliquez...
                                                 </h2>
 
-                                                <p className="mt-4 text-sm/relaxed">
-                                                    Gardez une trace de vos émotions.
+                                                <p className="mt-4 text-base/relaxed">
+                                                    Ce que vous avez ressenti, pourquoi vous avez ressenti cela, comment vous avez réagi, ce que vous avez fait pour vous sentir mieux.
+                                                    <br></br>
+                                                    <b>Du texte, de l'image, un enregistrement audio, choisissez le format qui vous convient.</b>
                                                 </p>
                                             </div>
                                         </div>
-
-                                        <svg
-                                            className="size-6 shrink-0 stroke-[#FF2D20]"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                                            />
-                                        </svg>
                                     </div>
                                 </div>
                             </div>
