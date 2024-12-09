@@ -3,9 +3,11 @@ import { MdAccountCircle } from "react-icons/md";
 import { LuBrain } from "react-icons/lu";
 import { PiSignIn } from "react-icons/pi";
 import { FiLayers } from "react-icons/fi";
+import { FaHandHoldingHand } from "react-icons/fa6";
 import Dropdown from '@/Components/Dropdown';
 import Slideshow from '@/Components/Slideshow';
 import WelcomeImage01 from '@/Assets/welcome_inner_01.jpg'
+import WelcomeImage02 from '@/Assets/welcome_inner_02.jpg'
 import AppInnerDashboardImage from '@/Assets/app_inner_dashboard.png';
 import InnerCreate01 from '@/Assets/app_inner_create_01.png';
 import InnerCreate02 from '@/Assets/app_inner_create_02.png';
@@ -138,8 +140,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </CreateButton>
 
                                 <div className="flex items-start gap-4 rounded-lg bg-gradient-to-br from-innerdarkblue to-innerlightblue p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-gray-200 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10">
-                                    <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-
+                                    <div className="flex size-12 shrink-0 items-center justify-center rounded-full sm:size-16">
                                     <MoodBadgeCycler />
                                     </div>
 
@@ -157,9 +158,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-innerdarkblue p-6 transition duration-300 hover:text-gray-200 md:row-span-3 lg:p-10 lg:pb-10">
                                     <div
                                         id="screenshot-container"
-                                        className="relative flex h-full w-full flex-1 items-stretch"
+                                        className="relative flex h-full w-full flex-1 items-stretch rounded-lg lg:rounded-lg"
                                     >
-                                        <Slideshow images={images} interval={3000} />
+                                        <Slideshow images={images} interval={3000} className="rounded-lg lg:rounded-lg" />
                                         <div className="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)]"></div>
                                     </div>
 
@@ -186,6 +187,52 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-gradient-to-br from-innerlightblue to-innerdarkblue p-6 transition duration-300 hover:text-gray-200 lg:p-10 lg:pb-10">
+                                    <div
+                                        id="screenshot-container"
+                                        className="relative flex w-full flex-1 items-stretch"
+                                    >
+                                        <img
+                                            src={WelcomeImage02}
+                                            alt="Inner, la plateforme de mémorisation des émotions"
+                                            className="aspect-video flex-1 rounded-[10px] object-cover object-top drop-shadow-[0px_4px_20px_rgba(0,0,0,0.25)]"
+                                        />
+                                        <div className="absolute inset-0 bg-innerlightblue/30 rounded-[10px]"></div>
+                                    </div>
+
+                                    <div className="relative flex items-center gap-6 lg:items-end">
+                                        <div
+                                            id="docs-card-content"
+                                            className="flex items-start gap-6 lg:flex-col"
+                                        >
+                                            <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-innerlightblue sm:size-16">
+                                            <FaHandHoldingHand className='text-2xl' />
+                                            </div>
+
+                                            <div className="pt-3 sm:pt-5 lg:pt-0">
+                                                <h2 className="text-xl font-semibold text-black dark:text-white">
+                                                    Retenez le moment présent
+                                                </h2>
+
+                                                <p className="mt-4 text-base/relaxed">
+                                                    Profitez et ressentez chaque instant, même les plus difficiles. Ils sont tous importants.
+                                                    <br></br>
+                                                    Notez-les, enregistrez-les, gardez-les précieusement pour vous.
+                                                    <br></br>
+                                                    <b>Et revenez-y quand vous en avez besoin.</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <CreateButton href={route('register')}>
+                                <PiSignIn className="mr-4" />
+                                    s'incrire
+                                </CreateButton>
+
+
                             </div>
                         </main>
 
