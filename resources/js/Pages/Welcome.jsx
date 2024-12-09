@@ -134,7 +134,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     </div>
                                 </div>
 
-                                <CreateButton href={route('register')}>
+                                <CreateButton className="w-1/2 ml-0" href={route('register')}>
                                 <PiSignIn className="mr-4" />
                                     s'incrire
                                 </CreateButton>
@@ -158,9 +158,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <div className="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-innerdarkblue p-6 transition duration-300 hover:text-gray-200 md:row-span-3 lg:p-10 lg:pb-10">
                                     <div
                                         id="screenshot-container"
-                                        className="relative flex h-full w-full flex-1 items-stretch rounded-lg lg:rounded-lg"
+                                        className="relative flex h-full w-full flex-1 items-stretch rounded-lg overflow-hidden"
                                     >
-                                        <Slideshow images={images} interval={3000} className="rounded-lg lg:rounded-lg" />
+                                        <Slideshow images={images} interval={3000} className="rounded-lg lg:rounded-lg overflow:hidden" />
                                         <div className="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)]"></div>
                                     </div>
 
@@ -227,7 +227,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     </div>
                                 </div>
 
-                                <CreateButton href={route('register')}>
+                                <CreateButton className="w-1/2 ml-0" href={route('register')}>
                                 <PiSignIn className="mr-4" />
                                     s'incrire
                                 </CreateButton>
