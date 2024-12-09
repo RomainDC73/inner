@@ -20,7 +20,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import MoodBadgeCycler from '@/Components/MoodBadgeCycler';
 import CreateButton from '@/Components/CreateButton';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome({ auth }) {
     const handleImageError = () => {
         document
             .getElementById('screenshot-container')
@@ -243,7 +243,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 <div className="orb-bottom"></div>
             </div>
                         <footer className="py-16 text-center text-sm text-black">
-                            Laravel v{laravelVersion} (PHP v{phpVersion})
+                            Projet de développement web par <a href="https://www.linkedin.com/in/romaindicandido/" target="_blank" rel="noreferrer" className="text-innerdarkblue hover:text-gray-700">Romain DI CANDIDO</a> - 2024
 
                         </footer>
 
