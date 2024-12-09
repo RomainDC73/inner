@@ -10,6 +10,7 @@ import BackButton from '@/Components/BackButton';
 import { Inertia } from '@inertiajs/inertia';
 import { MdEdit } from 'react-icons/md';
 
+
 export default function ShowRecap({ mood, moodTranslations, description, audioPath, mediaPath }) {
     const [editMode, setEditMode] = useState(false);
 
@@ -30,10 +31,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
             media_path: mediaPath || '',
         }, {
             onFinish: () => {
-                localStorage.removeItem('mood_id');
-                localStorage.removeItem('description');
-                localStorage.removeItem('media');
-                localStorage.removeItem('audio_path');
+                localStorage.clear();
             }
         });
     };
