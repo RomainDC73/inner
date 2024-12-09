@@ -89,7 +89,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => Inertia.get(`/create/write`)} // Rediriger si nécessaire
+                                    onClick={() => Inertia.get(`/create/talk`)} // Rediriger si nécessaire
                                 />
                             )}
                         </div>

@@ -57,8 +57,8 @@ export default function Talk() {
             </Head>
             <div className="flex flex-col">
                 <div className="text-center">
-                    <div className="overflow-hidden rounded-lg w-full max-w-3xl mx-auto">
-                        <div className="p-6 text-gray-900 space-y-3">
+                    <div className="overflow-hidden rounded-lg mx-auto w-4/5">
+                        <div className="text-gray-900 space-y-4">
                             <VoiceRecorder onRecordingComplete={handleRecordingComplete} />
                         </div>
                     </div>
