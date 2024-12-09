@@ -73,8 +73,8 @@ body, html {
 }
 
 .orbContainer-bottom .orb-bottom:nth-child(2) {
-    bottom: -5%;
-    left: 10%;
+    bottom: -20%;
+    left: -30%;
     animation-duration: 10s;
     background: radial-gradient(rgba(117, 185, 190, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
 }

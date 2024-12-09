@@ -6,6 +6,7 @@ import CustomPlayer from '@/Components/Player';
 import ImagePreview from '@/Components/ImagePreview';
 import CreateButton from '@/Components/CreateButton';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButton from '@/Components/BackButton';
 import { Inertia } from '@inertiajs/inertia';
 import { MdEdit } from 'react-icons/md';
 
@@ -39,9 +40,17 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
 
     return (
         <AuthenticatedLayout
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Récapitulatif</h2>}
-        >
-            <Head title="Récapitulatif" />
+            header={
+                <div>
+                <BackButton />
+                <h1 className="font-semibold text-xl text-gray-800 leading-tight">
+                Récapitulatif
+                </h1>
+                </div>
+                }>
+            <Head>
+            <title>Récapitulatif</title>
+            </Head>
 
             <div>
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 w-full">
