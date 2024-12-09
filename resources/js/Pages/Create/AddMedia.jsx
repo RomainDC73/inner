@@ -58,10 +58,15 @@ export default function AddMedia({ mood_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('create.submit-media'), {
+        Inertia.post(route('create.submit-media'), data, {
             onSuccess: () => {
-                Inertia.visit('/create/recap'); // Utilise directement la route nommée pour la redirection
+                // Redirige vers la page de récapitulatif sans rafraîchissement
+                Inertia.visit('/create/recap');
             },
+            onError: (errors) => {
+                // Vous pouvez gérer des erreurs ici si nécessaire
+                console.error(errors);
+            }
         });
     };
 
