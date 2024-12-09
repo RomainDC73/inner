@@ -1,10 +1,15 @@
-/* Styles globaux pour les orbes */
+body, html {
+    overflow-x: hidden;  /* Empêche tout défilement horizontal */
+}/* Styles globaux pour les orbes */
+
+
 .orb-container, .orbContainer-bottom {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Toujours en arrière-plan */
+    z-index: -1; /* Toujours en arrière-plan */
     pointer-events: none; /* Pour ignorer les clics */
+    overflow: hidden; /* Empêche les débordements visuels */
 }
 
 /* Orbes du haut */
@@ -15,8 +20,9 @@
 
 .orb {
     position: absolute;
-    width: 500px;
+    width: 400px;
     height: 400px;
+    max-width: 100%;
     border-radius: 50%;
     animation: float 10s infinite ease-in-out;
     opacity: 0.8;
@@ -37,8 +43,8 @@
 }
 
 .orb:nth-child(3) {
-    top: 5%;
-    left: -45%;
+    top: -2%;
+    left: -15%;
     animation-duration: 6s;
     background: radial-gradient(rgba(208, 214, 181, 0.6) 0%, rgba(0, 0, 0, 0) 60%);
 }
@@ -51,29 +57,30 @@
 
 .orb-bottom {
     position: absolute;
-    width: 500px;
+    width: 400px;
     height: 400px;
+    max-width: 100%;
     border-radius: 50%;
     animation: float-bottom 10s infinite ease-in-out;
     opacity: 0.8;
 }
 
 .orbContainer-bottom .orb-bottom:nth-child(1) {
-    bottom: -15%;
-    left: -30%;
+    bottom: -7%;
+    left: 30%;
     animation-duration: 14s;
     background: radial-gradient(rgba(237, 201, 255, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
 .orbContainer-bottom .orb-bottom:nth-child(2) {
-    bottom: -25%;
-    left: 40%;
+    bottom: -5%;
+    left: 10%;
     animation-duration: 10s;
     background: radial-gradient(rgba(117, 185, 190, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
 .orbContainer-bottom .orb-bottom:nth-child(3) {
-    bottom: -5%;
+    bottom: -3%;
     left: 50%;
     animation-duration: 12s;
     background: radial-gradient(rgba(208, 214, 181, 0.6) 0%, rgba(0, 0, 0, 0) 60%);

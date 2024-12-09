@@ -37,13 +37,15 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Welcome" />
-            <div>
+
             <div className="orbContainer">
                     <div className="orb"></div>
                     <div className="orb"></div>
                     <div className="orb"></div>
-            </div>
+                </div>
+            <div>
                 <div className="text-white relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+
 
                     <div className="relative w-full max-w-2xl px-6 lg:max-w-7xl ">
 
@@ -235,18 +237,18 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                             </div>
                         </main>
-
+                        <div className="orbContainer-bottom">
+                <div className="orb-bottom"></div>
+                <div className="orb-bottom"></div>
+                <div className="orb-bottom"></div>
+            </div>
                         <footer className="py-16 text-center text-sm text-black">
                             Laravel v{laravelVersion} (PHP v{phpVersion})
 
                         </footer>
 
                     </div>
-                    <div className="orbContainer-bottom">
-                <div className="orb-bottom"></div>
-                <div className="orb-bottom"></div>
-                <div className="orb-bottom"></div>
-            </div>
+
                 </div>
 
             </div>
