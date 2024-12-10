@@ -19,7 +19,7 @@ export default function Guest({ children }) {
             </div>
 
             {/* Contenu principal */}
-            <div className="flex flex-col items-center justify-center w-full mt-20">
+            <div className="flex flex-col items-center justify-center w-full mt-20 md:mt-4 lg:mt-2">
                 <Link href={route('welcome')}>
                     <ApplicationLogo className="h-14" />
                 </Link>
