@@ -43,7 +43,7 @@ export default function Dashboard() {
                     <div className="mt-2 overflow-hidden sm:rounded-lg">
                         <div className="p-6">
                             <PostsList posts={posts} /> {/* Passe les posts récupérés */}
-                            <PrimaryButton href="/posts">Voir tous</PrimaryButton>
+                            {posts.length > 0 && <PrimaryButton href="/posts">Voir tous</PrimaryButton>}
                         </div>
                     </div>
                 </div>

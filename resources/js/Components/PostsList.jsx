@@ -1,17 +1,20 @@
 import PostCard from './PostCard';
 
-const PostsList = ({ posts = [] }) => {  // Ajoute une valeur par défaut pour 'posts'
+const PostsList = ({ posts = [] }) => {
     return (
-        <div className="bg-grey">
-        <h1 className="mb-6">Mes derniers posts</h1>
+        <div>
+        {posts.length > 0 && <h1 className="mb-6">Mes derniers posts</h1>}
         <ul>
             {posts.length > 0 ? (
                 posts.map(post => (
-                    // Utiliser PostCard pour chaque post
                     <PostCard key={post.id} post={post} />
                 ))
             ) : (
-                <p>Aucun post trouvé. N'hésitez pas à publier votre humeur !</p>  // Message quand il n'y a pas de posts
+                <p className="mb-6 text-center">Tes derniers posts apparaîtront ici. ⬇️
+                <br></br>
+                Mais pour l'instant c'est calme par ici... 😴
+                <br></br>
+                <b>Et si on publiait une première humeur ?</b> 🤗</p>
             )}
         </ul>
     </div>
