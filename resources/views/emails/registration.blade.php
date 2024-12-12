@@ -4,10 +4,8 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <h2>Bienvenue [name]</h2>
+    <h2>Bienvenue {{ $name }}</h2>
     <p>Vous venez de créer votre compte sur l'application Inner et nous vous en remercions !</p>
-    <ul>
-      <li><strong>Nom</strong> : {{ $contact['nom'] }}</li>
-    </ul>
+    <p>Vous pouvez dès à présent vous connecter à votre espace personnel en cliquant sur le lien suivant : <a href="{{ $link }}">Se connecter</a></p>
   </body>
 </html>
