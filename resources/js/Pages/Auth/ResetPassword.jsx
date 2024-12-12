@@ -24,6 +24,10 @@ export default function ResetPassword({ token, email }) {
     return (
         <GuestLayout>
             <Head title="Reset Password" />
+            <h1 className="text-ml font-extrabold text-center text-gray-900 mb-2">
+                Renouvellez votre mot de passe
+            </h1>
+            <p className="text-sm text-center mb-8">Entrez le nouveau mot de passe que vous souhaitez.</p>
 
             <form onSubmit={submit}>
                 <div>
