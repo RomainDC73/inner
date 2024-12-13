@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Mail\Registration;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegistrationTest extends TestCase
 {
@@ -17,15 +19,29 @@ class RegistrationTest extends TestCase
     }
 
     public function test_new_users_can_register(): void
-    {
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
+{
+    // Fakes the mail sending during the test
+    Mail::fake();
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
-    }
+    // Send the request to register a new user
+    $response = $this->post('/register', [
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
+    // Assert that the user is authenticated
+    $this->assertAuthenticated();
+
+    // Assert that the user is redirected to the dashboard
+    $response->assertRedirect(route('dashboard', absolute: false));
+
+    // Assert that the email was sent to the user's email address
+    Mail::assertSent(Registration::class, function ($mail) {
+        return $mail->hasTo('test@example.com');
+    });
+}
+
+
 }
