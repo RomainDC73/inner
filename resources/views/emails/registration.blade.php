@@ -23,7 +23,7 @@
         border: 1px solid #e4e4e4;
       }
       .header {
-        background-color: #4CAF50;
+        background-color: #37515F;
         color: white;
         padding: 20px;
         text-align: center;
@@ -36,7 +36,7 @@
         padding: 20px;
       }
       .content h2 {
-        color: #4CAF50;
+        color: #37515F;
         font-size: 22px;
       }
       .content p {
@@ -47,14 +47,14 @@
         display: inline-block;
         padding: 10px 20px;
         margin: 20px 0;
-        background-color: #4CAF50;
+        background-color: #75B9BE;
         color: white;
         text-decoration: none;
         font-size: 16px;
         border-radius: 5px;
       }
       .btn:hover {
-        background-color: #45a049;
+        background-color: #75B9BE;
       }
       .footer {
         text-align: center;
@@ -65,7 +65,7 @@
         border-top: 1px solid #e4e4e4;
       }
       .footer a {
-        color: #4CAF50;
+        color: #37515F;
         text-decoration: none;
       }
       .footer a:hover {
@@ -82,12 +82,11 @@
         <h2>Bonjour {{ $name }} !</h2>
         <p>Merci de rejoindre notre communauté. Vous venez de créer votre compte sur l'application Inner et nous vous en remercions chaleureusement.</p>
         <p>Pour accéder à votre espace personnel et commencer à publier vos émotions et ressentis, cliquez sur le bouton ci-dessous :</p>
-        <a href="{{ url('/') }}" class="btn">Accéder à votre espace</a>
+        <a href="{{ url('/dashboard') }}" class="btn">Accéder à votre espace</a>
         <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
       </div>
       <div class="footer">
         <p>&copy; {{ date('Y') }} Inner. Tous droits réservés.</p>
-        <p><a href="{{ url('/contact') }}">Contactez-nous</a></p>
       </div>
     </div>
   </body>
