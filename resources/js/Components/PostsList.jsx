@@ -10,7 +10,7 @@ const PostsList = ({ posts = [] }) => {
                     <PostCard key={post.id} post={post} />
                 ))
             ) : (
-                <p className="mb-6 text-center">Tes derniers posts apparaîtront ici. ⬇️
+                <p className="mb-6 text-center">Tes derniers posts apparaîtront juste dessous. ⬇️
                 <br></br>
                 Mais pour l'instant c'est calme par ici... 😴
                 <br></br>
