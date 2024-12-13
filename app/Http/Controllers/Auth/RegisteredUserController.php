@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -46,9 +47,9 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Mail::to($user->email)->send(new Registration($user->name));
-
         Auth::login($user);
+        Log::info('Sending email to ' . $user->email);
+        Mail::to($user->email)->send(new Registration($user->name));
 
         return redirect()->route('dashboard');
     }
