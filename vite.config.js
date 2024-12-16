@@ -11,8 +11,12 @@ export default defineConfig({
         react(),
     ],
     server: {
-        // Ne pas démarrer le serveur en mode production
-        hmr: false, // Désactive le hot module replacement (HMR) en production
+        host: '0.0.0.0',
+        cors: true,
+        watch: {
+            usePolling: true,
+            interval: 100,
+        },
     },
     build: {
         // Assurez-vous que Vite compile les fichiers statiques pour la production
