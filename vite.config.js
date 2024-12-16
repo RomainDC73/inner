@@ -11,7 +11,7 @@ export default defineConfig({
         react(),
     ],
     server: {
-        host: 'localhost',
+        host: 'O.O.O.O',
         port: 5173,
         cors: true,
         watch: {
