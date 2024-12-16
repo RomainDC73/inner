@@ -15,16 +15,17 @@ export default defineConfig(({ mode }) => {
             react(),
         ],
         server: {
+            // Si en développement, utilise les certificats locaux
             https: isLocal
                 ? {
                       key: fs.readFileSync('/Users/fantaz/.config/valet/Certificates/inner.test.key'),
                       cert: fs.readFileSync('/Users/fantaz/.config/valet/Certificates/inner.test.crt'),
                   }
-                : undefined,
+                : undefined, // En production, ignore les certificats locaux
 
-            host: 'localhost',
-            port: 5173,
-            cors: true,
+            host: 'localhost', // L'adresse d'écoute en local (localhost)
+            port: 5173, // Le port d'écoute
+            cors: true, // Active CORS si nécessaire
             watch: {
                 usePolling: true,
                 interval: 100,
