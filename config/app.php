@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://inner.test'),
+    'url' => env('APP_URL', 'https://inner.onrender.com/'),
 
     /*
     |--------------------------------------------------------------------------

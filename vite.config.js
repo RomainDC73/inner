@@ -11,12 +11,12 @@ export default defineConfig({
         react(),
     ],
     server: {
-        host: '0.0.0.0',
-        port: 5173,
-        cors: true,
-        watch: {
-            usePolling: true,
-            interval: 100,
-        },
+        // Ne pas démarrer le serveur en mode production
+        hmr: false, // Désactive le hot module replacement (HMR) en production
+    },
+    build: {
+        // Assurez-vous que Vite compile les fichiers statiques pour la production
+        outDir: 'public/build', // Dossier de sortie pour les fichiers compilés
+        manifest: true, // Génère le fichier manifest.json
     },
 });
