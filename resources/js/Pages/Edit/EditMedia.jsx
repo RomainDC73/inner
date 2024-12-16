@@ -61,10 +61,8 @@ export default function EditMedia({ post }) {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log('Réponse du serveur :', response.data);
         window.location.href = response.data.redirect;
         } catch (error) {
-            console.error('Erreur lors de l\'envoi:', error.response.data);
         }
     };
 

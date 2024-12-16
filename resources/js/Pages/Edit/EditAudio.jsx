@@ -42,10 +42,8 @@ export default function EditAudio({ post }) {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log('Réponse du serveur :', response.data);
             window.location.href = response.data.redirect;
         } catch (error) {
-            console.error('Erreur lors de l\'envoi:', error.response?.data || error.message);
             setError('Une erreur est survenue lors de l\'enregistrement.');
         }
     };

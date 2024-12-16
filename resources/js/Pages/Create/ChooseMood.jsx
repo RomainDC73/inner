@@ -10,7 +10,8 @@ export default function ChooseMood({ moods, moodTranslations }) {
     const handleMoodSelect = (id) => {
         setSelectedMood(id);
         router.post(route('create.save-mood'), { mood_id: id }, {
-            onSuccess: () => console.log('Mood enregistré avec succès'),
+            onSuccess: () => {
+            },
         });
     };
 
