@@ -10,7 +10,6 @@ const moodColors = {
 };
 
 const PostCard = ({ post }) => {
-    // Formater la date
     const formattedDate = new Date(post.created_at).toLocaleDateString('fr-FR', {
         year: 'numeric',
         month: 'long',
@@ -20,7 +19,6 @@ const PostCard = ({ post }) => {
         minute: '2-digit',
     }).replace(':', 'h');
 
-    // Extrait de description
     const getExcerpt = (text, length = 40) => {
         return text.length > length ? text.substring(0, length) + '...' : text;
     };
@@ -28,23 +26,18 @@ const PostCard = ({ post }) => {
     return (
         <li className="mb-4">
             <Link href={`/posts/${post.id}`}>
-                {/* Appliquer les couleurs dynamiques basées sur le mood */}
                 <div className={`${moodColors[post.mood.name] || 'bg-gradient-to-br from-white to-gray-200'} rounded-lg p-4 shadow-md`}>
                     <div className="flex items-center mb-2 space-x-2">
-                        {/* Afficher le badge d'humeur */}
                         <MoodBadge mood={post.mood.name} />
                         <p className="text-sm text-gray-500">{formattedDate}</p>
                     </div>
-                    {/* Afficher un extrait de la description uniquement si elle existe */}
                     <div className="flex items-center mb-2 space-x-2">
                     {post.description ? (
                         <p className="text-gray-700">{getExcerpt(post.description)}</p>
                     ) : null}
-                    {/* Afficher une icône s'il y a un fichier audio */}
                     {post.audio_path ? (
                             <GiSoundWaves size={24} className="text-gray-700" />
                     ) : null}
-                    {/* Afficher une icône s'il y a une image */}
                     {post.media_path ? (
                             <CiImageOn size={24} className="text-gray-700" />
                     ) : null}

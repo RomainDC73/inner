@@ -7,31 +7,27 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import BackButton from '@/Components/BackButton';
 
 export default function EditAudio({ post }) {
-    // Utilisation de useForm pour gérer les données du formulaire
     const { data, setData, processing } = useForm({
-        audio: null, // L'audio initial (null au départ)
+        audio: null,
     });
 
     const fileInputRef = useRef(null);
 
     const [error, setError] = useState('');
 
-    // Gère l'enregistrement du nouvel audio
     const handleRecordingComplete = (audioBlob) => {
         if (audioBlob) {
-            setData('audio', audioBlob);  // Stocke l'audio dans les données du formulaire
+            setData('audio', audioBlob);
         } else {
-            setError('Le fichier audio est invalide.');  // Erreur si audio invalide
+            setError('Le fichier audio est invalide.');
         }
     };
 
-    // Gère la soumission du formulaire
     const handleSave = async (e) => {
         e.preventDefault();
 
         const formData = new FormData();
 
-        // Ajout direct de l'audio depuis data.audio
         if (data.audio instanceof Blob) {
             const file = new File([data.audio], 'audio.webm', { type: data.audio.type || 'audio/webm' });
             formData.append('audio', file);
@@ -47,7 +43,6 @@ export default function EditAudio({ post }) {
                 },
             });
             console.log('Réponse du serveur :', response.data);
-            // Redirection après la mise à jour
             window.location.href = response.data.redirect;
         } catch (error) {
             console.error('Erreur lors de l\'envoi:', error.response?.data || error.message);
@@ -69,16 +64,13 @@ export default function EditAudio({ post }) {
             <Head title="Modifier votre vocal" />
 
             <div className="max-w-4xl mx-auto p-6 space-y-6">
-                {/* Enregistrement d'un nouvel audio */}
                 <div className="text-center space-y-4">
                     <h2 className="text-lg font-semibold">Enregistrer</h2>
                     <VoiceRecorder onRecordingComplete={handleRecordingComplete} />
                 </div>
 
-                {/* Affichage des erreurs */}
                 {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
 
-                {/* Boutons d'action */}
                 <div className="flex justify-center space-x-4">
                     <DangerButton onClick={() => Inertia.get(route('posts.show', post.id))}>
                         Annuler

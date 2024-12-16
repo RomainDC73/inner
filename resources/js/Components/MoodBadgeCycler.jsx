@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import MoodBadge from './MoodBadge'; // Assurez-vous que le chemin est correct
+import MoodBadge from './MoodBadge';
 
 const MoodBadgeCycler = () => {
     const moods = ['good', 'meh', 'bad'];
@@ -8,9 +8,9 @@ const MoodBadgeCycler = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentMoodIndex((prevIndex) => (prevIndex + 1) % moods.length);
-        }, 1500); // Change toutes les 2 secondes
+        }, 1500);
 
-        return () => clearInterval(interval); // Nettoyage lorsque le composant est démonté
+        return () => clearInterval(interval);
     }, []);
 
     return (

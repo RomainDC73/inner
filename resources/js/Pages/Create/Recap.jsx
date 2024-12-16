@@ -36,11 +36,10 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
         });
     };
 
-    // Gérer le clic sur l'icône d'édition
     const handleEdit = (url) => {
         Inertia.visit(url, {
-            preserveState: true, // Permet de ne pas perdre l'état actuel de la page
-            replace: true, // Remplace l'historique pour éviter d'ajouter une nouvelle entrée
+            preserveState: true,
+            replace: true,
         });
     };
 
@@ -60,7 +59,6 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
 
             <div>
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 w-full">
-                    {/* MoodCard */}
                     <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                         <h3 className="text-lg font-semibold mb-2">Comment tu te sens</h3>
                         <div className="flex items-center justify-center gap-2">
@@ -72,13 +70,12 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => handleEdit(`/create/choose-mood`)} // Redirige de manière fluide
+                                    onClick={() => handleEdit(`/create/choose-mood`)}
                                 />
                             )}
                         </div>
                     </div>
 
-                    {/* Description */}
                     <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                         <h3 className="text-lg font-semibold mb-2">🖋</h3>
                         <div className="flex items-center justify-center gap-2">
@@ -86,13 +83,12 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => handleEdit(`/create/write`)} // Redirige de manière fluide
+                                    onClick={() => handleEdit(`/create/write`)}
                                 />
                             )}
                         </div>
                     </div>
 
-                    {/* Description Audio */}
                     <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                         <h3 className="text-lg font-semibold mb-2">🎤</h3>
                         <div className="flex items-center justify-center gap-2">
@@ -104,13 +100,12 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => handleEdit(`/create/talk`)} // Redirige de manière fluide
+                                    onClick={() => handleEdit(`/create/talk`)}
                                 />
                             )}
                         </div>
                     </div>
 
-                    {/* Image */}
                     <div className="overflow-hidden shadow-sm sm:rounded-lg p-4 text-center">
                         <h3 className="text-lg font-semibold mb-2">📷</h3>
                         <div className="flex items-center justify-center gap-2">
@@ -122,13 +117,12 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                             {editMode && (
                                 <MdEdit
                                     className="text-gray-500 cursor-pointer"
-                                    onClick={() => handleEdit(`/create/add-media`)} // Redirige de manière fluide
+                                    onClick={() => handleEdit(`/create/add-media`)}
                                 />
                             )}
                         </div>
                     </div>
 
-                    {/* Boutons */}
                     <div className="flex justify-center p-6 space-x-4">
                         <PrimaryButton onClick={() => setEditMode(!editMode)}>
                             {editMode ? 'Terminer' : 'Modifier'}

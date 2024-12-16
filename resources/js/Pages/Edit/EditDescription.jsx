@@ -4,17 +4,14 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import BackButton from '@/Components/BackButton';
 
 export default function EditDescription({ post }) {
-    // Initialisation du formulaire avec la description actuelle du post
     const { data, setData, patch, processing } = useForm({
-        description: post.description || '', // Valeur par défaut : la description actuelle du post
+        description: post.description || '',
     });
 
-    // Gestion de la soumission du formulaire
     const saveDescription = (e) => {
         e.preventDefault();
         patch(`/post/${post.id}/edit/description`, {
             onSuccess: () => {
-               // alert('Description mise à jour avec succès!');
             },
         });
     };
@@ -49,7 +46,7 @@ export default function EditDescription({ post }) {
                     <div className="flex justify-center">
                         <PrimaryButton
                             type="submit"
-                            disabled={processing} // Désactive le bouton pendant le traitement
+                            disabled={processing}
                         >
                             {processing ? 'Enregistrement...' : 'Enregistrer'}
                         </PrimaryButton>

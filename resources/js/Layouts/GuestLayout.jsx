@@ -5,7 +5,6 @@ import '../../css/cloud.css';
 export default function Guest({ children }) {
     return (
         <div className="relative flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
-            {/* Conteneur des orbes en arrière-plan */}
             <div className="orb-container">
                 <div className="orb"></div>
                 <div className="orb"></div>
@@ -18,7 +17,6 @@ export default function Guest({ children }) {
                 <div className="orb-bottom"></div>
             </div>
 
-            {/* Contenu principal */}
             <div className="flex flex-col items-center justify-center w-full mt-20 md:mt-4 lg:mt-2">
                 <Link href={route('welcome')}>
                     <ApplicationLogo className="h-14" />

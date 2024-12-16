@@ -8,7 +8,7 @@ const FilterForm = ({ moods, filters, onFilterChange }) => {
                 <div className="flex space-x-2 mt-2">
                     <div
                         className={`cursor-pointer ${!filters.mood ? 'font-bold' : ''}`}
-                        onClick={() => onFilterChange(null)} // Réinitialiser le filtre à "Tous"
+                        onClick={() => onFilterChange(null)}
                     >
                         <MoodBadge mood="all" />
                     </div>

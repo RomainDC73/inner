@@ -30,7 +30,7 @@ export default function VoiceRecorder({ onRecordingComplete }) {
             };
 
             mediaRecorder.onstop = () => {
-                stream.getTracks().forEach(track => track.stop()); // Libère les ressources
+                stream.getTracks().forEach(track => track.stop());
                 const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                 setAudioBlob(audioBlob);
                 setAudioURL(URL.createObjectURL(audioBlob));
@@ -70,7 +70,6 @@ export default function VoiceRecorder({ onRecordingComplete }) {
     return (
         <div className="text-center">
 
-            {/* Indicateur de durée et animation pendant l'enregistrement */}
             {recording && (
                 <div className="mb-4">
                     <div className="wave-container">
@@ -83,22 +82,18 @@ export default function VoiceRecorder({ onRecordingComplete }) {
                 </div>
             )}
 
-            {/* Bouton pour démarrer ou arrêter l'enregistrement */}
             <button className="mb-4" onClick={recording ? stopRecording : startRecording}>
                 {recording ? <IoStopCircle size={40} color="#F9B5AC" /> : <IoMicCircle size={40} color="#75B9BE" />}
             </button>
 
-            {/* Affichage du lecteur audio personnalisé après l'enregistrement */}
             {audioBlob && (
                 <div className="mt-4">
-                    {/* Composant CustomPlayer pour la lecture */}
                     <CustomPlayer
                         src={audioURL}
                         controls
                         className="mt-2"
                     />
 
-                    {/* Bouton pour réinitialiser l'enregistrement */}
                     <button onClick={resetRecording} className="mt-4">
                         <MdDeleteForever size={40} color="#F9B5AC" />
                     </button>

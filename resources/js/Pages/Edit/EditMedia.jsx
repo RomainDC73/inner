@@ -9,25 +9,22 @@ import axios from 'axios';
 
 export default function EditMedia({ post }) {
     const { data, setData, processing } = useForm({
-        media: null,  // Pour stocker l'image uploadée
+        media: null,
     });
 
     const [mediaPreview, setMediaPreview] = useState(null);
-    const fileInputRef = useRef(null); // Référence à l'input file
+    const fileInputRef = useRef(null);
 
-    // Utilisation de useEffect pour charger l'image existante si elle est présente
     useEffect(() => {
         if (post.media_url) {
             setMediaPreview(post.media_url);
         }
     }, [post]);
 
-    // Gérer l'upload de la photo
     const handleMediaChange = (e) => {
         const file = e.target.files[0];
         setData('media', file);
 
-        // Créer un aperçu de l'image
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -46,11 +43,10 @@ export default function EditMedia({ post }) {
         }
     };
 
-    // Supprimer l'image sélectionnée
     const handleRemoveMedia = () => {
         setData('media', null);
-        setMediaPreview(null); // Réinitialise l'aperçu de l'image
-        fileInputRef.current.value = ''; // Réinitialise l'input file
+        setMediaPreview(null);
+        fileInputRef.current.value = '';
     };
 
     const handleSubmit = async (e) => {
@@ -66,7 +62,6 @@ export default function EditMedia({ post }) {
                 }
             });
             console.log('Réponse du serveur :', response.data);
-            // Redirection après la mise à jour
         window.location.href = response.data.redirect;
         } catch (error) {
             console.error('Erreur lors de l\'envoi:', error.response.data);
@@ -88,21 +83,18 @@ export default function EditMedia({ post }) {
 
             <div className="flex flex-col items-center">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Choix entre importer ou prendre une photo */}
                     <ChooseMedia title="📁 Importer une photo" onClick={handleImportClick} />
                     <ChooseMedia title="📷 Prendre une photo" onClick={handleTakePhotoClick} />
                 </div>
 
-                {/* Input file pour importer ou prendre la photo */}
                 <input
                     type="file"
                     ref={fileInputRef}
-                    style={{ display: 'none' }}  // Cache l'input file
+                    style={{ display: 'none' }}
                     accept="image/*"
                     onChange={handleMediaChange}
                 />
 
-                {/* Affichage de la miniature si une photo est sélectionnée */}
                 {mediaPreview && (
                     <ImagePreview
                         src={mediaPreview}
@@ -110,12 +102,11 @@ export default function EditMedia({ post }) {
                     />
                 )}
 
-                {/* Boutons pour soumettre ou skipper */}
                 <div className="mt-8 flex space-x-4">
                     <PrimaryButton
                         onClick={handleSubmit}
                         className={`px-4 py-2 bg-blue-500 text-white rounded-lg ${processing ? 'opacity-50 cursor-not-allowed' : ''}`}
-                        disabled={processing} // Désactiver le bouton si traitement en cours
+                        disabled={processing}
                     >
                         Enregistrer
                     </PrimaryButton>

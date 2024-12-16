@@ -11,7 +11,6 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { MdEdit } from 'react-icons/md';
 
 export default function PostShow() {
-    // Récupère les données du post passées par Inertia depuis le contrôleur
     const { post } = usePage().props;
 
     const formattedDate = new Date(post.created_at).toLocaleDateString('fr-FR', {
@@ -31,7 +30,7 @@ export default function PostShow() {
     const handleDelete = () => {
         Inertia.delete(route('posts.destroy', post.id), {
             onSuccess: () => {
-                setShowModal(false); // Ferme la modal après suppression
+                setShowModal(false);
                 alert('Post supprimé avec succès!');
             },
         });
@@ -56,24 +55,20 @@ export default function PostShow() {
                     <div className="overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 space-y-3">
 
-                            {/* Humeur */}
                             <div className="flex items-center space-x-2">
                                 <h3 className="text-lg font-bold">Humeur </h3>
                                 <MoodBadge mood={post.mood.name} />
-                                {/* Affiche l'icône MdEdit si le mode édition est activé */}
                                 {editMode && (
                                     <MdEdit
                                         className="text-gray-500 cursor-pointer"
-                                        onClick={() => Inertia.get(`/post/${post.id}/edit/mood`)} // Action de modification de l'humeur
+                                        onClick={() => Inertia.get(`/post/${post.id}/edit/mood`)}
                                     />
                                 )}
                             </div>
 
-                            {/* Date */}
                             <p className="text-sm text-gray-500">Publié le {formattedDate}</p>
 
                             <div className="space-y-10">
-                                {/* Description */}
                                 <div className="flex items-center space-x-2">
                                     <p>
                                         {post.description ? (
@@ -88,15 +83,13 @@ export default function PostShow() {
                                         )}
                                     </p>
 
-                                    {/* Affiche l'icône MdEdit si le mode édition est activé */}
                                     {editMode && (
                                         <MdEdit
                                             className="text-gray-500 cursor-pointer"
-                                            onClick={() => Inertia.get(`/post/${post.id}/edit/description`)} // Action de modification de la description
+                                            onClick={() => Inertia.get(`/post/${post.id}/edit/description`)}
                                         />
                                     )}
                                 </div>
-                                {/* Image */}
                                 {post.media_path && (
                                     <div className="relative mb-6">
                                         <img
@@ -104,17 +97,15 @@ export default function PostShow() {
                                             src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
                                             alt="Media"
                                         />
-                                        {/* Affiche l'icône MdEdit si le mode édition est activé */}
                                         {editMode && (
                                             <MdEdit
                                                 className="absolute top-2 right-2 text-gray-500 cursor-pointer"
-                                                onClick={() => Inertia.get(`/post/${post.id}/edit/media`)} // Action de modification du média
+                                                onClick={() => Inertia.get(`/post/${post.id}/edit/media`)}
                                             />
                                         )}
                                     </div>
                                 )}
 
-                                {/* Audio */}
                                 <div className="flex items-center justify-between">
                                     <div className="flex-grow">
                                         {post.audio_path ? (
@@ -123,11 +114,10 @@ export default function PostShow() {
                                             />
                                         ) : null}
                                     </div>
-                                    {/* Affiche l'icône MdEdit si le mode édition est activé */}
                                     {editMode && (
                                         <MdEdit
                                             className="ml-4 text-gray-500 cursor-pointer"
-                                            onClick={() => Inertia.get(`/post/${post.id}/edit/audio`)} // Action de modification de l'audio
+                                            onClick={() => Inertia.get(`/post/${post.id}/edit/audio`)}
                                         />
                                     )}
                                 </div>
@@ -135,10 +125,10 @@ export default function PostShow() {
                         </div>
                         <div className="flex justify-between p-6">
                             <PrimaryButton onClick={() => setEditMode(!editMode)}>
-                                {editMode ? 'Terminer' : 'Modifier'} {/* Change le texte du bouton en fonction du mode */}
+                                {editMode ? 'Terminer' : 'Modifier'}
                             </PrimaryButton>
                             <DangerButton
-                                onClick={() => setShowModal(true)} // Ouvre le modal au clic
+                                onClick={() => setShowModal(true)}
                             >
                                 Supprimer
                             </DangerButton>
@@ -147,7 +137,6 @@ export default function PostShow() {
                 </div>
             </div>
 
-            {/* Modal de confirmation */}
             <Modal show={showModal} onClose={() => setShowModal(false)}>
                 <div className="p-6">
                     <h2 className="text-lg font-semibold">Confirmation de suppression</h2>

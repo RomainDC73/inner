@@ -6,14 +6,13 @@ import { Head, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
 export default function Dashboard() {
-    // Récupère l'utilisateur, les salutations, et les posts passés depuis le contrôleur
     const { auth, greetings, posts } = usePage().props;
     const user = auth.user;
 
     const getRandomGreeting = () => {
-        const greetingKeys = Object.keys(greetings); // Récupère les clés du fichier de traduction
-        const randomKey = greetingKeys[Math.floor(Math.random() * greetingKeys.length)]; // Choisit une clé aléatoire
-        return greetings[randomKey]; // Retourne la salutation correspondante
+        const greetingKeys = Object.keys(greetings);
+        const randomKey = greetingKeys[Math.floor(Math.random() * greetingKeys.length)];
+        return greetings[randomKey];
     };
 
     const [randomGreeting, setRandomGreeting] = useState('');
@@ -39,10 +38,9 @@ export default function Dashboard() {
             </div>
             <div>
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    {/* Ajout du composant PostsList pour afficher les posts de l'utilisateur */}
                     <div className="mt-2 overflow-hidden sm:rounded-lg">
                         <div className="p-6">
-                            <PostsList posts={posts} /> {/* Passe les posts récupérés */}
+                            <PostsList posts={posts} />
                             {posts.length > 0 && <PrimaryButton href="/posts">Voir tous</PrimaryButton>}
                         </div>
                     </div>

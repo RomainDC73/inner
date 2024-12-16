@@ -3,9 +3,9 @@ import { IoChevronBackCircleOutline } from "react-icons/io5";
 const BackButton = ({ fallbackUrl = '/', className = '' }) => {
     const handleBack = () => {
         if (window.history.length > 1) {
-            window.history.back(); // Retourne à la page précédente
+            window.history.back();
         } else {
-            window.location.href = fallbackUrl; // Navigue vers une URL de secours si aucune page précédente
+            window.location.href = fallbackUrl;
         }
     };
 

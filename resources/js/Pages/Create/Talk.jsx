@@ -29,11 +29,10 @@ export default function Talk() {
             return;
         }
 
-        // Envoie du formulaire
         post('/create/save-talk', {
             onSuccess: () => {
                 console.log('Audio enregistré avec succès');
-                setError(''); // Réinitialiser l'erreur après succès
+                setError('');
             },
             onError: (errors) => {
                 console.error('Erreur lors de l\'enregistrement de l\'audio', errors);

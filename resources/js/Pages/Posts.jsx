@@ -5,11 +5,9 @@ import BackButton from '@/Components/BackButton';
 import { Head, usePage, router, Link } from '@inertiajs/react';
 
 export default function Posts() {
-    // Récupère l'utilisateur et les posts paginés passés depuis le contrôleur
     const { posts, moods, filters } = usePage().props;
 
     const handleFilterChange = (moodId) => {
-        // Transmet le filtre au serveur
         router.get(route('posts.index', { mood: moodId, page: 1 }, { preserveState: true }));
     }
 
@@ -29,17 +27,10 @@ export default function Posts() {
 
                             <div className="flex justify-center mt-4 space-x-2">
                                 {posts.links.map((link, index) => {
-                                    // Masquer "Précédent" si on est sur la première page
                                     if (link.label.includes('&laquo') && link.url === null) return null;
-
-                                    // Masquer "Suivant" si on est sur la dernière page
                                     if (link.label.includes('&raquo;') && link.url === null) return null;
-
-                                    // Ajouter les filtres actifs aux liens de pagination
                                     const url = new URL(link.url);
                                     const searchParams = new URLSearchParams(url.search);
-
-                                    // Conserver les filtres dans l'URL
                                     if (filters.mood) {
                                         searchParams.set('mood', filters.mood);
                                     }
