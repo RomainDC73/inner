@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use App\Console\Commands\CustomServeCommand;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,5 +22,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+        $this->app->singleton('command.serve', function ($app) {
+            return $app->make(CustomServeCommand::class);
+        });
     }
 }
