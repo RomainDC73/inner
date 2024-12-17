@@ -29,8 +29,8 @@ COPY --from=node_build /app/public ./public
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage
 
-# Exposez le port 80 pour PHP-FPM
-EXPOSE 80
+# Exposez le port 8000 pour PHP-FPM
+EXPOSE 8000
 
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
 
