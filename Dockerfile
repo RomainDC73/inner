@@ -22,6 +22,9 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY . .
 RUN composer install --optimize-autoloader --no-dev
 
+# Copiez le fichier corrigé ServeCommand.php
+COPY ./path/to/local/ServeCommand.php /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/ServeCommand.php
+
 # Copiez les assets front-end générés par Vite
 COPY --from=node_build /app/public ./public
 
@@ -32,6 +35,5 @@ RUN chown -R www-data:www-data /var/www/html \
 # Exposez le port 8000 pour PHP-FPM
 EXPOSE 8000
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT:-8000}"]
-
-
+# Démarrage du serveur Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
