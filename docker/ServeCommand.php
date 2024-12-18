@@ -203,17 +203,10 @@ class ServeCommand extends Command
      * @return string
      */
     protected function port()
-    {
-        $port = $this->input->getOption('port');
-
-        if (is_null($port)) {
-            [, $port] = $this->getHostAndPort();
+        {
+            $port = env('PORT', 8000); // Utilise la variable d'environnement PORT ou 8000 par défaut
+            return (int) $port + $this->portOffset;
         }
-
-        $port = $port ?: env('PORT', 8000); // Utilise 8000 par défaut si PORT n'est pas défini
-
-        return (int) $port + $this->portOffset;
-    }
 
     /**
      * Get the host and port from the host option string.
