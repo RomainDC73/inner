@@ -210,11 +210,9 @@ class ServeCommand extends Command
             [, $port] = $this->getHostAndPort();
         }
 
-        $port = $port ?: 8000;
+        $port = $port ?: env('PORT', 8000); // Utilise 8000 par défaut si PORT n'est pas défini
 
-        dd($port, $this->portOffset);
-
-        return (int) $port + (int) $this->portOffset;
+        return (int) $port + $this->portOffset;
     }
 
     /**
