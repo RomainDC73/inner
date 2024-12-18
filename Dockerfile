@@ -23,7 +23,7 @@ COPY . .
 RUN composer install --optimize-autoloader --no-dev
 
 # Copiez le fichier corrigé ServeCommand.php
-COPY ./path/to/local/ServeCommand.php /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/ServeCommand.php
+COPY /Users/fantaz/Documents/WebProjects/inner/vendor/laravel/framework/src/Illuminate/Foundation/Console/ServeCommand.php /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/Console/ServeCommand.php
 
 # Copiez les assets front-end générés par Vite
 COPY --from=node_build /app/public ./public
