@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, router } from '@inertiajs/react';
 import { useState, useRef } from 'react';
 import VoiceRecorder from '@/Components/VoiceRecorder';
 import DangerButton from '@/Components/DangerButton';
@@ -70,7 +70,7 @@ export default function EditAudio({ post }) {
                 {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
 
                 <div className="flex justify-center space-x-4">
-                    <DangerButton onClick={() => Inertia.get(route('posts.show', post.id))}>
+                    <DangerButton onClick={() => router.get(route('posts.show', post.id))}>
                         Annuler
                     </DangerButton>
                     <PrimaryButton onClick={handleSave} disabled={!data.audio || processing}>

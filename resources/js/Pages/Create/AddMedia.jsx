@@ -1,10 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm, router } from '@inertiajs/react';
 import ChooseMedia from '@/Components/ChooseMedia';
 import ImagePreview from '@/Components/ImagePreview';
 import PrimaryButton from '@/Components/PrimaryButton';
 import BackButton from '@/Components/BackButton';
-import { Inertia } from '@inertiajs/inertia';
 import { useRef, useState, useEffect } from 'react';
 
 export default function AddMedia({ mood_id }) {
@@ -54,9 +53,11 @@ export default function AddMedia({ mood_id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Inertia.post(route('create.submit-media'), data, {
+        post(route('create.submit-media'), {
+            preserveState: true,
+            preserveScroll: true,
             onSuccess: () => {
-                Inertia.visit('/create/recap');
+                router.visit('/create/recap');
             },
             onError: (errors) => {
                 console.error(errors);

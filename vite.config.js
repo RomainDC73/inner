@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import fs from 'fs';
 
 export default defineConfig({
     plugins: [
@@ -11,16 +12,23 @@ export default defineConfig({
         react(),
     ],
     server: {
-        host: '0.0.0.0',
-        cors: true,
+        https: {
+            key: fs.readFileSync('./localhost-key.pem'),
+            cert: fs.readFileSync('./localhost.pem'),
+        },
+        host: 'localhost',
+        cors: {
+            origin: 'https://inner.test', // Remplacez par votre domaine si nécessaire
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+    },
         watch: {
             usePolling: true,
             interval: 100,
         },
     },
     build: {
-        // Assurez-vous que Vite compile les fichiers statiques pour la production
-        outDir: 'public/build', // Dossier de sortie pour les fichiers compilés
-        manifest: true, // Génère le fichier manifest.json
+        outDir: 'public/build',
+        manifest: true,
     },
 });

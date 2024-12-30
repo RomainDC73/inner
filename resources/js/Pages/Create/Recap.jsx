@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, router } from '@inertiajs/react';
 import { useState } from 'react';
 import MoodCard from '@/Components/MoodCard';
 import CustomPlayer from '@/Components/Player';
@@ -7,7 +7,6 @@ import ImagePreview from '@/Components/ImagePreview';
 import CreateButton from '@/Components/CreateButton';
 import PrimaryButton from '@/Components/PrimaryButton';
 import BackButton from '@/Components/BackButton';
-import { Inertia } from '@inertiajs/inertia';
 import { MdEdit } from 'react-icons/md';
 
 
@@ -24,7 +23,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        Inertia.post(route('posts.store'), {
+        router.post(route('posts.store'), {
             mood_id: mood ? mood.id : null,
             description: description || '',
             audio_path: audioPath || '',
@@ -37,7 +36,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
     };
 
     const handleEdit = (url) => {
-        Inertia.visit(url, {
+        router.visit(url, {
             preserveState: true,
             replace: true,
         });

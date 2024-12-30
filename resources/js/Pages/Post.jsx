@@ -1,8 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, usePage, router } from '@inertiajs/react';
 import { useState } from 'react';
 import Modal from '@/Components/Modal';
-import { Inertia } from '@inertiajs/inertia';
 import MoodBadge from '@/Components/MoodBadge';
 import CustomPlayer from '@/Components/Player';
 import BackButton from '@/Components/BackButton';
@@ -28,7 +27,7 @@ export default function PostShow() {
     const [editMode, setEditMode] = useState(false);
 
     const handleDelete = () => {
-        Inertia.delete(route('posts.destroy', post.id), {
+        router.delete(route('posts.destroy', post.id), {
             onSuccess: () => {
                 setShowModal(false);
                 alert('Post supprimé avec succès!');
@@ -61,7 +60,7 @@ export default function PostShow() {
                                 {editMode && (
                                     <MdEdit
                                         className="text-gray-500 cursor-pointer"
-                                        onClick={() => Inertia.get(`/post/${post.id}/edit/mood`)}
+                                        onClick={() => router.get(`/post/${post.id}/edit/mood`)}
                                     />
                                 )}
                             </div>
@@ -86,7 +85,7 @@ export default function PostShow() {
                                     {editMode && (
                                         <MdEdit
                                             className="text-gray-500 cursor-pointer"
-                                            onClick={() => Inertia.get(`/post/${post.id}/edit/description`)}
+                                            onClick={() => router.get(`/post/${post.id}/edit/description`)}
                                         />
                                     )}
                                 </div>
@@ -100,7 +99,7 @@ export default function PostShow() {
                                         {editMode && (
                                             <MdEdit
                                                 className="absolute top-2 right-2 text-gray-500 cursor-pointer"
-                                                onClick={() => Inertia.get(`/post/${post.id}/edit/media`)}
+                                                onClick={() => router.get(`/post/${post.id}/edit/media`)}
                                             />
                                         )}
                                     </div>
@@ -117,7 +116,7 @@ export default function PostShow() {
                                     {editMode && (
                                         <MdEdit
                                             className="ml-4 text-gray-500 cursor-pointer"
-                                            onClick={() => Inertia.get(`/post/${post.id}/edit/audio`)}
+                                            onClick={() => router.get(`/post/${post.id}/edit/audio`)}
                                         />
                                     )}
                                 </div>
