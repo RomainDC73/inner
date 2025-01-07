@@ -25,3 +25,6 @@ localhost-key.pem
 localhost.pem
 localhost+2-key.pem
 localhost+2.pem
+vite.config.js
+package-lock.json
+package.json
