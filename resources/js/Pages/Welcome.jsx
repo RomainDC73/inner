@@ -88,7 +88,7 @@ export default function Welcome({ auth }) {
                                     <ApplicationLogo className="h-14" />
                                 </Link>
                                 <h1 className="text-innerdarkblue uppercase mt-8 tracking-wider">
-                                    Mémorisez vos émotions.
+                                    Mémorisez vos émotions
                                 </h1>
                             </div>
                         </header>
