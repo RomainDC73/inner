@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
-import fs from 'fs';
 
 export default defineConfig({
     plugins: [
@@ -12,23 +11,19 @@ export default defineConfig({
         react(),
     ],
     server: {
-        https: {
-            key: fs.readFileSync('./localhost-key.pem'),
-            cert: fs.readFileSync('./localhost.pem'),
-        },
-        host: 'localhost',
+        host: '0.0.0.0',
         cors: {
-            origin: 'https://inner.test', // Remplacez par votre domaine si nécessaire
+            origin: 'https://inner-app.eu',
             methods: ['GET', 'POST', 'PUT', 'DELETE'],
             allowedHeaders: ['Content-Type', 'Authorization'],
-    },
-        watch: {
-            usePolling: true,
-            interval: 100,
         },
     },
     build: {
         outDir: 'public/build',
         manifest: true,
+        chunkSizeWarningLimit: 1600,
     },
+    esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  },
 });
