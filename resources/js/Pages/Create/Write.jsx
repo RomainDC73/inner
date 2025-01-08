@@ -39,9 +39,9 @@ export default function Write({ mood_id }) {
             }
         >
             <Head title="Écrire" />
-            <form onSubmit={handleSubmit} className="flex flex-col items-center">
+            <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
                 <LongTextInput
-                    className="w-96 text-gray-700 border-slate-400 rounded-lg focus:border-innerlightblue focus:ring-innerlightblue focus:outline-none"
+                    className="w-full max-w-[90%] text-gray-700 border-slate-400 rounded-lg focus:border-innerlightblue focus:ring-innerlightblue focus:outline-none"
                     value={data.description}
                     onChange={(e) => setData('description', e.target.value)}
                 />
