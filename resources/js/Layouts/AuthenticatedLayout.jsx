@@ -21,7 +21,7 @@ export default function Authenticated({ header, children }) {
                 <div className="orb"></div>
             </div>
 
-            <nav className="relative z-50">
+            <nav className="relative z-100">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
