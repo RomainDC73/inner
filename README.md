@@ -123,8 +123,35 @@ Les contributions sont les bienvenues !
 5. Créez une pull request vers la branche principale.
 
 ## Auteurs
-- **Votre Nom / Équipe** : Créateur et développeur principal de l'application.
+- **Romain DI CANDIDO** : Créateur et développeur principal de l'application.
 
 ## Licence
 Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
 
+## Notes personnelles pour la compilation et le build
+Au moment du build il est de temps à autre nécessaire de refaire 
+```nvm install 22```
+car la commande npm n'est pas acceptée.
+Le résultat précise que nvm est déjà installé, ensuite il est possible d'utiliser npm.
+Ensuite, pour faire ```npm run build```, il arrive qu'il y ait un message d'erreur 'esbuild'
+Dans ce cas : 
+
+```npm cache clean --force```
+
+```rm -rf node_modules package-lock.json```
+
+```npm install```	
+
+```npm update vite @vitejs/plugin-react```
+
+```export NODE_OPTIONS="--max-old-space-size=8192"```
+
+```npm run build```
+
+Et si ça fonctionne pas avec l’erreur esbuild, refaire (et vérifier qu’il n’y ait pas de dossier «build» vide dans le dossier public, si c'est le cas, le supprimer) : 
+
+```export NODE_OPTIONS="--max-old-space-size=8192"```
+
+```npm run build```
+
+Une fois que le serveur est lancé, déplacer manifest.json depuis public/build/.vite vers public/build
