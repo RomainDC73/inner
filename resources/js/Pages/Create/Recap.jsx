@@ -92,7 +92,7 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                         <h3 className="text-lg font-semibold mb-2">🎤</h3>
                         <div className="flex items-center justify-center gap-2">
                             {audioPath ? (
-                                <CustomPlayer src={`/storage/${audioPath}`} />
+                                <CustomPlayer src={`${audioPath}`} />
                             ) : (
                                 <p className="text-gray-400 italic">Aucun fichier vocal enregistré.</p>
                             )}
@@ -109,8 +109,9 @@ export default function ShowRecap({ mood, moodTranslations, description, audioPa
                         <h3 className="text-lg font-semibold mb-2">📷</h3>
                         <div className="flex items-center justify-center gap-2">
                             {mediaPath ? (
-                                <ImagePreview src={`/storage/${mediaPath}`} />
-                            ) : (
+                                <ImagePreview src={`${mediaPath}`} />
+                                
+                                ) : (
                                 <p className="text-gray-400 italic">Aucune image sélectionnée.</p>
                             )}
                             {editMode && (

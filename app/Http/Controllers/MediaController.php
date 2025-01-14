@@ -34,10 +34,11 @@ class MediaController extends Controller
             // Stocker le chemin du fichier média dans la session pour un usage ultérieur
             $mediaPath = $request->file('media')->store('media', 'public');
             // Stocker le fichier en session pour un enregistrement ultérieur
-            session(['media_path' => $mediaPath]);
+            session(['media_path' => Storage::url($mediaPath)]);
         }
 
         Log::info('Media path stored in session: ' . session('media_path'));
+
         return redirect()->route('create.recap'); // Assurez-vous que cette route existe
     }
 

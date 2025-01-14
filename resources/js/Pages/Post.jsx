@@ -93,7 +93,7 @@ export default function PostShow() {
                                     <div className="relative mb-6">
                                         <img
                                             className="w-1/2 mx-auto mt-4 rounded-lg"
-                                            src={post.media_path.startsWith('http') ? post.media_path : `/storage/${post.media_path}`}
+                                            src={post.media_path.startsWith('http') ? post.media_path : `${post.media_path}`}
                                             alt="Media"
                                         />
                                         {editMode && (
@@ -109,7 +109,7 @@ export default function PostShow() {
                                     <div className="flex-grow">
                                         {post.audio_path ? (
                                             <CustomPlayer
-                                                src={post.audio_path.startsWith('http') ? post.audio_path : `/storage/${post.audio_path}`}
+                                                src={post.audio_path.startsWith('http') ? post.audio_path : `${post.audio_path}`}
                                             />
                                         ) : null}
                                     </div>

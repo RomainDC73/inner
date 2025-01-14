@@ -102,7 +102,7 @@ class DescriptionController extends Controller
         if ($request->hasFile('audio')) {
             // Stockage du fichier audio
             $audioPath = $request->file('audio')->store('audio', 'public');
-            session(['audio_path' => $audioPath]); // Stocker le chemin dans la session
+            session(['audio_path' => Storage::url($audioPath)]); // Stocker le chemin dans la session
         }
 
         if ($request->hasFile('audio')) {
