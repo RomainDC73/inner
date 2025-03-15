@@ -45,9 +45,3 @@ Accédez à l'application en ligne : [https://inner-app.eu](https://inner-app.eu
 
 ## Licence
 Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
-
-```export NODE_OPTIONS="--max-old-space-size=8192"```
-
-```npm run build```
-
-Une fois que le serveur est lancé, déplacer manifest.json depuis public/build/.vite vers public/build
